@@ -19,16 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initializePlat()
         self.initdata()
         
-//        UINavigationBar.appearance().barStyle = .BlackTranslucent
-//        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-//        
+        UINavigationBar.appearance().barStyle = UIBarStyle.Default
+//        UINavigationBar.appearance().barTintColor = UIColor(red: 33/255, green: 142/255, blue: 27/255, alpha: 1)
+//
 //        UIToolbar.appearance().barStyle = .BlackTranslucent
-//        UITabBar.appearance().barStyle = .Black
-//        UITabBar.appearance().translucent = true
-//        UITabBar.appearance().tintColor = UIColor.whiteColor()
-//        
+        UITabBar.appearance().barStyle = UIBarStyle.Default
+        UITabBar.appearance().translucent = true
+        UITabBar.appearance().tintColor = UIColor(red: 35/255, green: 144/255, blue: 30/255, alpha: 1)
+        UITabBar.appearance().barTintColor = UIColor(red: 217/255, green: 247/255, blue: 217/255, alpha: 0.5)
+
+//
 //        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
-//        
+//
 //        UIButton.appearance().tintColor = UIColor.whiteColor()
 
 //        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        // Override point for customization after application launch.
+
         return true
     }
 

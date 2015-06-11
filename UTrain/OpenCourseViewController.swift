@@ -1,5 +1,5 @@
 //
-//  MyClassViewController.swift
+//  OpenCourseViewController.swift
 //  UTrain
 //
 //  Created by SN on 15/6/8.
@@ -8,14 +8,17 @@
 
 import UIKit
 
-class MyClassViewController: UIViewController {
+class OpenCourseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //        self.initdata()
+
+//        self.initdata()
         
         self.initnavigation()
+    
+    
+    
     
     }
 
@@ -53,6 +56,7 @@ class MyClassViewController: UIViewController {
         
 //        let searchContent = SearchViewController()
 //        searchContent.hidesBottomBarWhenPushed = true
+
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
     }
     

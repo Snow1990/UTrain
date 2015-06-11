@@ -1,18 +1,21 @@
 //
-//  OpenClassViewController.swift
+//  SearchViewController.swift
 //  UTrain
 //
-//  Created by SN on 15/6/8.
+//  Created by SN on 15/6/9.
 //  Copyright (c) 2015年 Snow. All rights reserved.
 //
 
 import UIKit
 
-class OpenClassViewController: UIViewController {
+class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.navigationItem.title = "123"
+//        self.hidesBottomBarWhenPushed = true
+        self.view.backgroundColor = UIColor.whiteColor()
         // Do any additional setup after loading the view.
     }
 
@@ -20,6 +23,11 @@ class OpenClassViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
+    
     
 
     /*

@@ -12,20 +12,44 @@ class MainTabBarController: UITabBarController, BWWalkthroughViewControllerDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+//        if let dest = self.viewControllers[0] as? UINavigationController {
+//            if let uRecommendViewController = dest.viewControllers[0] as? URecommendViewController {
+//                
+//            }
+//        }
+//        if let b = self.toolbarItems as? [UINavigationController] {
+//            println(b[0].viewControllers[0].title)
+//
+//        }
+        
+//        if let dest = segue.destinationViewController as? UINavigationController {
+//            if let chatViewController = dest.viewControllers[0] as? ChatViewController {
+//                
+//                //把当前选择的单元格用户传递给聊天视图
+//                chatViewController.toBuddy = currentBuddy!
+//                
+        
+        
+        
 
     }
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         if !userDefaults.boolForKey(Constants.FirstLaunchNUD) {
             
             showWalkthrough()
-            println("viewDidLoad")
+            
             userDefaults.setBool(true, forKey: Constants.FirstLaunchNUD)
             userDefaults.synchronize()
         }
+        super.viewDidAppear(animated)
+
 
     }
     
@@ -71,11 +95,15 @@ class MainTabBarController: UITabBarController, BWWalkthroughViewControllerDeleg
     // MARK: - Walkthrough delegate -
     
     func walkthroughPageDidChange(pageNumber: Int) {
-//        println("Current Page \(pageNumber)")
+
     }
     
     func walkthroughCloseButtonPressed() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func unwindToMainTabBar(segue: UIStoryboardSegue) {
+        
     }
 
 }
