@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIToolbar.appearance().barStyle = .BlackTranslucent
         UITabBar.appearance().barStyle = UIBarStyle.Default
         UITabBar.appearance().translucent = true
-        UITabBar.appearance().tintColor = UIColor(red: 35/255, green: 144/255, blue: 30/255, alpha: 1)
-        UITabBar.appearance().barTintColor = UIColor(red: 217/255, green: 247/255, blue: 217/255, alpha: 0.5)
+        UITabBar.appearance().tintColor = Constants.DarkGreen
+        UITabBar.appearance().barTintColor = Constants.LightGreen
 
 //
 //        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()

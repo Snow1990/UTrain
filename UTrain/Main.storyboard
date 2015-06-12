@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9N0-Dd-mv5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--公开课-->
@@ -52,6 +51,24 @@
             </objects>
             <point key="canvasLocation" x="88" y="3764"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="QWA-Nn-Tv3">
+            <objects>
+                <viewController id="Lnr-yW-wXC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xJg-F0-9Ho"/>
+                        <viewControllerLayoutGuide type="bottom" id="qJR-uB-cvY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K77-Kg-KEu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.41979337993421051" green="0.43148643092105265" blue="0.42976459703947278" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXN-7J-nPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="4513"/>
+        </scene>
         <!--搜索页-->
         <scene sceneID="Ohx-UW-lKy">
             <objects>
@@ -79,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="-743" y="3764"/>
         </scene>
-        <!--Recommend View Controller-->
+        <!--U培训-->
         <scene sceneID="Rw0-4k-IcI">
             <objects>
-                <viewController storyboardIdentifier="URecomend" id="Gsd-PZ-Xl0" customClass="URecommendViewController" customModule="UTrain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="URecomend" id="Gsd-PZ-Xl0" customClass="HomePageViewController" customModule="UTrain" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kii-ty-ZSk"/>
                         <viewControllerLayoutGuide type="bottom" id="1vB-4p-Dwt"/>
@@ -91,45 +108,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_line" translatesAutoresizingMaskIntoConstraints="NO" id="ryr-Lr-2Bu">
-                                <rect key="frame" x="0.0" y="64" width="600" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="oXg-4Y-gsg"/>
-                                </constraints>
-                            </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eKF-ug-3GJ">
-                                <rect key="frame" x="0.0" y="66" width="600" height="534"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ae2-D4-dTH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ghw-bq-ptA">
-                                    <size key="itemSize" width="145" height="185"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TUV-FX-4in">
+                                    <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jyc-Me-k4I">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
                             </collectionView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ryr-Lr-2Bu" firstAttribute="top" secondItem="kii-ty-ZSk" secondAttribute="bottom" id="L2G-V2-o0S"/>
-                            <constraint firstItem="eKF-ug-3GJ" firstAttribute="top" secondItem="ryr-Lr-2Bu" secondAttribute="bottom" id="Re5-ZN-fh2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eKF-ug-3GJ" secondAttribute="trailing" constant="-16" id="SUf-sP-QG2"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="eKF-ug-3GJ" secondAttribute="bottom" id="guZ-Ph-CXk"/>
-                            <constraint firstItem="eKF-ug-3GJ" firstAttribute="leading" secondItem="lY4-cA-fZD" secondAttribute="leadingMargin" constant="-16" id="hnA-62-Qzy"/>
-                            <constraint firstItem="ryr-Lr-2Bu" firstAttribute="leading" secondItem="lY4-cA-fZD" secondAttribute="leading" id="kZk-fx-r5A"/>
-                            <constraint firstItem="ryr-Lr-2Bu" firstAttribute="leading" secondItem="lY4-cA-fZD" secondAttribute="leadingMargin" constant="-16" id="mll-SP-5BN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ryr-Lr-2Bu" secondAttribute="trailing" constant="-16" id="qSW-tp-aRe"/>
+                            <constraint firstItem="Ae2-D4-dTH" firstAttribute="leading" secondItem="lY4-cA-fZD" secondAttribute="leading" id="19K-MM-D46"/>
+                            <constraint firstItem="1vB-4p-Dwt" firstAttribute="top" secondItem="Ae2-D4-dTH" secondAttribute="bottom" id="SQc-jo-rqs"/>
+                            <constraint firstAttribute="trailing" secondItem="Ae2-D4-dTH" secondAttribute="trailing" id="TbX-2t-Vf3"/>
+                            <constraint firstItem="Ae2-D4-dTH" firstAttribute="top" secondItem="lY4-cA-fZD" secondAttribute="top" id="ijW-L7-mlV"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="kZk-fx-r5A"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="2lq-Sf-gOE">
+                    <navigationItem key="navigationItem" title="U培训" id="2lq-Sf-gOE">
                         <barButtonItem key="rightBarButtonItem" title="搜索" id="ycw-N6-pyx"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="courseCollectionView" destination="eKF-ug-3GJ" id="h94-Dz-Oh7"/>
+                        <outlet property="courseCollectionView" destination="Ae2-D4-dTH" id="0hH-Wb-4pP"/>
                         <segue destination="IVz-GJ-jnZ" kind="presentation" identifier="toSearchSegue" modalTransitionStyle="coverVertical" id="sg7-Hb-00A"/>
                         <segue destination="9p1-3l-GPd" kind="presentation" identifier="toCourseDetailSegue" id="2Zl-t0-cnb"/>
                     </connections>
@@ -151,18 +163,19 @@
                     <connections>
                         <segue destination="yUE-wv-kfv" kind="relationship" relationship="viewControllers" id="WxM-Ku-BtD"/>
                         <segue destination="LZ2-wY-VVd" kind="relationship" relationship="viewControllers" id="SuG-cr-Qxv"/>
+                        <segue destination="URU-Om-IaW" kind="relationship" relationship="viewControllers" id="IVl-bC-SCE"/>
                         <segue destination="jjy-hd-dVV" kind="relationship" relationship="viewControllers" id="Vqp-AC-1Mc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2U-Xp-Mmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88" y="439"/>
+            <point key="canvasLocation" x="88" y="419"/>
         </scene>
-        <!--U推荐-->
+        <!--首页-->
         <scene sceneID="EKe-hF-70d">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yUE-wv-kfv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="U推荐" image="mu_reco_normal" id="FZ4-c2-OcC"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="mu_reco_normal" id="FZ4-c2-OcC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iIl-qy-p7t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -196,6 +209,25 @@
             </objects>
             <point key="canvasLocation" x="88" y="1322"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="zOa-oE-UeW">
+            <objects>
+                <viewController id="G1j-J3-230" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CUI-6y-uWB"/>
+                        <viewControllerLayoutGuide type="bottom" id="S6B-Vm-Akm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0gp-VY-gyv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZBt-Aw-slC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jdW-r3-Skd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="2151"/>
+        </scene>
         <!--我的课堂-->
         <scene sceneID="kZT-fj-awl">
             <objects>
@@ -217,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBj-m2-u1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="2151"/>
+            <point key="canvasLocation" x="1910" y="2146"/>
         </scene>
         <!--我的课堂-->
         <scene sceneID="IHb-vt-Lmw">
@@ -238,7 +270,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G39-1e-C9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="1322"/>
+            <point key="canvasLocation" x="1910" y="1317"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yU2-dL-Vfh">
@@ -279,14 +311,32 @@
             </objects>
             <point key="canvasLocation" x="88" y="2992"/>
         </scene>
+        <!--培训班-->
+        <scene sceneID="ywj-dN-vUX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="URU-Om-IaW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="培训班" image="mu_open_normal" id="PKX-sU-VIu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WZv-0e-3NG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="G1j-J3-230" kind="relationship" relationship="rootViewController" id="NaR-BU-h6t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IAT-XS-vLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="1317"/>
+        </scene>
     </scenes>
     <resources>
         <image name="mu_myclass_normal" width="36" height="30"/>
         <image name="mu_open_normal" width="36" height="30"/>
         <image name="mu_reco_normal" width="36" height="30"/>
-        <image name="tab_line" width="600" height="4"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sg7-Hb-00A"/>
+        <segue reference="yAV-vF-uyK"/>
     </inferredMetricsTieBreakers>
 </document>

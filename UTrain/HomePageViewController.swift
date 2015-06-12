@@ -1,5 +1,5 @@
 //
-//  URecommendViewController.swift
+//  HomePageViewController.swift
 //  UTrain
 //
 //  Created by SN on 15/6/8.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URecommendViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
     
@@ -40,23 +40,13 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
 
         self.initTabBar()
         self.initNavigation()
-
-        courseCollectionView.dataSource = self
-        courseCollectionView.delegate = self
-//        let imageView = UIImageView(image: UIImage(named: "tab_line")!)
-//        imageView.frame = CGRectMake(0, 64, 320, 2)
-//        self.view.addSubview(imageView)
-        
-        courseCollectionView.registerClass(URecommendCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.URecommendReusableCellID)
-        
-        
-
+        self.initCollectionView()
 
         initView()
         initScrollView()
     
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -68,7 +58,7 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
         
     }
     
-    //MARK: TabBar布局
+    //MARK: TabBar初始化
     func initTabBar() {
         
 //        self.navigationController?.tabBarController.set
@@ -83,20 +73,18 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
 //        self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
 //        self.navigationController?.tabBarItem.
-
-        self.navigationController?.tabBarItem.title = "U推荐"
-        self.navigationController?.tabBarItem.image = UIImage(named: "mu_myclass_normal")
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "mu_myclass_pressed")
-        self.navigationController?.tabBarItem.badgeValue = "5"
-
         
-//        
-//        self.tabBarItem.title=@"Web Chat";//注意如果这个标题不设置默认在页签上显示视图控制器标题
-//        self.tabBarItem.image=[UIImage imageNamed:@"tabbar_mainframe.png"];//默认图片
-//        self.tabBarItem.selectedImage=[UIImage imageNamed:@"tabbar_mainframeHL.png"];//选中图片
+        
+        
+        //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
+        self.navigationController?.tabBarItem.title = "首页"
+        self.navigationController?.tabBarItem.image = UIImage(named: "mu_reco_normal")
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "mu_reco_pressed")
+//        self.navigationController?.tabBarItem.badgeValue = "5"
+
         
     }
-    //MARK: 导航条布局
+    //MARK: 导航条初始化
     func initNavigation() {
         
         //左边barbuttonitem
@@ -123,7 +111,24 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
 //        self.navigationItem.rightBarButtonItem = searchBarButtonItem
         self.navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
     }
-
+    //Collection View 初始化
+    func initCollectionView() {
+        courseCollectionView.dataSource = self
+        courseCollectionView.delegate = self
+//                let imageView = UIImageView(image: UIImage(named: "tab_line")!)
+//                imageView.frame = CGRectMake(0, 64, 320, 2)
+//                self.view.addSubview(imageView)
+        
+        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionHeaderView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionFooterView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID)
+        
+        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
+        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
+    }
+    
+    //搜索
     func search() {
         
 //        let searchContent = SearchViewController()
@@ -141,10 +146,10 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
     
     func initView() {
         
-        let backgroundLable = UILabel(frame: UIScreen.mainScreen().bounds)
-        backgroundLable.backgroundColor = UIColor.yellowColor()
-        backgroundLable.alpha = 0.1
-        self.courseCollectionView.addSubview(backgroundLable)
+//        let backgroundLable = UILabel(frame: UIScreen.mainScreen().bounds)
+//        backgroundLable.backgroundColor = UIColor.yellowColor()
+//        backgroundLable.alpha = 0.1
+//        self.courseCollectionView.addSubview(backgroundLable)
         
         
 //        self.courseCollectionView.backgroundColor = UIColor.grayColor()
@@ -165,19 +170,20 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
     
     // MARK: - Collection data sourse
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
 //         return totalCourses[section].count
-        return 6
+        return 4
     }
    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.URecommendReusableCellID, forIndexPath: indexPath) as! URecommendCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
 //        cell.frame = CGRectMake(10, 10, 200, 200)
+        println(cell.frame)
         return cell
     }
     
@@ -186,9 +192,50 @@ class URecommendViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         self.performSegueWithIdentifier(Constants.ToCourseDetailSegue, sender: self)
+
         
         
     }
+    
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        var reusableView: UICollectionReusableView?
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeaderView
+            reusableView = headerView
+            
+            reusableView!.backgroundColor = UIColor.clearColor()
+            
+            
+        }else {
+            let footView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionFooterView
+            reusableView = footView
+            reusableView!.backgroundColor = Constants.CellFooterColor
+            
+        }
+        
+        
+        
+        return reusableView!
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        let rect = UIScreen.mainScreen().bounds
+//        println(rect)
+//        println(CGSizeMake((rect.width-30)/2, 300))
+//        return CGSizeMake((rect.width-30)/2, 150)
+        return HomePageCollectionViewCell.getSize()
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 5, 0, 5)
+
+    }
+    
     
     /*
     // MARK: - Navigation

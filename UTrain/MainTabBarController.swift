@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController, BWWalkthroughViewControllerDeleg
 
         
 //        if let dest = self.viewControllers[0] as? UINavigationController {
-//            if let uRecommendViewController = dest.viewControllers[0] as? URecommendViewController {
+//            if let HomePageViewController = dest.viewControllers[0] as? HomePageViewController {
 //                
 //            }
 //        }
