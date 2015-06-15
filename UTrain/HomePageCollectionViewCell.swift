@@ -55,28 +55,29 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     }
     
     class func getSize() -> CGSize {
-        return CGSizeMake(Argument.cellWidth, Argument.cellHight)
+        return CGSizeMake(Argument.CellWidth, Argument.CellHight)
     }
     
     private struct Argument {
-        static let rect = UIScreen.mainScreen().bounds
-        static let scale:CGFloat = 16/9
-        static let cellWidth: CGFloat = (rect.width - 20)/2
-        static let cellHight: CGFloat = imageHight + titleHight + clickCountHight + 5
-        static let imageWidth: CGFloat = cellWidth
-        static let imageHight: CGFloat = imageWidth/scale
+        static let Rect = UIScreen.mainScreen().bounds
+        static let Scale: CGFloat = 16/9
+        static let Gap: CGFloat = Rect.width/60
+        static let CellWidth: CGFloat = (Rect.width - Gap * 3)/2
+        static let CellHight: CGFloat = ImageHight + TitleHight + ClickCountHight + Gap
+        static let ImageWidth: CGFloat = CellWidth
+        static let ImageHight: CGFloat = ImageWidth/Scale
         
-        static let titleWidth: CGFloat = cellWidth-10
-        static let titleHight: CGFloat = 20
+        static let TitleWidth: CGFloat = CellWidth-10
+        static let TitleHight: CGFloat = 20
         
-        static let clickCountWidth: CGFloat = (cellWidth-10)/2
-        static let clickCountHight: CGFloat = 20
+        static let ClickCountWidth: CGFloat = (CellWidth-10)/2
+        static let ClickCountHight: CGFloat = 20
         
-        static let starViewWidth: CGFloat = (cellWidth-10)/2
-        static let starViewHight: CGFloat = 20
+        static let StarViewWidth: CGFloat = (CellWidth-10)/2
+        static let StarViewHight: CGFloat = 20
         
-        static let sourceWidth: CGFloat = imageWidth
-        static let sourceHight: CGFloat = 20
+        static let SourceWidth: CGFloat = ImageWidth
+        static let SourceHight: CGFloat = 20
 //        static let aboutHight = 0.6
 //        static let mainSpeakerHight = 0.6
 //        static let imageHight = 0.6
@@ -99,7 +100,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         //课程图片
         imageView.backgroundColor = UIColor.brownColor().colorWithAlphaComponent(0.5)
         imageView.opaque = false
-        imageView.frame = CGRectMake(0, 0, Argument.imageWidth, Argument.imageHight)
+        imageView.frame = CGRectMake(0, 0, Argument.ImageWidth, Argument.ImageHight)
         self.addSubview(imageView)
         
         
@@ -107,7 +108,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         title.backgroundColor = UIColor.clearColor()
         title.text = "标题示例文字"
         title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        title.frame = CGRectMake(5, imageView.frame.height, Argument.titleWidth, Argument.titleHight)
+        title.frame = CGRectMake(5, imageView.frame.height, Argument.TitleWidth, Argument.TitleHight)
         self.addSubview(title)
         
         //课程点击次数
@@ -116,12 +117,12 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
         clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        clickCount.frame = CGRectMake(5, imageView.frame.height + title.frame.height, Argument.clickCountWidth, Argument.clickCountHight)
+        clickCount.frame = CGRectMake(5, imageView.frame.height + title.frame.height, Argument.ClickCountWidth, Argument.ClickCountHight)
         self.addSubview(clickCount)
         
         //评价星级
         self.starNum = 3
-        setupStarImage(frame: CGRectMake(Argument.cellWidth/2, imageView.frame.height + title.frame.height, Argument.starViewWidth, Argument.starViewHight))
+        setupStarImage(frame: CGRectMake(Argument.CellWidth/2, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight))
 
         
         
@@ -129,7 +130,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         sourceContent.text = "  来源：" + source
 //        sourceContent.backgroundColor = UIColor.yellowColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.sourceHight, Argument.sourceWidth, Argument.sourceHight);
+        sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
         self.addSubview(sourceContent)
         
         insertTransparentGradient(frame: sourceContent.frame)
@@ -229,10 +230,8 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     }
     
     //Transparent Gradient Layer
-
     func insertTransparentGradient(#frame: CGRect) {
-//        let colorOne = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0)
-//        let colorTwo = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        
         let colorOne = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 0)
         let colorTwo = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
         
@@ -247,9 +246,6 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         headerLayer.frame = frame
         self.layer.insertSublayer(headerLayer, atIndex: 0)
     }
-    
-    
-    
     
     //color gradient layer
     func insertColorGradient(#frame: CGRect) {

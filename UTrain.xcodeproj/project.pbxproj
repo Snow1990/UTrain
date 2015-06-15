@@ -26,6 +26,9 @@
 		87F182F51B25989D000314B5 /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87F182F41B25989D000314B5 /* Walkthrough.storyboard */; };
 		87F182F71B259AA9000314B5 /* CustomPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F182F61B259AA9000314B5 /* CustomPageViewController.swift */; };
 		87F182FB1B267BD0000314B5 /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F182FA1B267BD0000314B5 /* BWWalkthroughViewController.swift */; };
+		87F5A10C1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A10B1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift */; };
+		87F5A1111B2ADE580058D7AF /* FirstPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */; };
+		87F5A1421B2EB0650058D7AF /* AdScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A1411B2EB0650058D7AF /* AdScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,9 @@
 		87F182F41B25989D000314B5 /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
 		87F182F61B259AA9000314B5 /* CustomPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageViewController.swift; sourceTree = "<group>"; };
 		87F182FA1B267BD0000314B5 /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
+		87F5A10B1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageAdCollectionViewCell.swift; sourceTree = "<group>"; };
+		87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageViewController.swift; sourceTree = "<group>"; };
+		87F5A1411B2EB0650058D7AF /* AdScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +91,10 @@
 		87AE27B91B268D5B00C397C4 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */,
 				87F182E81B2594DF000314B5 /* HomePageViewController.swift */,
 				87AE27C21B26DEE400C397C4 /* HomePageCollectionViewCell.swift */,
+				87F5A10B1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift */,
 				87D295E51B296286006F772C /* CourseCollectionHeaderView.swift */,
 				87D295E71B296E24006F772C /* CourseCollectionFooterView.swift */,
 			);
@@ -142,6 +150,7 @@
 				87AE27BF1B26CF8000C397C4 /* Main.storyboard */,
 				87F182E61B25939F000314B5 /* Constants.swift */,
 				87F182EA1B259515000314B5 /* Controller */,
+				87F5A1401B2EB0210058D7AF /* View */,
 				87F182B81B252F82000314B5 /* Supporting Files */,
 			);
 			path = UTrain;
@@ -197,6 +206,14 @@
 				87F182F41B25989D000314B5 /* Walkthrough.storyboard */,
 			);
 			name = FirstLaunch;
+			sourceTree = "<group>";
+		};
+		87F5A1401B2EB0210058D7AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87F5A1411B2EB0650058D7AF /* AdScrollView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,9 +319,12 @@
 			files = (
 				87AE27C31B26DEE400C397C4 /* HomePageCollectionViewCell.swift in Sources */,
 				87AE27BD1B26CA1F00C397C4 /* SearchViewController.swift in Sources */,
+				87F5A1111B2ADE580058D7AF /* FirstPageViewController.swift in Sources */,
 				87F182EC1B259533000314B5 /* OpenCourseViewController.swift in Sources */,
 				87F182E51B2591E5000314B5 /* MainTabBarController.swift in Sources */,
+				87F5A10C1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift in Sources */,
 				87AE27CA1B28153D00C397C4 /* CourseDetailViewController.swift in Sources */,
+				87F5A1421B2EB0650058D7AF /* AdScrollView.swift in Sources */,
 				87F182FB1B267BD0000314B5 /* BWWalkthroughViewController.swift in Sources */,
 				87F182BB1B252F82000314B5 /* AppDelegate.swift in Sources */,
 				87F182EE1B259543000314B5 /* MyClassViewController.swift in Sources */,

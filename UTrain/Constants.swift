@@ -23,6 +23,7 @@ struct Constants {
     
     //可重用cellID
     static let HomePageReusableCellID = "HomePageCell"
+    static let HomePageAdReusableCellID = "HomePageAdCell"
     static let CollectionHeaderViewReusableCellID = "CollectionHeaderView"
     static let CollectionFooterViewReusableCellID = "CollectionFooterView"
     

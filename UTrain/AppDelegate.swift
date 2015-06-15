@@ -19,14 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initializePlat()
         self.initdata()
         
-        UINavigationBar.appearance().barStyle = UIBarStyle.Default
-//        UINavigationBar.appearance().barTintColor = UIColor(red: 33/255, green: 142/255, blue: 27/255, alpha: 1)
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
+        UINavigationBar.appearance().barTintColor = Constants.DarkGreen
+
 //
 //        UIToolbar.appearance().barStyle = .BlackTranslucent
         UITabBar.appearance().barStyle = UIBarStyle.Default
         UITabBar.appearance().translucent = true
         UITabBar.appearance().tintColor = Constants.DarkGreen
         UITabBar.appearance().barTintColor = Constants.LightGreen
+        UITabBar.appearance().opaque = false
 
 //
 //        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()

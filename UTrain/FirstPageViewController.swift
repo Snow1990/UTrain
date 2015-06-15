@@ -1,20 +1,15 @@
 //
-//  HomePageViewController.swift
+//  FirstPageViewController.swift
 //  UTrain
 //
-//  Created by SN on 15/6/8.
+//  Created by SN on 15/6/12.
 //  Copyright (c) 2015年 Snow. All rights reserved.
 //
 
 import UIKit
 
-class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    
-    
-    
-//    var currentPage: Int = 0
-//    var reloadFlag: Int = 7
+class FirstPageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
     
     var leagueCourses = [String]()  //团（队）务
     var publicDevelopmentCourses = [String]()  //公益发展
@@ -24,37 +19,40 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     var wholeNationCourses = [String]()  //全国团校精品课程
     var wangyiOpenCourses = [String]()  //网易公开课
     var totalCourses = [[String]]()  //所有数据集合,将课程数组按顺序存储
-
+    
     //滚动广告页
     var adScrollView = UIScrollView()
     
     
-    //课程Collection
     @IBOutlet weak var courseCollectionView: UICollectionView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initData()
-
-        self.initTabBar()
-        self.initNavigation()
+        
+//        self.initTabBar()
+//        self.initNavigation()
         self.initCollectionView()
-
+        
         initView()
         initScrollView()
         
-        println(self.courseCollectionView.contentInset.bottom)
-    
+//        courseCollectionView.dataSource = self
+//        courseCollectionView.delegate = self
+        
+
+//        //注册collectionCellID
+//        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
+
+        // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     func initData() {
         
@@ -63,18 +61,18 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     //MARK: TabBar初始化
     func initTabBar() {
         
-//        self.navigationController?.tabBarController.set
+        //        self.navigationController?.tabBarController.set
         
-//        var recommendImage = UIImage(named: "mu_myclass_normal")!
-//        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
-//        var leftButton = UIButton(frame: CGRectMake(0, 0, 68, 24))
-//        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
-//        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
-//        var leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-//        
-//        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+        //        var recommendImage = UIImage(named: "mu_myclass_normal")!
+        //        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
+        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 68, 24))
+        //        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
+        //        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
+        //        var leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        //
+        //        self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
-//        self.navigationController?.tabBarItem.
+        //        self.navigationController?.tabBarItem.
         
         
         
@@ -82,8 +80,8 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         self.navigationController?.tabBarItem.title = "首页"
         self.navigationController?.tabBarItem.image = UIImage(named: "mu_reco_normal")
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: "mu_reco_pressed")
-//        self.navigationController?.tabBarItem.badgeValue = "5"
-
+        //        self.navigationController?.tabBarItem.badgeValue = "5"
+        
         
     }
     //MARK: 导航条初始化
@@ -91,7 +89,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         
         //左边barbuttonitem
         var leftImage = UIImage(named: "home_logo")!
-//        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
+        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
         var leftButton = UIButton(frame: CGRectMake(0, 0, 68, 24))
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
@@ -101,24 +99,24 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         
         //又边barbuttonitem search
         var searchImage = UIImage(named: "btn_search")!
-//        var searchButton = UIButton(frame: CGRectMake(0, 0, 50, 30))
-
+        //        var searchButton = UIButton(frame: CGRectMake(0, 0, 50, 30))
+        
         var searchButton = UIButton(frame: CGRectMake(50, 0, 30, 18))
-
+        
         searchButton.setBackgroundImage(searchImage, forState: UIControlState.Normal)
         
         searchButton.addTarget(self, action: "search", forControlEvents: UIControlEvents.TouchUpInside)
-
+        
         var searchBarButtonItem = UIBarButtonItem(customView: searchButton)
-//        self.navigationItem.rightBarButtonItem = searchBarButtonItem
+        //        self.navigationItem.rightBarButtonItem = searchBarButtonItem
         self.navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
     }
     //Collection View 初始化
     func initCollectionView() {
-
+        
         courseCollectionView.dataSource = self
         courseCollectionView.delegate = self
-
+        
         
         //注册collectionCellID
         courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
@@ -129,43 +127,43 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         //注册collection section footer ID
         courseCollectionView.registerClass(CourseCollectionFooterView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID)
         
-//        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
-//        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
+        //        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
+        //        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
     }
     
     //搜索
     func search() {
         
-//        let searchContent = SearchViewController()
-//        searchContent.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(searchContent, animated: false)
+        //        let searchContent = SearchViewController()
+        //        searchContent.hidesBottomBarWhenPushed = true
+        //        self.navigationController?.pushViewController(searchContent, animated: false)
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
         
         
-//        SearchViewController*searchcontent = [[SearchViewController alloc]init];
-//        searchcontent.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:searchcontent animated:YES];
-
+        //        SearchViewController*searchcontent = [[SearchViewController alloc]init];
+        //        searchcontent.hidesBottomBarWhenPushed = YES;
+        //        [self.navigationController pushViewController:searchcontent animated:YES];
+        
         
     }
     
     func initView() {
         
-//        let backgroundLable = UILabel(frame: UIScreen.mainScreen().bounds)
-//        backgroundLable.backgroundColor = UIColor.yellowColor()
-//        backgroundLable.alpha = 0.1
-//        self.courseCollectionView.addSubview(backgroundLable)
+        //        let backgroundLable = UILabel(frame: UIScreen.mainScreen().bounds)
+        //        backgroundLable.backgroundColor = UIColor.yellowColor()
+        //        backgroundLable.alpha = 0.1
+        //        self.courseCollectionView.addSubview(backgroundLable)
         
         
-//        self.courseCollectionView.backgroundColor = UIColor.grayColor()
-//        self.courseCollectionView.alpha = 0.1
+        //        self.courseCollectionView.backgroundColor = UIColor.grayColor()
+        //        self.courseCollectionView.alpha = 0.1
         
-//        UILabel*labelback = [[UILabel alloc]init];
-//        labelback.backgroundColor = [UIColor grayColor];
-//        labelback.alpha = 0.1;
-//        labelback.frame = CGRectMake(0, 0, 320, iPhoneHeight);
-//        [self.view addSubview:labelback];
+        //        UILabel*labelback = [[UILabel alloc]init];
+        //        labelback.backgroundColor = [UIColor grayColor];
+        //        labelback.alpha = 0.1;
+        //        labelback.frame = CGRectMake(0, 0, 320, iPhoneHeight);
+        //        [self.view addSubview:labelback];
     }
     
     func initScrollView() {
@@ -176,7 +174,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     
     // MARK: - Collection data sourse
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 7
+        return 8
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -186,7 +184,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
             return 4
         }
     }
-   
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //如果是广告页
         if indexPath.section == 0 {
@@ -195,32 +193,39 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
             return cell
         }else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
-          
+            
             return cell
         }
         
     }
     
     // MARK: - Collection delegate
-
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         self.performSegueWithIdentifier(Constants.ToCourseDetailSegue, sender: self)
+        
+        
         
     }
     
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
+        //        if indexPath.section == 0 && kind == UICollectionElementKindSectionHeader {
+        //            return UICollectionReusableView().prepareForReuse()
+        //        }
         var reusableView: UICollectionReusableView?
-
+        
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeaderView
             headerView.lable.text = getCollectionHeaderTitle(indexPath.section)
+
             reusableView = headerView
             
             reusableView!.backgroundColor = UIColor.clearColor()
-
+            
+            
         }else {
             let footView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionFooterView
             reusableView = footView
@@ -228,8 +233,53 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
             
         }
         
+        
+        
         return reusableView!
     }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if indexPath.section == 0 {
+            return HomePageAdCollectionViewCell.getSize()
+        }else {
+            return HomePageCollectionViewCell.getSize()
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        if section == 0 {
+            return UIEdgeInsetsZero
+        }else {
+            let Rect = UIScreen.mainScreen().bounds
+            let Gap: CGFloat = Rect.width/60
+            return UIEdgeInsetsMake(0, Gap, 0, Gap)
+        }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        //        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
+        //        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
+        
+        if section == 0 {
+            return CGSizeMake(0, 0)
+        }else {
+            return CGSizeMake(0, 40)
+        }
+        
+    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        
+        return CGSizeMake(0, 10)
+    }
+    
+    
+    // MARK: - functions
+
     func getCollectionHeaderTitle(section: Int) -> String{
         switch section{
         case 0:
@@ -253,52 +303,13 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
-    // MARK: - UICollectionViewDelegateFlowLayout
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-        if indexPath.section == 0 {
-            return HomePageAdCollectionViewCell.getSize()
-        }else {
-            return HomePageCollectionViewCell.getSize()
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        if section == 0 {
-            return UIEdgeInsetsZero
-        }else {
-            return UIEdgeInsetsMake(0, 5, 0, 5)
-        }
-
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        //        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
-        //        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
-
-        if section == 0 {
-            return CGSizeMake(0, 0)
-        }else {
-            return CGSizeMake(0, 40)
-        }
-        
-    }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        
-        return CGSizeMake(0, 10)
-    }
-    
-    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
 }
