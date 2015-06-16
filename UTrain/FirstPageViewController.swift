@@ -30,7 +30,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         
         self.initData()
         
-//        self.initTabBar()
+        self.initTabBar()
 //        self.initNavigation()
         self.initCollectionView()
         
@@ -61,28 +61,10 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     //MARK: TabBar初始化
     func initTabBar() {
         
-        //        self.navigationController?.tabBarController.set
-        
-        //        var recommendImage = UIImage(named: "mu_myclass_normal")!
-        //        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
-        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 68, 24))
-        //        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
-        //        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
-        //        var leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        //
-        //        self.navigationItem.leftBarButtonItem = leftBarButtonItem
-        
-        //        self.navigationController?.tabBarItem.
-        
-        
-        
         //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
         self.navigationController?.tabBarItem.title = "首页"
-        self.navigationController?.tabBarItem.image = UIImage(named: "mu_reco_normal")
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "mu_reco_pressed")
-        //        self.navigationController?.tabBarItem.badgeValue = "5"
-        
-        
+        self.navigationController?.tabBarItem.image = UIImage(named: "table_icon1_normal")
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon1_pressed")
     }
     //MARK: 导航条初始化
     func initNavigation() {

@@ -29,6 +29,7 @@
 		87F5A10C1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A10B1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift */; };
 		87F5A1111B2ADE580058D7AF /* FirstPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */; };
 		87F5A1421B2EB0650058D7AF /* AdScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A1411B2EB0650058D7AF /* AdScrollView.swift */; };
+		87F5A1461B2FC2060058D7AF /* TrainingClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5A1451B2FC2060058D7AF /* TrainingClassViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		87F5A10B1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageViewController.swift; sourceTree = "<group>"; };
 		87F5A1411B2EB0650058D7AF /* AdScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdScrollView.swift; sourceTree = "<group>"; };
+		87F5A1451B2FC2060058D7AF /* TrainingClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingClassViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,10 +191,11 @@
 				87F182F31B259847000314B5 /* FirstLaunch */,
 				87AE27B91B268D5B00C397C4 /* HomePage */,
 				87AE27CC1B28161D00C397C4 /* OpenCourse */,
+				87F5A1471B2FC2590058D7AF /* TrainingClass */,
+				87F5A1481B2FC26F0058D7AF /* MyClass */,
 				87AE27BE1B26CA2600C397C4 /* Search */,
 				87AE27CB1B28154400C397C4 /* CourseDetail */,
 				87F182E41B2591E5000314B5 /* MainTabBarController.swift */,
-				87F182ED1B259543000314B5 /* MyClassViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -214,6 +217,22 @@
 				87F5A1411B2EB0650058D7AF /* AdScrollView.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		87F5A1471B2FC2590058D7AF /* TrainingClass */ = {
+			isa = PBXGroup;
+			children = (
+				87F5A1451B2FC2060058D7AF /* TrainingClassViewController.swift */,
+			);
+			name = TrainingClass;
+			sourceTree = "<group>";
+		};
+		87F5A1481B2FC26F0058D7AF /* MyClass */ = {
+			isa = PBXGroup;
+			children = (
+				87F182ED1B259543000314B5 /* MyClassViewController.swift */,
+			);
+			name = MyClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +351,7 @@
 				87F182F11B259830000314B5 /* BWWalkthroughPageViewController.swift in Sources */,
 				87D295E61B296286006F772C /* CourseCollectionHeaderView.swift in Sources */,
 				87F182E91B2594DF000314B5 /* HomePageViewController.swift in Sources */,
+				87F5A1461B2FC2060058D7AF /* TrainingClassViewController.swift in Sources */,
 				87D295E81B296E24006F772C /* CourseCollectionFooterView.swift in Sources */,
 				87F182F71B259AA9000314B5 /* CustomPageViewController.swift in Sources */,
 			);

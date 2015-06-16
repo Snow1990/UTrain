@@ -60,7 +60,9 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     
     private struct Argument {
         static let Rect = UIScreen.mainScreen().bounds
-        static let Scale: CGFloat = 16/9
+
+        //collection cell 宽高比
+        static let Scale: CGFloat = 16/10
         static let Gap: CGFloat = Rect.width/60
         static let CellWidth: CGFloat = (Rect.width - Gap * 3)/2
         static let CellHight: CGFloat = ImageHight + TitleHight + ClickCountHight + Gap
@@ -70,10 +72,12 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         static let TitleWidth: CGFloat = CellWidth-10
         static let TitleHight: CGFloat = 20
         
-        static let ClickCountWidth: CGFloat = (CellWidth-10)/2
+        
+        static let ClickLabelScale: CGFloat = 0.6
+        static let ClickCountWidth: CGFloat = (CellWidth-10) * ClickLabelScale
         static let ClickCountHight: CGFloat = 20
         
-        static let StarViewWidth: CGFloat = (CellWidth-10)/2
+        static let StarViewWidth: CGFloat = (CellWidth-10) * (1 - ClickLabelScale)
         static let StarViewHight: CGFloat = 20
         
         static let SourceWidth: CGFloat = ImageWidth
@@ -112,22 +116,25 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         self.addSubview(title)
         
         //课程点击次数
-        clickCountNum = 200
+        clickCountNum = 12334
         clickCount.text = "点击：\(clickCountNum)"
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
         clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         clickCount.frame = CGRectMake(5, imageView.frame.height + title.frame.height, Argument.ClickCountWidth, Argument.ClickCountHight)
         self.addSubview(clickCount)
         
         //评价星级
         self.starNum = 3
-        setupStarImage(frame: CGRectMake(Argument.CellWidth/2, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight))
+        setupStarImage(frame: CGRectMake(Argument.CellWidth * Argument.ClickLabelScale, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight))
 
         
         
         //来源
+        source = "广州团校"
         sourceContent.text = "  来源：" + source
+        sourceContent.textColor = UIColor.whiteColor()
 //        sourceContent.backgroundColor = UIColor.yellowColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
@@ -208,12 +215,18 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     
     func setupStarImage(#frame: CGRect) {
         
-        let starNormalImage = UIImage(named: "rating_normal")
-        let starPressedImage = UIImage(named: "rating_pressed")
+        let starNormalImage = UIImage(named: "start2")
+        let starPressedImage = UIImage(named: "start1")
         
         for index in 0..<5 {
+            let Scale:CGFloat = 0.8
+            let X = frame.origin.x + frame.width/5*CGFloat(index)
+            let Y = frame.origin.y + (frame.height - frame.width/5)/2
+            let Width = frame.width/5 * Scale
+            let Height = frame.width/5 * Scale
+            let starImageView = UIImageView(frame: CGRectMake(X, Y, Width, Height))
             
-            let starImageView = UIImageView(frame: CGRectMake(frame.origin.x + frame.width/5*CGFloat(index) , frame.origin.y, frame.width/5, frame.height))
+//            let starImageView = UIImageView(frame: CGRectMake(frame.origin.x + frame.width/5*CGFloat(index) , frame.origin.y, frame.width/5, frame.width/5))
 //            starImageView.backgroundColor = UIColor.clearColor()
             
             if index < self.starNum {

@@ -26,17 +26,13 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        setupCell()
-//        addAutoTimer()
-        
         let scrollView = AdScrollView(frame: frame)
         scrollView.imageNameArray = imageArray
-//        scrollView.setPageControlShowStyle(.Center)
-        scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
-        scrollView.pageControl.currentPageIndicatorTintColor = UIColor.purpleColor()
-
         scrollView.setImageName(imageArray)
         self.addSubview(scrollView)
+        
+        scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
+        scrollView.pageControl.currentPageIndicatorTintColor = Constants.LightGreen
         scrollView.addPageControl()
 
     }
@@ -55,7 +51,8 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     }
     private struct Argument {
         static let Rect = UIScreen.mainScreen().bounds
-        static let Scale:CGFloat = 16/9
+        //广告页宽高比
+        static let Scale:CGFloat = 19/8
         static let CellWidth: CGFloat = Rect.width
         static let CellHeight: CGFloat = CellWidth/Scale
         static let AdPageControlWidth: CGFloat = CellWidth/5

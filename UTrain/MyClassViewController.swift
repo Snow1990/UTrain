@@ -15,6 +15,8 @@ class MyClassViewController: UIViewController {
         
         //        self.initdata()
         
+        self.initTabBar()
+
         self.initnavigation()
     
     }
@@ -56,6 +58,15 @@ class MyClassViewController: UIViewController {
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
     }
     
+    
+    //MARK: TabBar初始化
+    func initTabBar() {
+        
+        //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
+        self.navigationController?.tabBarItem.title = "我的"
+        self.navigationController?.tabBarItem.image = UIImage(named: "table_icon4_normal")
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon4_pressed")
+    }
 
     /*
     // MARK: - Navigation

@@ -1,34 +1,25 @@
 //
-//  OpenCourseViewController.swift
+//  TrainingClassViewController.swift
 //  UTrain
 //
-//  Created by SN on 15/6/8.
+//  Created by SN on 15/6/16.
 //  Copyright (c) 2015年 Snow. All rights reserved.
 //
 
 import UIKit
 
-class OpenCourseViewController: UIViewController {
+class TrainingClassViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.initdata()
-        
         self.initTabBar()
-
+        
         self.initnavigation()
-    
-    
-    
+        
+        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     //MARK: 导航条布局
     func initnavigation() {
         
@@ -55,22 +46,28 @@ class OpenCourseViewController: UIViewController {
     
     func search() {
         
-//        let searchContent = SearchViewController()
-//        searchContent.hidesBottomBarWhenPushed = true
-
+        //        let searchContent = SearchViewController()
+        //        searchContent.hidesBottomBarWhenPushed = true
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
     }
     
-
+    
     //MARK: TabBar初始化
     func initTabBar() {
         
         //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
-        self.navigationController?.tabBarItem.title = "公开课"
-        self.navigationController?.tabBarItem.image = UIImage(named: "table_icon2_normal")
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon2_pressed")
+        self.navigationController?.tabBarItem.title = "培训班"
+        self.navigationController?.tabBarItem.image = UIImage(named: "table_icon3_normal")
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon3_pressed")
+    }
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
+
     /*
     // MARK: - Navigation
 

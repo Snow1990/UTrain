@@ -18,6 +18,7 @@ enum UIPageControlShowStyle {
 
 class AdScrollView: UIScrollView, UIScrollViewDelegate {
 
+    //MARK: - 定义参数
     //广告的label
     var adLable: UILabel?
     //循环滚动的三个视图
@@ -26,25 +27,15 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     var rightImageView = UIImageView()
     //循环滚动的周期时间
     var moveTime = NSTimer()
-    //用于确定滚动式由人导致的还是计时器到了,系统帮我们滚动的,true,则为系统滚动,false则为客户滚动(ps.在客户端中客户滚动一个广告后,这个广告的计时器要归0并重新计时)
-//    var isTimeUp = false
     var pageControlShowStyle = UIPageControlShowStyle.Center
     var pageControl = UIPageControl()
     var imageNameArray = [String]()
-
-    
-    
-    //记录中间图片的下标,开始总是为1
+    //记录中间图片的下标
     var currentImageNum = 0
-
-   
-    private struct Argument {
-        static let ChangeImageTime = 2.0
-    }
+    let ChangeImageTime = 2.0
     
-
-
-    //MARK: - 指定广告所占的frame
+    
+    //MARK: - 初始化，指定广告所占的frame
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.bounces = false
@@ -62,11 +53,12 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         rightImageView.frame = CGRectMake(frame.width * 2, 0, frame.width, frame.height)
         self.addSubview(rightImageView)
         
-        moveTime = NSTimer.scheduledTimerWithTimeInterval(Argument.ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
-        
-//        addPageControl()
+        moveTime = NSTimer.scheduledTimerWithTimeInterval(ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
     }
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     //MARK: - 设置广告所使用的图片(名字)
     func setImageName(imageNameArray: [String]) {
@@ -92,17 +84,13 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         }
         pageControl.currentPage = 0
         pageControl.enabled = false
-
     }
     
-   
     //由于PageControl这个空间必须要添加在滚动视图的父视图上(添加在滚动视图上的话会随着图片滚动,而达不到效果)
     func addPageControl() {
         setPageControlShowStyle()
         self.superview?.addSubview(pageControl)
     }
-    
-    
     
     //MARK: - 计时器到时,系统滚动图片
     func animalMoveImage() {
@@ -127,23 +115,13 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         centerImageView.image = UIImage(named: imageNameArray[currentImageNum])
         rightImageView.image = UIImage(named: imageNameArray[getNext(currentImageNum)])
         
-        
         self.contentOffset = CGPointMake(self.frame.width, 0)
       
-//        moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
-
         //手动控制图片滚动应该取消那个三秒的计时器
-        moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
-
-//        if (!isTimeUp) {
-//  
-//            moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
-//
-//        }
-//        isTimeUp = false
-        
+        moveTime.fireDate = NSDate(timeIntervalSinceNow: ChangeImageTime)
     }
     
+    //MARK: - 公共方法
     func getForward(index: Int) -> Int {
         if index == 0 {
             return imageNameArray.count - 1
@@ -160,18 +138,6 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
 
+   
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
