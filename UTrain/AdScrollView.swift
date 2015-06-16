@@ -27,24 +27,24 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     //循环滚动的周期时间
     var moveTime = NSTimer()
     //用于确定滚动式由人导致的还是计时器到了,系统帮我们滚动的,true,则为系统滚动,false则为客户滚动(ps.在客户端中客户滚动一个广告后,这个广告的计时器要归0并重新计时)
-    var isTimeUp = false
-    
+//    var isTimeUp = false
+    var pageControlShowStyle = UIPageControlShowStyle.Center
     var pageControl = UIPageControl()
     var imageNameArray = [String]()
 
     
     
     //记录中间图片的下标,开始总是为1
-    var currentImageNum = 1
+    var currentImageNum = 0
 
    
     private struct Argument {
-        static let ChangeImageTime = 3.0
+        static let ChangeImageTime = 2.0
     }
     
 
 
-    //MARK: - 自由指定广告所占的frame
+    //MARK: - 指定广告所占的frame
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.bounces = false
@@ -63,9 +63,8 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         self.addSubview(rightImageView)
         
         moveTime = NSTimer.scheduledTimerWithTimeInterval(Argument.ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
-
-    
-
+        
+//        addPageControl()
     }
     
     
@@ -78,14 +77,12 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     }
 
     //MARK: - 创建pageControl,指定其显示样式
-    func setPageControlShowStyle(pageControlShowStyle: UIPageControlShowStyle) {
+    func setPageControlShowStyle() {
         pageControl.numberOfPages = imageNameArray.count
-
-        switch pageControlShowStyle {
+        switch self.pageControlShowStyle {
         case .Default:
             pageControl = UIPageControl()
         case .Left:
-
             pageControl.frame = CGRectMake(10.0, self.frame.origin.y + self.frame.height - 20, 20 * CGFloat(pageControl.numberOfPages), 20)
         case .Center:
             pageControl.frame = CGRectMake(0, 0, 20 * CGFloat(pageControl.numberOfPages), 20)
@@ -95,14 +92,13 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         }
         pageControl.currentPage = 0
         pageControl.enabled = false
-        self.targetForAction("addPageControl", withSender: self)
+
     }
     
    
-    
-    
     //由于PageControl这个空间必须要添加在滚动视图的父视图上(添加在滚动视图上的话会随着图片滚动,而达不到效果)
     func addPageControl() {
+        setPageControlShowStyle()
         self.superview?.addSubview(pageControl)
     }
     
@@ -112,42 +108,57 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     func animalMoveImage() {
         self.setContentOffset(CGPointMake(self.frame.width * CGFloat(2), 0), animated: true)
         NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "scrollViewDidEndDecelerating:", userInfo: nil, repeats: false)
-        
-        
-
     }
     
     //MARK: - 图片停止时,调用该函数使得滚动视图复用
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+
         if self.contentOffset.x == 0 {
-            currentImageNum = (currentImageNum - 1) % imageNameArray.count
-            pageControl.currentPage = (pageControl.currentPage - 1) % imageNameArray.count
+            currentImageNum = getForward(currentImageNum)
+            pageControl.currentPage = currentImageNum
         }else if self.contentOffset.x == self.frame.width * 2 {
-            currentImageNum = (currentImageNum + 1) % imageNameArray.count
-            pageControl.currentPage = (pageControl.currentPage + 1) % imageNameArray.count
+            currentImageNum = getNext(currentImageNum)
+            pageControl.currentPage = currentImageNum
         }else {
             return
         }
         
-        leftImageView.image = UIImage(named: imageNameArray[(currentImageNum - 1) % imageNameArray.count])
-        centerImageView.image = UIImage(named: imageNameArray[currentImageNum % imageNameArray.count])
-        rightImageView.image = UIImage(named: imageNameArray[(currentImageNum + 1) % imageNameArray.count])
-
+        leftImageView.image = UIImage(named: imageNameArray[getForward(currentImageNum)])
+        centerImageView.image = UIImage(named: imageNameArray[currentImageNum])
+        rightImageView.image = UIImage(named: imageNameArray[getNext(currentImageNum)])
+        
+        
         self.contentOffset = CGPointMake(self.frame.width, 0)
       
-        
-        //手动控制图片滚动应该取消那个三秒的计时器
-        if (!isTimeUp) {
-  
-            moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
+//        moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
 
-        }
-        isTimeUp = false
+        //手动控制图片滚动应该取消那个三秒的计时器
+        moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
+
+//        if (!isTimeUp) {
+//  
+//            moveTime.fireDate = NSDate(timeIntervalSinceNow: Argument.ChangeImageTime)
+//
+//        }
+//        isTimeUp = false
         
     }
     
+    func getForward(index: Int) -> Int {
+        if index == 0 {
+            return imageNameArray.count - 1
+        }else {
+            return index - 1
+        }
+    }
     
-    
+    func getNext(index: Int) -> Int {
+        if index == imageNameArray.count - 1 {
+            return 0
+        }else {
+            return index + 1
+        }
+    }
 
     
     required init(coder aDecoder: NSCoder) {

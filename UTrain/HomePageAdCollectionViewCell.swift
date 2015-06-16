@@ -31,10 +31,14 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
         
         let scrollView = AdScrollView(frame: frame)
         scrollView.imageNameArray = imageArray
-        scrollView.setPageControlShowStyle(.Right)
+//        scrollView.setPageControlShowStyle(.Center)
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
         scrollView.pageControl.currentPageIndicatorTintColor = UIColor.purpleColor()
+
+        scrollView.setImageName(imageArray)
         self.addSubview(scrollView)
+        scrollView.addPageControl()
+
     }
     
     required init(coder aDecoder: NSCoder) {
