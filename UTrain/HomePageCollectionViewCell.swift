@@ -15,7 +15,11 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     //课程简介
     var title = UILabel()
     //“来源：”
-    var source = ""
+    var source: String = "" {
+        didSet{
+            sourceContent.text = "  来源：" + source
+        }
+    }
     //来源
     var sourceContent = UILabel()
     //评分
@@ -23,7 +27,11 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     //多少人点击
     var clickCount = UILabel()
     //点击次数
-    var clickCountNum = Int()
+    var clickCountNum: Int = 0 {
+        didSet{
+            clickCount.text = "点击：\(clickCountNum)"
+        }
+    }
     
 
     
@@ -92,8 +100,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         self.addSubview(title)
         
         //课程点击次数
-        clickCountNum = 12334
-        clickCount.text = "点击：\(clickCountNum)"
+//        clickCountNum = 12334
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
         clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
@@ -108,8 +115,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
         
         //来源
-        source = "广州团校"
-        sourceContent.text = "  来源：" + source
+//        source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);

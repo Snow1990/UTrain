@@ -34,29 +34,57 @@ struct Constants {
     static let CellFooterColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 0.5)
     
     
-//    
-//    static let SDCARD =
-//    
-//    
-//    public final static String SDCARD = Environment
-//    .getExternalStorageDirectory().toString();
-//    // 客户端文件夹包名
-//    public final static String DIR_PATH = SDCARD + "/mutrain";
-//    // 客户端图片缓存文件夹包名
-//    public final static String IMG_PATH = DIR_PATH + "/images";
-//    // 偏好设置文件名
-//    public final static String PREFER_FILE_NAME = "mutrain";
-//    public final static Integer PAGE_SIZE = 20;
-//    // 测试
-//    public final static String DOMAIN = "http://120.24.79.127:8081";
+    //文件存储
+    static let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
+        NSSearchPathDomainMask.UserDomainMask, true)
+    static let DocumentDirectory = path[0] as! String
+    static let SDCard = DocumentDirectory
+    // 客户端文件夹包名
+    static let DirPath = SDCard + "/mutrain"
+    // 客户端图片缓存文件夹包名
+    static let ImgPath = DirPath + "/images"
+    // 偏好设置文件名
+    static let PreferFileName = "mutrain"
+    static let PageSize = 20
+    // 测试
+    static let Domain = "http://120.24.79.127:8081"
 //    // 正式
-//    // public final static String DOMAIN="http://edu.youths.org.cn";
-//    // 登陆
-//    public final static String LOGIN = DOMAIN + "/ws/app/auth/stu/login";
-//    // 获取公开课推荐的banner课程
-//    public final static String GET_BANNER_COURSES = DOMAIN
-//    + "/ws/app/public/reco/getBannerCourses";
-//    // 获取公开课推荐的body课程
-//    public final static String GET_BODY_COURSES = DOMAIN
-//    + "/ws/app/public/reco/getBodyCourses";
+//    static let Domain = "http://edu.youths.org.cn"
+    // 登陆
+    static let Login = Domain + "/ws/app/auth/stu/login"
+    // 获取公开课推荐的banner课程
+    static let GetBannerCourses = Domain + "/ws/app/public/reco/getBannerCourses"
+    // 获取公开课推荐的body课程
+    static let GetBodyCourses = Domain + "/ws/app/public/reco/getBodyCourses"
+    // 获取单个公开课课程的详细信息
+    static let GetPublicCourse = Domain + "/ws/app/public/getCourse"
+    // 获取公开课相关推荐课程（共10个）
+    static let GetPublicRecommendCourses = Domain + "/ws/app/public/getRecommendCourses"
+    // 获取公开课热门搜索课程（共10个）
+    static let GetHotSearch = Domain + "/ws/app/public/getHotSearch"
+    // 获取公开课课程列表
+    static let GetPublicCourses = Domain + "/ws/app/public/getCourses"
+    // 获取公开课的课程类型（只包含大类）
+    static let GetPublicMaxType = Domain + "/ws/app/public/getMaxType"
+    // 获取公开课课程评论列表
+    static let PublicComments = Domain + "/ws/app/public/comment/list"
+    // 保存公开课课程评论
+    static let SavePublicComment = Domain + "/ws/app/public/comment/save"
+    // 公开课收藏操作
+    static let SavePublicFavourite = Domain + "/ws/app/public/favorites/save"
+    // 公开课取消收藏操作
+    static let DeletePublicFavourite = Domain + "/ws/app/public/favorites/delete"
+    // 获取培训班的课程类型
+    static let GetSeriesType = Domain + "/ws/app/series/getType"
+    // 获取培训班的系列课列表
+    static let GetSeriesCourses = Domain + "/ws/app/series/getSeriesCourses"
+    
+    
+    
+    //获取文件路径
+    func getFilePath(#fileName:String)->String{
+        var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        var documentDirectory = path[0] as! String
+        return documentDirectory.stringByAppendingPathComponent(fileName)
+    }
 }

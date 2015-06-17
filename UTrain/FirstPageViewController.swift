@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import Alamofire
 
 class FirstPageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+//    
+//    var leagueCourses = [String]()  //团（队）务
+//    var publicDevelopmentCourses = [String]()  //公益发展
+//    var employmentCourses = [String]()  //就业创业
+//    var interestCourses = [String]()  //兴趣爱好
+//    var activityCourses = [String]()  //课外活动
+//    var wholeNationCourses = [String]()  //全国团校精品课程
+//    var wangyiOpenCourses = [String]()  //网易公开课
+//    var totalCourses = [[String]]()  //所有数据集合,将课程数组按顺序存储
     
-    var leagueCourses = [String]()  //团（队）务
-    var publicDevelopmentCourses = [String]()  //公益发展
-    var employmentCourses = [String]()  //就业创业
-    var interestCourses = [String]()  //兴趣爱好
-    var activityCourses = [String]()  //课外活动
-    var wholeNationCourses = [String]()  //全国团校精品课程
-    var wangyiOpenCourses = [String]()  //网易公开课
-    var totalCourses = [[String]]()  //所有数据集合,将课程数组按顺序存储
+    //公开课推荐的banner课程
+    var bannerCourses = [CourseInfo]()
+    //公开课推荐的body课程
+    var bodyCourses = [MaxType]() {
+        didSet{
+            self.courseCollectionView.reloadData()
+        }
+    }
     
     //滚动广告页
     var adScrollView = UIScrollView()
@@ -34,6 +44,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
 
         self.initCollectionView()
         
+
        
 
 
@@ -49,7 +60,24 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func initData() {
+
+        Alamofire.request(.GET, Constants.GetBannerCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
+            if let json = data as? [NSDictionary] {
+                for course in json {
+                    let courseInfo = CourseInfo(bannerCoursesJson: course)
+                    self.bannerCourses.append(courseInfo)
+                }
+            }
+        }
         
+        Alamofire.request(.GET, Constants.GetBodyCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
+            if let json = data as? [NSDictionary] {
+                for type in json {
+                    let maxType = MaxType(BodyCoursesJson: type)
+                    self.bodyCourses.append(maxType)
+                }
+            }
+        }
     }
     
     //MARK: TabBar初始化
@@ -81,14 +109,14 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: - Collection data sourse
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 8
+        return self.bodyCourses.count + 1
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if section == 0 {
             return 1
         }else {
-            return 4
+            return self.bodyCourses[section - 1].maxTypeCourses.count
         }
     }
     
@@ -101,6 +129,11 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         }else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
             
+            var course = self.bodyCourses[indexPath.section - 1].maxTypeCourses[indexPath.row]
+            cell.title.text = course.name
+            cell.source = course.sourceName!
+            cell.clickCountNum = course.hits!
+            cell.setNeedsDisplay()
             return cell
         }
         
@@ -124,8 +157,8 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeaderView
-            headerView.lable.text = getCollectionHeaderTitle(indexPath.section)
-
+//            headerView.lable.text = getCollectionHeaderTitle(indexPath.section)
+            headerView.lable.text = self.bodyCourses[indexPath.section - 1].maxTypeName
             reusableView = headerView
             
             reusableView!.backgroundColor = UIColor.clearColor()
@@ -150,7 +183,6 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             return HomePageCollectionViewCell.getSize()
         }
     }
-    let asd = "213"
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         if section == 0 {

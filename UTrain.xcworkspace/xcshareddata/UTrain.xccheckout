@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>55E8C5E8-392E-496D-8160-32DBFD834DC7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>UTrain</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E58FCE9671AE70AF29AB58DBB48065EF5A7A636D</key>
+		<string>https://github.com/Snow1990/UTrain.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>UTrain.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E58FCE9671AE70AF29AB58DBB48065EF5A7A636D</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Snow1990/UTrain.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E58FCE9671AE70AF29AB58DBB48065EF5A7A636D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E58FCE9671AE70AF29AB58DBB48065EF5A7A636D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UTrain</string>
+		</dict>
+	</array>
+</dict>
+</plist>
