@@ -14,21 +14,12 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     var imageView = UIImageView()
     //课程简介
     var title = UILabel()
-    
-//    //“主讲：”
-//    var mainSpeaker = UILabel()
-//    //主讲人
-//    var mainSpeakerContent = UILabel()
     //“来源：”
     var source = ""
     //来源
     var sourceContent = UILabel()
-    //评分星星图片
-//    var imageViewStarArr = [UIImageView]()
     //评分
     var starNum = Int()
-//    //用户图片
-//    var peopleImgView = UIImageView()
     //多少人点击
     var clickCount = UILabel()
     //点击次数
@@ -40,9 +31,6 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupCell()
-
-        
-
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -64,14 +52,15 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         //collection cell 宽高比
         static let Scale: CGFloat = 16/10
         static let Gap: CGFloat = Rect.width/60
+        
         static let CellWidth: CGFloat = (Rect.width - Gap * 3)/2
         static let CellHight: CGFloat = ImageHight + TitleHight + ClickCountHight + Gap
+        
         static let ImageWidth: CGFloat = CellWidth
         static let ImageHight: CGFloat = ImageWidth/Scale
         
         static let TitleWidth: CGFloat = CellWidth-10
         static let TitleHight: CGFloat = 20
-        
         
         static let ClickLabelScale: CGFloat = 0.6
         static let ClickCountWidth: CGFloat = (CellWidth-10) * ClickLabelScale
@@ -82,24 +71,11 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
         static let SourceWidth: CGFloat = ImageWidth
         static let SourceHight: CGFloat = 20
-//        static let aboutHight = 0.6
-//        static let mainSpeakerHight = 0.6
-//        static let imageHight = 0.6
-//        static let imageHight = 0.6
-
         
     }
     
 
     private func setupCell() {
-
-        
-//        self.backgroundColor = UIColor.yellowColor()
-
-        
-//        self.alpha = 0.1
-//        self.opaque = true
-        
         
         //课程图片
         imageView.backgroundColor = UIColor.brownColor().colorWithAlphaComponent(0.5)
@@ -135,7 +111,6 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         source = "广州团校"
         sourceContent.text = "  来源：" + source
         sourceContent.textColor = UIColor.whiteColor()
-//        sourceContent.backgroundColor = UIColor.yellowColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
         self.addSubview(sourceContent)
@@ -226,9 +201,6 @@ class HomePageCollectionViewCell: UICollectionViewCell {
             let Height = frame.width/5 * Scale
             let starImageView = UIImageView(frame: CGRectMake(X, Y, Width, Height))
             
-//            let starImageView = UIImageView(frame: CGRectMake(frame.origin.x + frame.width/5*CGFloat(index) , frame.origin.y, frame.width/5, frame.width/5))
-//            starImageView.backgroundColor = UIColor.clearColor()
-            
             if index < self.starNum {
                 starImageView.image = starPressedImage
             }else {
@@ -236,10 +208,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
             }
             
             self.addSubview(starImageView)
-//            imageViewStarArr.append(starImageView)
         }
-        
-
     }
     
     //Transparent Gradient Layer

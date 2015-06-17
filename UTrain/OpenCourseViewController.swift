@@ -8,8 +8,9 @@
 
 import UIKit
 
-class OpenCourseViewController: UIViewController {
+class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    @IBOutlet weak var courseCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +20,8 @@ class OpenCourseViewController: UIViewController {
 
         self.initnavigation()
     
+        self.initCollectionView()
+
     
     
     }
@@ -33,8 +36,8 @@ class OpenCourseViewController: UIViewController {
     func initnavigation() {
         
         //左边barbuttonitem
-        var leftImage = UIImage(named: "home_logo")!
-        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
+        var leftImage = UIImage(named: "nav_icon1")!
+        var leftButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
         var leftBarButtonItem = UIBarButtonItem(customView: leftButton)
@@ -42,8 +45,8 @@ class OpenCourseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
         //又边barbuttonitem search
-        var searchImage = UIImage(named: "btn_search")!
-        var searchButton = UIButton(frame: CGRectMake(0, 0, 50, 30))
+        var searchImage = UIImage(named: "nav_icon2")!
+        var searchButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         searchButton.setBackgroundImage(searchImage, forState: UIControlState.Normal)
         
         searchButton.addTarget(self, action: "search", forControlEvents: UIControlEvents.TouchUpInside)
@@ -69,6 +72,32 @@ class OpenCourseViewController: UIViewController {
         self.navigationController?.tabBarItem.title = "公开课"
         self.navigationController?.tabBarItem.image = UIImage(named: "table_icon2_normal")
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon2_pressed")
+    }
+    
+    //MARK: Collection View 初始化
+    func initCollectionView() {
+        
+        courseCollectionView.dataSource = self
+        courseCollectionView.delegate = self
+        
+        
+        //注册collectionCellID
+        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
+    }
+    
+    
+    
+    // MARK: - Collection data sourse
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
+        
+        return cell
     }
     
     /*

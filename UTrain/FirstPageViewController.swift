@@ -23,23 +23,19 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     //滚动广告页
     var adScrollView = UIScrollView()
     
-    
     @IBOutlet weak var courseCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.initData()
         
         self.initTabBar()
-//        self.initNavigation()
+
         self.initCollectionView()
         
-        initView()
-        initScrollView()
-        
-//        courseCollectionView.dataSource = self
-//        courseCollectionView.delegate = self
-        
+       
+
 
 //        //注册collectionCellID
 //        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
@@ -51,8 +47,6 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     func initData() {
         
@@ -66,34 +60,8 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         self.navigationController?.tabBarItem.image = UIImage(named: "table_icon1_normal")
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon1_pressed")
     }
-    //MARK: 导航条初始化
-    func initNavigation() {
-        
-        //左边barbuttonitem
-        var leftImage = UIImage(named: "home_logo")!
-        //        var leftButton = UIButton(frame: CGRectMake(0, 0, 85, 30))
-        var leftButton = UIButton(frame: CGRectMake(0, 0, 68, 24))
-        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
-        leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
-        var leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        
-        self.navigationItem.leftBarButtonItem = leftBarButtonItem
-        
-        //又边barbuttonitem search
-        var searchImage = UIImage(named: "btn_search")!
-        //        var searchButton = UIButton(frame: CGRectMake(0, 0, 50, 30))
-        
-        var searchButton = UIButton(frame: CGRectMake(50, 0, 30, 18))
-        
-        searchButton.setBackgroundImage(searchImage, forState: UIControlState.Normal)
-        
-        searchButton.addTarget(self, action: "search", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        var searchBarButtonItem = UIBarButtonItem(customView: searchButton)
-        //        self.navigationItem.rightBarButtonItem = searchBarButtonItem
-        self.navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
-    }
-    //Collection View 初始化
+    
+    //MARK: Collection View 初始化
     func initCollectionView() {
         
         courseCollectionView.dataSource = self
@@ -108,50 +76,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         courseCollectionView.registerClass(CourseCollectionHeaderView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID)
         //注册collection section footer ID
         courseCollectionView.registerClass(CourseCollectionFooterView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID)
-        
-        //        let collectionViewLayout = courseCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //        collectionViewLayout.headerReferenceSize = CGSizeMake(0, 40)
-        //        collectionViewLayout.footerReferenceSize = CGSizeMake(0, 10)
     }
-    
-    //搜索
-    func search() {
-        
-        //        let searchContent = SearchViewController()
-        //        searchContent.hidesBottomBarWhenPushed = true
-        //        self.navigationController?.pushViewController(searchContent, animated: false)
-        self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
-        
-        
-        //        SearchViewController*searchcontent = [[SearchViewController alloc]init];
-        //        searchcontent.hidesBottomBarWhenPushed = YES;
-        //        [self.navigationController pushViewController:searchcontent animated:YES];
-        
-        
-    }
-    
-    func initView() {
-        
-        //        let backgroundLable = UILabel(frame: UIScreen.mainScreen().bounds)
-        //        backgroundLable.backgroundColor = UIColor.yellowColor()
-        //        backgroundLable.alpha = 0.1
-        //        self.courseCollectionView.addSubview(backgroundLable)
-        
-        
-        //        self.courseCollectionView.backgroundColor = UIColor.grayColor()
-        //        self.courseCollectionView.alpha = 0.1
-        
-        //        UILabel*labelback = [[UILabel alloc]init];
-        //        labelback.backgroundColor = [UIColor grayColor];
-        //        labelback.alpha = 0.1;
-        //        labelback.frame = CGRectMake(0, 0, 320, iPhoneHeight);
-        //        [self.view addSubview:labelback];
-    }
-    
-    func initScrollView() {
-        
-    }
-    
     
     
     // MARK: - Collection data sourse
@@ -187,8 +112,6 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         
         self.performSegueWithIdentifier(Constants.ToCourseDetailSegue, sender: self)
         
-        
-        
     }
     
     
@@ -214,9 +137,6 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             reusableView!.backgroundColor = Constants.CellFooterColor
             
         }
-        
-        
-        
         return reusableView!
     }
     
@@ -230,6 +150,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             return HomePageCollectionViewCell.getSize()
         }
     }
+    let asd = "213"
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         if section == 0 {
@@ -254,6 +175,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
     }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
         return CGSizeMake(0, 10)

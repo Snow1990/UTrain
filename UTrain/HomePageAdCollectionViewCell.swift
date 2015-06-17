@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
+class HomePageAdCollectionViewCell: UICollectionViewCell {
     
     var currentPage = 0
     // 定时器
@@ -32,7 +32,7 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
         self.addSubview(scrollView)
         
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
-        scrollView.pageControl.currentPageIndicatorTintColor = Constants.LightGreen
+        scrollView.pageControl.currentPageIndicatorTintColor = UIColor.redColor()
         scrollView.addPageControl()
 
     }
@@ -59,7 +59,7 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
         static let AdPageControlHeight: CGFloat = 10
         static let AdPageNumber: Int = 5
     }
-    
+    /*
     private func setupCell() {
         
         scrollView.frame = self.frame
@@ -99,18 +99,11 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     func pageChanged(){
         self.scrollView.setContentOffset(CGPointMake(UIScreen.mainScreen().bounds.width * CGFloat(pageControl.currentPage), 0), animated: true)
-//        let offset = CGFloat(pageControl.currentPage) * UIScreen.mainScreen().bounds.width
-//        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-//            self.scrollView.contentOffset.x = offset
-//
-//        },nil)
         
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "autoChangeScrollView", userInfo: nil, repeats: false)
-        
-        
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-//        stopAutoTimer()
+
         let curPage = scrollView.contentOffset.x / UIScreen.mainScreen().bounds.width
         pageControl.currentPage = Int(curPage)
     }
@@ -164,5 +157,6 @@ class HomePageAdCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     }
     
 
+*/
     
 }

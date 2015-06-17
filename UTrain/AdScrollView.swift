@@ -31,7 +31,7 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     var pageControl = UIPageControl()
     var imageNameArray = [String]()
     //记录中间图片的下标
-    var currentImageNum = 0
+    var currentImageNum = 1
     let ChangeImageTime = 2.0
     
     
@@ -42,6 +42,7 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.pagingEnabled = true
+
         self.contentOffset = CGPointMake(frame.width, 0)
         self.contentSize = CGSizeMake(frame.width * 3, frame.height)
         self.delegate = self
@@ -52,7 +53,10 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         self.addSubview(centerImageView)
         rightImageView.frame = CGRectMake(frame.width * 2, 0, frame.width, frame.height)
         self.addSubview(rightImageView)
+       
         
+
+//        println(self.contentOffset)
         moveTime = NSTimer.scheduledTimerWithTimeInterval(ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
     }
     
@@ -103,10 +107,10 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
 
         if self.contentOffset.x == 0 {
             currentImageNum = getForward(currentImageNum)
-            pageControl.currentPage = currentImageNum
+            pageControl.currentPage = getForward(currentImageNum)
         }else if self.contentOffset.x == self.frame.width * 2 {
             currentImageNum = getNext(currentImageNum)
-            pageControl.currentPage = currentImageNum
+            pageControl.currentPage = getForward(currentImageNum)
         }else {
             return
         }
