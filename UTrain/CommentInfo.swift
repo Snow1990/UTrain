@@ -1,5 +1,5 @@
 //
-//  Comment.swift
+//  CommentInfo.swift
 //  UTrain
 //
 //  Created by SN on 15/6/17.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Comment {
+class CommentInfo {
     //课程ID
     var courseId: String!
 //    //学员ID（登录学员必传值）
@@ -23,5 +23,5 @@ class Comment {
     //用户类型（1：游客；2：学员；3：讲师；4：匿名用户）
     var userType: Int!
     //学员
-    var student: Student?
+    var studentInfo: StudentInfo?
 }

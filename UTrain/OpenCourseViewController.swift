@@ -7,23 +7,38 @@
 //
 
 import UIKit
+import Alamofire
 
 class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    
+    //当前课程按页码分组
+    var coursesByPage = [PageInfo](){
+        didSet{
+            self.courseCollectionView.reloadData()
+        }
+    }
+    
+    //图片字典
+    var imageDictionary = [String: UIImage]() {
+        didSet{
+            self.courseCollectionView.reloadData()
+        }
+    }
+    
+    
     @IBOutlet weak var courseCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.initdata()
-        
+        self.initData()
+
         self.initTabBar()
 
         self.initnavigation()
     
         self.initCollectionView()
 
-    
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +47,29 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     
+    //从网络下载数据
+    func initData() {
+        
+        Alamofire.request(Network.Router.CourseByPage(pageNo: 1, pageSize: 10)).responseJSON { (request, _, data, error) -> Void in
+            
+            if let json = data as? NSDictionary {
+
+                let pageInfo = PageInfo(pageCoursesJson: json)
+                self.coursesByPage.append(pageInfo)
+                
+                //下载图片数据
+                for courseInfo in pageInfo.currentCourses {
+                    if let path = courseInfo.imagePath {
+                        Alamofire.request(Network.Router.Image(imagePath: path)).responseImage() {(_, _, image, error) in
+                            if error == nil && image != nil {
+                                self.imageDictionary[courseInfo.imagePath!] = image!
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     //MARK: 导航条布局
     func initnavigation() {
         
@@ -77,26 +115,44 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     //MARK: Collection View 初始化
     func initCollectionView() {
         
+        courseCollectionView.backgroundColor = Constants.OpenCourseBGColor
+        
         courseCollectionView.dataSource = self
         courseCollectionView.delegate = self
         
         
         //注册collectionCellID
-        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
     }
     
-    
-    
     // MARK: - Collection data sourse
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return self.coursesByPage.count
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.coursesByPage[section].currentCourses.count
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! CourseCollectionViewCell
         
+
+        //获取课程详细信息
+        var course = self.coursesByPage[indexPath.section].currentCourses[indexPath.row]
+
+        cell.title.text = course.name
+        cell.source = course.sourceName!
+        cell.clickCountNum = course.hits!
+        cell.starNum = Int(course.avgStarScore! + 0.5)
+        cell.imageView.image = nil
+        if let path = course.imagePath {
+            cell.imageView.image = imageDictionary[path]
+        }
+        
+
         return cell
     }
     
@@ -105,7 +161,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        return HomePageCollectionViewCell.getSize()
+        return CourseCollectionViewCell.getSize()
         
     }
     
@@ -113,10 +169,13 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
        
         let Rect = UIScreen.mainScreen().bounds
         let Gap: CGFloat = Rect.width/60
-        return UIEdgeInsetsMake(0, Gap, 0, Gap)
+        return UIEdgeInsetsMake(Gap, Gap, Gap, Gap)
         
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return UIScreen.mainScreen().bounds.width/60
+    }
     /*
     // MARK: - Navigation
 

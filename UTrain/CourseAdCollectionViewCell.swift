@@ -1,5 +1,5 @@
 //
-//  HomePageAdCollectionViewCell.swift
+//  CourseAdCollectionViewCell.swift
 //  UTrain
 //
 //  Created by SN on 15/6/12.
@@ -8,35 +8,26 @@
 
 import UIKit
 
-class HomePageAdCollectionViewCell: UICollectionViewCell {
+class CourseAdCollectionViewCell: UICollectionViewCell {
     
     //测试用图片
 //    let imageArray = ["tutorial_background_00","tutorial_background_01","tutorial_background_02","tutorial_background_03","tutorial_background_04"]
-    var scrollView: AdScrollView!
     
+    var scrollView: AdScrollView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         scrollView = AdScrollView(frame: frame)
         self.addSubview(scrollView)
-
-//        scrollView.setImageName(imageArray.map{UIImage(named: $0)!})
         
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
-        scrollView.pageControl.currentPageIndicatorTintColor = UIColor.redColor()
+        scrollView.pageControl.currentPageIndicatorTintColor = Constants.LightGreen
         scrollView.addPageControl()
     }
-    func setAdScrollViewImage(imageArray: [UIImage]) {
-        
-        scrollView!.setImageName(imageArray)
-  
-    }
-    
+   
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
-    
     
     class func reuseIdentifier() -> String{
         return Constants.HomePageAdReusableCellID

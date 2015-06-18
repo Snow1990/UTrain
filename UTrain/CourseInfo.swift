@@ -34,7 +34,7 @@ class CourseInfo:NSObject {
     //描述或简介
     var courseDescription: String?
     //讲师
-    var lecture: Lecture?
+    var lectureInfo: LectureInfo?
     //true：已收藏；false：未收藏
     var favorites = false
     
@@ -50,10 +50,11 @@ class CourseInfo:NSObject {
         self.avgStarScore = course["avg_star_score"] as? Double
         self.imagePath = course["img_path"] as? String
         self.sourceName = course["source_name"] as? String
+        
+        if let lectureId = course["teacher_id"] as? String,
+            let lectureName = course["teacher_name"] as? String {
+                lectureInfo = LectureInfo(id: lectureId, name: lectureName)
+        }
     }
-    
-    
-    
-    
 
 }

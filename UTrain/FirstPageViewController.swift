@@ -24,9 +24,18 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             self.courseCollectionView.reloadData()
         }
     }
-    
-    //图片缓存
-    let imageCache = NSCache()
+    //图片字典
+    var imageDictionary = [String: UIImage]() {
+        didSet{
+            self.courseCollectionView.reloadData()
+        }
+    }
+    //滚动图片
+    var adImageArr = [UIImage]() {
+        didSet{
+            self.courseCollectionView.reloadData()
+        }
+    }
     
     @IBOutlet weak var courseCollectionView: UICollectionView!
     
@@ -46,29 +55,47 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         // Dispose of any resources that can be recreated.
     }
     
-    //从网络下载数据
+    // MARK: - 从网络下载数据
     func initData() {
 
+        //下载广告页数据
         Alamofire.request(.GET, Network.GetBannerCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
             if let json = data as? [NSDictionary] {
                 for course in json {
                     let courseInfo = CourseInfo(bannerCoursesJson: course)
                     self.bannerCourses.append(courseInfo)
+                    
+                    //下载图片数据
+                    Alamofire.request(Network.Router.Image(imagePath: courseInfo.imagePath!)).responseImage() {(_, _, image, error) in
+                        if error == nil && image != nil {
+                            self.adImageArr.append(image!)
+                        }
+                    }
                 }
             }
         }
         
+        //下载Collection里的数据
         Alamofire.request(.GET, Network.GetBodyCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
             if let json = data as? [NSDictionary] {
                 for type in json {
-                    let maxType = MaxType(BodyCoursesJson: type)
+                    let maxType = MaxType(bodyCoursesJson: type)
                     self.bodyCourses.append(maxType)
+                    
+                    //下载图片数据
+                    for courseInfo in maxType.maxTypeCourses {
+                        Alamofire.request(Network.Router.Image(imagePath: courseInfo.imagePath!)).responseImage() {(_, _, image, error) in
+                            if error == nil && image != nil {
+                                self.imageDictionary[courseInfo.imagePath!] = image!
+                            }
+                        }
+                    }
                 }
             }
         }
     }
     
-    //MARK: TabBar初始化
+    // MARK: - TabBar初始化
     func initTabBar() {
         
         //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
@@ -77,16 +104,16 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon1_pressed")
     }
     
-    //MARK: Collection View 初始化
+    // MARK: - Collection View 初始化
     func initCollectionView() {
         
         courseCollectionView.dataSource = self
         courseCollectionView.delegate = self
         
         //注册collectionCellID
-        courseCollectionView.registerClass(HomePageCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageReusableCellID)
         //注册广告页CellID
-        courseCollectionView.registerClass(HomePageAdCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageAdReusableCellID)
+        courseCollectionView.registerClass(CourseAdCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageAdReusableCellID)
         //注册collection section header ID
         courseCollectionView.registerClass(CourseCollectionHeaderView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID)
         //注册collection section footer ID
@@ -110,68 +137,21 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //如果是广告页
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageAdReusableCellID, forIndexPath: indexPath) as! HomePageAdCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageAdReusableCellID, forIndexPath: indexPath) as! CourseAdCollectionViewCell
 
-            var array = [UIImage]()
-            for course in self.bannerCourses {
-                
-                if let image = self.imageCache.objectForKey(course.imagePath!) as? UIImage {
-                    array.append(image)
+            cell.scrollView.imageNameArray = self.adImageArr
 
-                } else {
-                    
-                    Alamofire.request(Network.Router.Image(course.imagePath!)).responseImage() {
-                        (request, _, image, error) in
-                        if error == nil && image != nil {
-                            
-                            self.imageCache.setObject(image!, forKey: course.imagePath!)
-                            array.append(image!)
-                            self.courseCollectionView.reloadData()
-
-                        } else {
-                            /*
-                            If the cell went off-screen before the image was downloaded, we cancel it and
-                            an NSURLErrorDomain (-999: cancelled) is returned. This is a normal behavior.
-                            */
-                        }
-                    }
-                }
-            }
-
-            cell.setAdScrollViewImage(array)
             return cell
         }else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! CourseCollectionViewCell
             
             //获取课程详细信息
             var course = self.bodyCourses[indexPath.section - 1].maxTypeCourses[indexPath.row]
             cell.title.text = course.name
             cell.source = course.sourceName!
             cell.clickCountNum = course.hits!
-            cell.imageView.image = nil
-            
-            if let image = self.imageCache.objectForKey(course.imagePath!) as? UIImage {
-                cell.imageView.image = image
-            } else {
-
-//                cell.imageView.image = nil
-                cell.request = Alamofire.request(Network.Router.Image(course.imagePath!)).responseImage() {
-                    (request, _, image, error) in
-                    if error == nil && image != nil {
-
-                        self.imageCache.setObject(image!, forKey: course.imagePath!)
-
-                        if request.URLString == cell.request?.request.URLString {
-                            cell.imageView.image = image
-                        }
-                    } else {
-                        /*
-                        If the cell went off-screen before the image was downloaded, we cancel it and
-                        an NSURLErrorDomain (-999: cancelled) is returned. This is a normal behavior.
-                        */
-                    }
-                }
-            }
+            cell.starNum = Int(course.avgStarScore! + 0.5)
+            cell.imageView.image = imageDictionary[course.imagePath!]
 
             return cell
         }
@@ -212,9 +192,9 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            return HomePageAdCollectionViewCell.getSize()
+            return CourseAdCollectionViewCell.getSize()
         }else {
-            return HomePageCollectionViewCell.getSize()
+            return CourseCollectionViewCell.getSize()
         }
     }
     
@@ -242,31 +222,6 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         return CGSizeMake(0, 10)
     }
     
-    
-    // MARK: - functions
-
-//    func getCollectionHeaderTitle(section: Int) -> String{
-//        switch section{
-//        case 0:
-//            return ""
-//        case 1:
-//            return "团（队）务"
-//        case 2:
-//            return "公益发展"
-//        case 3:
-//            return "创业就业"
-//        case 4:
-//            return "兴趣爱好"
-//        case 5:
-//            return "课外活动"
-//        case 6:
-//            return "全国城市精品"
-//        case 7:
-//            return "网易公开课"
-//        default:
-//            return ""
-//        }
-//    }
     
     /*
     // MARK: - Navigation

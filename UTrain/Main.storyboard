@@ -18,6 +18,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YBC-6M-paT">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zHk-G3-1Dw">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,8 +41,8 @@
                         <color key="backgroundColor" red="0.54092899100000003" green="1" blue="0.41118037359999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YBC-6M-paT" firstAttribute="leading" secondItem="Qs9-nJ-Z3F" secondAttribute="leading" id="03I-Ze-f0Z"/>
+                            <constraint firstItem="r0g-bz-uBk" firstAttribute="bottom" secondItem="YBC-6M-paT" secondAttribute="bottom" id="T2q-YZ-2kP"/>
                             <constraint firstItem="YBC-6M-paT" firstAttribute="top" secondItem="Qs9-nJ-Z3F" secondAttribute="top" id="WoH-u6-iTu"/>
-                            <constraint firstItem="r0g-bz-uBk" firstAttribute="top" secondItem="YBC-6M-paT" secondAttribute="bottom" id="ZTL-lt-ms3"/>
                             <constraint firstAttribute="trailing" secondItem="YBC-6M-paT" secondAttribute="trailing" id="mEJ-XK-ywX"/>
                         </constraints>
                     </view>
@@ -215,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdW-r3-Skd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941" y="2151"/>
+            <point key="canvasLocation" x="1733" y="2131"/>
         </scene>
         <!--我的课堂-->
         <scene sceneID="kZT-fj-awl">
@@ -238,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBj-m2-u1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910" y="2146"/>
+            <point key="canvasLocation" x="2702" y="2126"/>
         </scene>
         <!--我的课堂-->
         <scene sceneID="IHb-vt-Lmw">
@@ -259,7 +260,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G39-1e-C9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910" y="1317"/>
+            <point key="canvasLocation" x="2702" y="1297"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yU2-dL-Vfh">
@@ -317,7 +318,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAT-XS-vLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941" y="1317"/>
+            <point key="canvasLocation" x="1733" y="1297"/>
         </scene>
         <!--首页-->
         <scene sceneID="kws-6V-3aA">

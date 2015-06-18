@@ -1,5 +1,5 @@
 //
-//  HomePageCollectionViewCell.swift
+//  CourseCollectionViewCell.swift
 //  UTrain
 //
 //  Created by SN on 15/6/9.
@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class HomePageCollectionViewCell: UICollectionViewCell {
+class CourseCollectionViewCell: UICollectionViewCell {
     
     //课程图片
     var imageView = UIImageView()
@@ -24,7 +24,12 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     //来源
     var sourceContent = UILabel()
     //评分
-    var starNum = Int()
+    var starNum: Int = 0 {
+        didSet{
+            setupStarImage()
+        }
+    }
+    var starImageArr = [UIImageView]()
     //多少人点击
     var clickCount = UILabel()
     //点击次数
@@ -40,6 +45,8 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.whiteColor()
         
         setupCell()
     }
@@ -97,13 +104,13 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
         //课程名称
         title.backgroundColor = UIColor.clearColor()
-//        title.text = "标题示例文字"
+        title.text = "标题示例文字"
         title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         title.frame = CGRectMake(5, imageView.frame.height, Argument.TitleWidth, Argument.TitleHight)
         self.addSubview(title)
         
         //课程点击次数
-//        clickCountNum = 12334
+        clickCountNum = 12334
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
         clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
@@ -113,12 +120,22 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
         //评价星级
         self.starNum = 3
-        setupStarImage(frame: CGRectMake(Argument.CellWidth * Argument.ClickLabelScale, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight))
+        let starImageFrame = CGRectMake(Argument.CellWidth * Argument.ClickLabelScale, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight)
+        for index in 0..<5 {
+            let Scale:CGFloat = 0.8
+            let X = starImageFrame.origin.x + starImageFrame.width/5*CGFloat(index)
+            let Y = starImageFrame.origin.y + (starImageFrame.height - starImageFrame.width/5)/2
+            let Width = starImageFrame.width/5 * Scale
+            let Height = starImageFrame.width/5 * Scale
+            starImageArr.append(UIImageView(frame: CGRectMake(X, Y, Width, Height)))
+            
+            self.addSubview(starImageArr[index])
+        }
 
         
         
         //来源
-//        source = "广州团校"
+        source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
@@ -197,28 +214,43 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setupStarImage(#frame: CGRect) {
+    func setupStarImage() {
         
         let starNormalImage = UIImage(named: "start2")
         let starPressedImage = UIImage(named: "start1")
+
         
-        for index in 0..<5 {
-            let Scale:CGFloat = 0.8
-            let X = frame.origin.x + frame.width/5*CGFloat(index)
-            let Y = frame.origin.y + (frame.height - frame.width/5)/2
-            let Width = frame.width/5 * Scale
-            let Height = frame.width/5 * Scale
-            let starImageView = UIImageView(frame: CGRectMake(X, Y, Width, Height))
-            
+        for index in 0..<starImageArr.count {
             if index < self.starNum {
-                starImageView.image = starPressedImage
+                starImageArr[index].image = starPressedImage
             }else {
-                starImageView.image = starNormalImage
+                starImageArr[index].image = starNormalImage
             }
-            
-            self.addSubview(starImageView)
         }
     }
+    
+//    func setupStarImage(#frame: CGRect) {
+//        
+//        let starNormalImage = UIImage(named: "start2")
+//        let starPressedImage = UIImage(named: "start1")
+//        
+//        for index in 0..<5 {
+//            let Scale:CGFloat = 0.8
+//            let X = frame.origin.x + frame.width/5*CGFloat(index)
+//            let Y = frame.origin.y + (frame.height - frame.width/5)/2
+//            let Width = frame.width/5 * Scale
+//            let Height = frame.width/5 * Scale
+//            let starImageView = UIImageView(frame: CGRectMake(X, Y, Width, Height))
+//            
+//            if index < self.starNum {
+//                starImageView.image = starPressedImage
+//            }else {
+//                starImageView.image = starNormalImage
+//            }
+//            
+//            self.addSubview(starImageView)
+//        }
+//    }
     
     //Transparent Gradient Layer
     func insertTransparentGradient(#view: UIView) {

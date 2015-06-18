@@ -1,5 +1,5 @@
 //
-//  Student.swift
+//  StudentInfo.swift
 //  UTrain
 //
 //  Created by SN on 15/6/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Student {
+class StudentInfo {
     //学员ID
     var stuId: String!
     //学员昵称

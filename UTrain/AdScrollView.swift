@@ -132,7 +132,7 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         if imageNameArray.isEmpty {
             return 0
         }
-        if index == 0 {
+        if index <= 0 {
             return imageNameArray.count - 1
         }else {
             return index - 1
@@ -143,7 +143,7 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         if imageNameArray.isEmpty {
             return 0
         }
-        if index == imageNameArray.count - 1 {
+        if index >= imageNameArray.count - 1 {
             return 0
         }else {
             return index + 1

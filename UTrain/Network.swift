@@ -83,16 +83,23 @@ struct Network {
     
     enum Router: URLRequestConvertible {
 
-        case Image(String)
+        case Image(imagePath:String)
+        case CourseByPage(pageNo:Int,pageSize:Int)
         
         var URLRequest: NSURLRequest {
             let (path:String, parameters: [String:AnyObject]) = {
                 switch self {
-                case Router.Image(let imageName):
+                case Router.Image(let imagePath):
                     let params = [
-                        "image": imageName
+                        "image": imagePath
                     ]
                     return (GetImage, params)
+                case Router.CourseByPage(let pageNo, let pageSize):
+                    let params = [
+                        "pageNo": pageNo,
+                        "pageSize": pageSize
+                    ]
+                    return (GetPublicCourses,params)
                 }
             }()
             
