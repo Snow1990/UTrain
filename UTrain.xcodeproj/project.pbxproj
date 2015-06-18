@@ -14,6 +14,7 @@
 		875201021B310FD1005DF73B /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875201011B310FD1005DF73B /* Student.swift */; };
 		875201041B311100005DF73B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875201031B311100005DF73B /* Page.swift */; };
 		875201061B311B7B005DF73B /* MaxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875201051B311B7B005DF73B /* MaxType.swift */; };
+		875201081B315405005DF73B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875201071B315405005DF73B /* Network.swift */; };
 		87AE27BD1B26CA1F00C397C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */; };
 		87AE27C01B26CF8000C397C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87AE27BF1B26CF8000C397C4 /* Main.storyboard */; };
 		87AE27C31B26DEE400C397C4 /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27C21B26DEE400C397C4 /* HomePageCollectionViewCell.swift */; };
@@ -59,6 +60,7 @@
 		875201011B310FD1005DF73B /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		875201031B311100005DF73B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		875201051B311B7B005DF73B /* MaxType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxType.swift; sourceTree = "<group>"; };
+		875201071B315405005DF73B /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		87AE27BF1B26CF8000C397C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87AE27C21B26DEE400C397C4 /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -107,7 +109,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		87AE27B91B268D5B00C397C4 /* HomePage */ = {
+		87AE27B91B268D5B00C397C4 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
 				87F5A1101B2ADE580058D7AF /* FirstPageViewController.swift */,
@@ -117,7 +119,7 @@
 				87D295E51B296286006F772C /* CourseCollectionHeaderView.swift */,
 				87D295E71B296E24006F772C /* CourseCollectionFooterView.swift */,
 			);
-			name = HomePage;
+			name = FirstPage;
 			sourceTree = "<group>";
 		};
 		87AE27BE1B26CA2600C397C4 /* Search */ = {
@@ -183,6 +185,7 @@
 				87F182BA1B252F82000314B5 /* AppDelegate.swift */,
 				87AE27BF1B26CF8000C397C4 /* Main.storyboard */,
 				87F182E61B25939F000314B5 /* Constants.swift */,
+				875201071B315405005DF73B /* Network.swift */,
 				87B75AA11B30FED1006C5139 /* Model */,
 				87F182EA1B259515000314B5 /* Controller */,
 				87F5A1401B2EB0210058D7AF /* View */,
@@ -222,7 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				87F182F31B259847000314B5 /* FirstLaunch */,
-				87AE27B91B268D5B00C397C4 /* HomePage */,
+				87AE27B91B268D5B00C397C4 /* FirstPage */,
 				87AE27CC1B28161D00C397C4 /* OpenCourse */,
 				87F5A1471B2FC2590058D7AF /* TrainingClass */,
 				87F5A1481B2FC26F0058D7AF /* MyClass */,
@@ -447,6 +450,7 @@
 				87F182E51B2591E5000314B5 /* MainTabBarController.swift in Sources */,
 				875200FB1B30FFF6005DF73B /* CourseInfo.swift in Sources */,
 				87F5A10C1B2AD0AD0058D7AF /* HomePageAdCollectionViewCell.swift in Sources */,
+				875201081B315405005DF73B /* Network.swift in Sources */,
 				87AE27CA1B28153D00C397C4 /* CourseDetailViewController.swift in Sources */,
 				87F5A1421B2EB0650058D7AF /* AdScrollView.swift in Sources */,
 				875201001B310E97005DF73B /* Comment.swift in Sources */,

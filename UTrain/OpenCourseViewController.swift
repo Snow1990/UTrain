@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var courseCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -98,6 +98,23 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! HomePageCollectionViewCell
         
         return cell
+    }
+    
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return HomePageCollectionViewCell.getSize()
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+       
+        let Rect = UIScreen.mainScreen().bounds
+        let Gap: CGFloat = Rect.width/60
+        return UIEdgeInsetsMake(0, Gap, 0, Gap)
+        
     }
     
     /*

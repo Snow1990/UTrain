@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomePageCollectionViewCell: UICollectionViewCell {
     
@@ -32,6 +33,8 @@ class HomePageCollectionViewCell: UICollectionViewCell {
             clickCount.text = "点击：\(clickCountNum)"
         }
     }
+    var request: Alamofire.Request?
+
     
 
     
@@ -94,7 +97,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         
         //课程名称
         title.backgroundColor = UIColor.clearColor()
-        title.text = "标题示例文字"
+//        title.text = "标题示例文字"
         title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         title.frame = CGRectMake(5, imageView.frame.height, Argument.TitleWidth, Argument.TitleHight)
         self.addSubview(title)
@@ -121,7 +124,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
         self.addSubview(sourceContent)
         
-        insertTransparentGradient(frame: sourceContent.frame)
+        insertTransparentGradient(view: sourceContent)
         
         /*
         
@@ -218,7 +221,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     }
     
     //Transparent Gradient Layer
-    func insertTransparentGradient(#frame: CGRect) {
+    func insertTransparentGradient(#view: UIView) {
         
         let colorOne = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 0)
         let colorTwo = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
@@ -231,8 +234,8 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         let headerLayer = CAGradientLayer()
         headerLayer.colors = colors
         headerLayer.locations = locations
-        headerLayer.frame = frame
-        self.layer.insertSublayer(headerLayer, atIndex: 0)
+        headerLayer.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
+        view.layer.insertSublayer(headerLayer, atIndex: 0)
     }
     
     //color gradient layer

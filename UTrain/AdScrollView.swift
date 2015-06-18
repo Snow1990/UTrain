@@ -29,10 +29,15 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     var moveTime = NSTimer()
     var pageControlShowStyle = UIPageControlShowStyle.Center
     var pageControl = UIPageControl()
-    var imageNameArray = [String]()
+    var imageNameArray = [UIImage](){
+        didSet {
+            pageControl.numberOfPages = imageNameArray.count
+        }
+    }
     //记录中间图片的下标
     var currentImageNum = 1
     let ChangeImageTime = 2.0
+
     
     
     //MARK: - 初始化，指定广告所占的frame
@@ -53,11 +58,9 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         self.addSubview(centerImageView)
         rightImageView.frame = CGRectMake(frame.width * 2, 0, frame.width, frame.height)
         self.addSubview(rightImageView)
-       
         
-
-//        println(self.contentOffset)
         moveTime = NSTimer.scheduledTimerWithTimeInterval(ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
+
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -65,11 +68,8 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     //MARK: - 设置广告所使用的图片(名字)
-    func setImageName(imageNameArray: [String]) {
+    func setImageName(imageNameArray: [UIImage]) {
         self.imageNameArray = imageNameArray
-        leftImageView.image = UIImage(named: imageNameArray[0])
-        centerImageView.image = UIImage(named: imageNameArray[1])
-        rightImageView.image = UIImage(named: imageNameArray[2])
     }
 
     //MARK: - 创建pageControl,指定其显示样式
@@ -114,10 +114,12 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         }else {
             return
         }
-        
-        leftImageView.image = UIImage(named: imageNameArray[getForward(currentImageNum)])
-        centerImageView.image = UIImage(named: imageNameArray[currentImageNum])
-        rightImageView.image = UIImage(named: imageNameArray[getNext(currentImageNum)])
+        if imageNameArray.count >= 3{
+            
+            leftImageView.image = imageNameArray[getForward(currentImageNum)]
+            centerImageView.image = imageNameArray[currentImageNum]
+            rightImageView.image = imageNameArray[getNext(currentImageNum)]
+        }
         
         self.contentOffset = CGPointMake(self.frame.width, 0)
       
@@ -127,6 +129,9 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     
     //MARK: - 公共方法
     func getForward(index: Int) -> Int {
+        if imageNameArray.isEmpty {
+            return 0
+        }
         if index == 0 {
             return imageNameArray.count - 1
         }else {
@@ -135,6 +140,9 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func getNext(index: Int) -> Int {
+        if imageNameArray.isEmpty {
+            return 0
+        }
         if index == imageNameArray.count - 1 {
             return 0
         }else {

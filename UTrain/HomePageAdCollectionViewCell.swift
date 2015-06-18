@@ -10,35 +10,31 @@ import UIKit
 
 class HomePageAdCollectionViewCell: UICollectionViewCell {
     
-    var currentPage = 0
-    // 定时器
-    var myAutoTimer: NSTimer?
-    var scrollView = UIScrollView()
-    var pageControl = UIPageControl()
-    //循环滚动的三个视图
-    var leftImageView = UIImageView()
-    var centerImageView = UIImageView()
-    var rightImageView = UIImageView()
-    
     //测试用图片
-    let imageArray = ["tutorial_background_00","tutorial_background_01","tutorial_background_02","tutorial_background_03","tutorial_background_04"]
+//    let imageArray = ["tutorial_background_00","tutorial_background_01","tutorial_background_02","tutorial_background_03","tutorial_background_04"]
+    var scrollView: AdScrollView!
     
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let scrollView = AdScrollView(frame: frame)
-        scrollView.imageNameArray = imageArray
-        scrollView.setImageName(imageArray)
+        scrollView = AdScrollView(frame: frame)
         self.addSubview(scrollView)
+
+//        scrollView.setImageName(imageArray.map{UIImage(named: $0)!})
         
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
         scrollView.pageControl.currentPageIndicatorTintColor = UIColor.redColor()
         scrollView.addPageControl()
-
+    }
+    func setAdScrollViewImage(imageArray: [UIImage]) {
+        
+        scrollView!.setImageName(imageArray)
+  
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
     }
     
     
@@ -55,9 +51,9 @@ class HomePageAdCollectionViewCell: UICollectionViewCell {
         static let Scale:CGFloat = 19/8
         static let CellWidth: CGFloat = Rect.width
         static let CellHeight: CGFloat = CellWidth/Scale
-        static let AdPageControlWidth: CGFloat = CellWidth/5
-        static let AdPageControlHeight: CGFloat = 10
-        static let AdPageNumber: Int = 5
+//        static let AdPageControlWidth: CGFloat = CellWidth/5
+//        static let AdPageControlHeight: CGFloat = 10
+//        static let AdPageNumber: Int = 5
     }
     /*
     private func setupCell() {
