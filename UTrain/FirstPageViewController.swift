@@ -59,7 +59,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     func initData() {
 
         //下载广告页数据
-        Alamofire.request(.GET, Network.GetBannerCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
+        Alamofire.request(.GET, Network.GetBannerCourses).responseJSON { (_, _, data, error) -> Void in
             if let json = data as? [NSDictionary] {
                 for course in json {
                     let courseInfo = CourseInfo(bannerCoursesJson: course)
@@ -76,7 +76,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
         //下载Collection里的数据
-        Alamofire.request(.GET, Network.GetBodyCourses, parameters: nil).responseJSON { (_, _, data, error) -> Void in
+        Alamofire.request(.GET, Network.GetBodyCourses).responseJSON { (_, _, data, error) -> Void in
             if let json = data as? [NSDictionary] {
                 for type in json {
                     let maxType = MaxType(bodyCoursesJson: type)
@@ -106,7 +106,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: - Collection View 初始化
     func initCollectionView() {
-        
+
         courseCollectionView.dataSource = self
         courseCollectionView.delegate = self
         
@@ -210,7 +210,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSizeMake(0, 0)
+            return CGSizeZero
         }else {
             return CGSizeMake(0, 40)
         }

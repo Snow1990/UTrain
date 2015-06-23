@@ -23,6 +23,7 @@ class CourseAdCollectionViewCell: UICollectionViewCell {
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
         scrollView.pageControl.currentPageIndicatorTintColor = Constants.LightGreen
         scrollView.addPageControl()
+
     }
    
     required init(coder aDecoder: NSCoder) {

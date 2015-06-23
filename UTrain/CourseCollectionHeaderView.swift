@@ -10,9 +10,7 @@ import UIKit
 
 class CourseCollectionHeaderView: UICollectionReusableView {
     
-
-    
-    
+ 
     var lable = UILabel()
     var imageView = UIImageView()
     

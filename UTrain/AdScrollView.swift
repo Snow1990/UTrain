@@ -37,8 +37,6 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
     //记录中间图片的下标
     var currentImageNum = 1
     let ChangeImageTime = 2.0
-
-    
     
     //MARK: - 初始化，指定广告所占的frame
     override init(frame: CGRect) {
@@ -60,7 +58,6 @@ class AdScrollView: UIScrollView, UIScrollViewDelegate {
         self.addSubview(rightImageView)
         
         moveTime = NSTimer.scheduledTimerWithTimeInterval(ChangeImageTime, target: self, selector: "animalMoveImage", userInfo: nil, repeats: true)
-
     }
     
     required init(coder aDecoder: NSCoder) {

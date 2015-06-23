@@ -10,7 +10,17 @@ import Foundation
 import UIKit
 
 
+
 struct Constants {
+    enum CourseType: String{
+        case TDW = "团（队）务"
+        case GYFZ = "公益发展"
+        case JYCY = "就业创业"
+        case XQAH = "兴趣爱好"
+        case KWHD = "课外活动"
+        case QGCSJPK = "全国城市精品课"
+        case WYGKK = "网易公开课"
+    }
     
     //NSUserDefault中键值名
     static let FirstLaunchNUD = "UTrainFirstLaunch"
@@ -24,8 +34,10 @@ struct Constants {
     //可重用cellID
     static let HomePageReusableCellID = "HomePageCell"
     static let HomePageAdReusableCellID = "HomePageAdCell"
+    static let SideMenuReusableCellID = "SideMenuCell"
     static let CollectionHeaderViewReusableCellID = "CollectionHeaderView"
     static let CollectionFooterViewReusableCellID = "CollectionFooterView"
+    static let CollectionLoadingViewReusableCellID = "CollectionLoadingView"
     
     
     //颜色
@@ -33,11 +45,8 @@ struct Constants {
     static let LightGreen = UIColor(red: 217/255, green: 247/255, blue: 217/255, alpha: 1)
     static let CellFooterColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 1)
     static let OpenCourseBGColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 1)
+    static let SideMenuBGColor = UIColor(red: 54/255, green: 134/255, blue: 50/255, alpha: 0.8)
+
     
-    
-    
-    
-    
-        
-    
+
 }

@@ -16,6 +16,11 @@ class MaxType {
     //大类包含的课程
     var maxTypeCourses = [CourseInfo]()
     
+    init(maxType: NSDictionary) {
+        self.maxTypeId  = maxType["id"] as? String
+        self.maxTypeName = maxType["name"] as? String
+    }
+    
     init(bodyCoursesJson maxType: NSDictionary) {
         self.maxTypeId  = maxType["max_type_id"] as? String
         self.maxTypeName = maxType["max_type_name"] as? String
