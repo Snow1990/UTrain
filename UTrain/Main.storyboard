@@ -50,6 +50,7 @@
                     <connections>
                         <outlet property="courseCollectionView" destination="YBC-6M-paT" id="Tdb-0Q-Xug"/>
                         <segue destination="IVz-GJ-jnZ" kind="presentation" identifier="toSearchSegue" modalTransitionStyle="coverVertical" id="WTI-1w-bMA"/>
+                        <segue destination="9p1-3l-GPd" kind="presentation" identifier="toCourseDetailSegue" id="bL9-K2-saZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VdQ-Fe-dEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,6 +398,7 @@
         <image name="table_icon4_normal" width="29" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bL9-K2-saZ"/>
         <segue reference="WTI-1w-bMA"/>
     </inferredMetricsTieBreakers>
 </document>

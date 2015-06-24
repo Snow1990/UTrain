@@ -9,15 +9,18 @@
 import UIKit
 import Alamofire
 
-class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SideMenuTableViewDelegate {
 
-    // 大类
-    var maxTypeArr = [MaxType](){
-        didSet {
-            self.sideMenuViewController.tableView.reloadData()
-        }
-    }
     
+    
+//    // 大类
+//    var maxTypeArr = [MaxType](){
+//        didSet {
+//            self.sideMenuViewController.tableView.reloadData()
+//        }
+//    }
+    //
+    var coursesDictionary = [String: OpenCourseMaxTypeInfo]()
     // 当前课程按页码分组
     var coursesByPage = [PageInfo](){
         didSet {
@@ -32,24 +35,25 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    // 当前大类ID
-    var currentMaxTypeId = ""
+    // 当前大类
+    var currentMaxType:MaxType?
     // 当前页码
     var currentPage = 1
     // 是否正在下载数据
     var isLoading = false
+    // 数据下载完成
     var isLoaded = false
     
     // 抽屉效果
     var sideMenu: SnowSideMenu?
-    var sideMenuViewController = UITableViewController()
+    var sideMenuViewController = SideMenuTableViewController()
 
     
     @IBOutlet weak var courseCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initData()
+//        self.initData()
 //
 //        self.loadData()
 
@@ -59,7 +63,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     
         self.initSideMenu()
         
-        self.initTableView()
+
         
         self.initCollectionView()
         
@@ -93,17 +97,21 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         }
         isLoading = true
         
-//        Alamofire.request(Network.Router.CourseByPage(pageNo: self.currentPage, pageSize: 10)).responseJSON { (_, _, data, error) -> Void in
+//        if self.coursesDictionary[self.currentMaxType!.maxTypeId] != nil {
+//            self.courseCollectionView.reloadData()
+//            return
+//        }
         
-        Alamofire.request(Network.Router.CourseByType(pageNo: self.currentPage, maxTypeId: self.currentMaxTypeId)).responseJSON { (_, _, data, error) -> Void in
-            
+        Alamofire.request(Network.Router.CourseByType(pageNo: self.currentPage, maxTypeId: self.currentMaxType?.maxTypeId)).responseJSON { (request, _, data, error) -> Void in
+//            println(request)
             if error == nil {
                 
                 if let json = data as? NSDictionary {
                     
                     let pageInfo = PageInfo(pageCoursesJson: json)
                     self.coursesByPage.append(pageInfo)
-                    
+
+//                    self.coursesDictionary[self.currentMaxType!.maxTypeId] = self.coursesByPage
                     //下载图片数据
                     for courseInfo in pageInfo.currentCourses {
                         if let path = courseInfo.imagePath {
@@ -127,7 +135,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y + view.frame.size.height >= scrollView.contentSize.height {
+        if scrollView.contentOffset.y + view.frame.size.height >= scrollView.contentSize.height * 0.9 && scrollView.contentSize.height > 0 {
             if !self.isLoaded {
                 loadData()
             }
@@ -137,19 +145,6 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // 从网络下载数据
     func initData() {
         
-        Alamofire.request(.GET, Network.GetPublicMaxType).responseJSON { (_, _, data, error) -> Void in
-            if let json = data as? [NSDictionary] {
-                for type in json {
-                    let maxType = MaxType(maxType: type)
-                    self.maxTypeArr.append(maxType)
-                    
-                }
-                if !self.maxTypeArr.isEmpty {
-                    self.currentMaxTypeId = self.maxTypeArr[0].maxTypeId
-                    self.loadData()
-                }
-            }
-        }
         
         
 
@@ -164,12 +159,12 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         var leftButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
-        
         leftButton.addTarget(self, action: "toggle", forControlEvents: UIControlEvents.TouchUpInside)
         
-        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 50, 25))
+        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 100, 25))
         sideMenuLabel.textColor = UIColor.whiteColor()
-        sideMenuLabel.text = "1234"
+        sideMenuLabel.tag = 1
+        
         leftView.addSubview(leftButton)
         leftView.addSubview(sideMenuLabel)
         
@@ -192,15 +187,10 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // 切换抽屉效果
     func toggle() {
         self.sideMenu?.toggleMenu()
-//        if let OpenCourseNavCon = self.parentViewController as? OpenCourseNavigationController {
-//            OpenCourseNavCon.sideMenu?.toggleMenu()
-//        }
     }
     // 搜索
     func search() {
         
-//        let searchContent = SearchViewController()
-//        searchContent.hidesBottomBarWhenPushed = true
 
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
     }
@@ -218,33 +208,14 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: SideMenu初始化
     func initSideMenu() {
         sideMenu = SnowSideMenu(sourceView: self.view, menuViewController: sideMenuViewController, menuPosition:.Left)
+        sideMenuViewController.delegate = self
         
-        sideMenuViewController.tableView.delegate = self
-        sideMenuViewController.tableView.dataSource = self
         
         // make navigation bar showing over side menu
         view.bringSubviewToFront(self.navigationController!.navigationBar)
     }
     
-    // MARK: Table View 初始化
-    func initTableView() {
-        // Customize apperance of table view
-        sideMenuViewController.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
-        sideMenuViewController.tableView.separatorStyle = .None
-        sideMenuViewController.tableView.backgroundColor = Constants.SideMenuBGColor
-        sideMenuViewController.tableView.scrollsToTop = false
-        sideMenuViewController.tableView.scrollEnabled = false
-        
-        // Preserve selection between presentations
-        sideMenuViewController.clearsSelectionOnViewWillAppear = false
-        
-        
-        
-        //注册TableViewCellID
-        sideMenuViewController.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Constants.SideMenuReusableCellID)
-        
-
-    }
+    
     // MARK: Collection View 初始化
     func initCollectionView() {
         
@@ -270,7 +241,6 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         return self.coursesByPage[section].currentCourses.count
     }
     
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! CourseCollectionViewCell
@@ -300,6 +270,12 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         
     }
     
+    // MARK: - Collection delegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(Constants.ToCourseDetailSegue, sender: self)
+
+    }
+
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -329,6 +305,36 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
+    // MARK: - 抽屉效果委托
+    // 点击某个大类
+    func sideMenu(didSelectMaxType maxType: MaxType) {
+        self.currentMaxType = maxType
+        self.currentPage = 1
+        self.coursesByPage = []
+        self.isLoaded = false
+
+        let leftBarButtonLabel = self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(1) as? UILabel
+        leftBarButtonLabel?.text = maxType.maxTypeName
+        self.sideMenu?.toggleMenu(false)
+
+//        if let courses = coursesDictionary[self.currentMaxType!.maxTypeId] {
+//            self.coursesByPage = courses
+//            self.currentPage = courses.count
+//        }else {
+//            self.loadData()
+//
+//        }
+        
+        
+        self.loadData()
+
+
+
+        
+    }
+   
+    
+    /*
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -360,7 +366,9 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         self.currentPage = 1
         self.coursesByPage = []
         self.isLoaded = false
-//        self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(<#tag: Int#>)
+        let leftBarButtonLabel = self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(1) as? UILabel
+        leftBarButtonLabel?.text = maxTypeArr[indexPath.row].maxTypeName
+        
         self.toggle()
         self.loadData()
 
@@ -372,7 +380,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     
-    
+    */
     
     
     /*

@@ -7,26 +7,36 @@
 //
 
 import UIKit
+import Alamofire
+
+protocol SideMenuTableViewDelegate {
+    func sideMenu(didSelectMaxType maxType: MaxType)
+}
 
 class SideMenuTableViewController: UITableViewController {
 
+    // 当前大类
+    var currentMaxType: MaxType?
+    var delegate: SideMenuTableViewDelegate?
+    
+    // 大类
+    var maxTypeArr = [MaxType](){
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Customize apperance of table view
-        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
-        tableView.separatorStyle = .None
-        tableView.backgroundColor = Constants.SideMenuBGColor
-        tableView.scrollsToTop = false
-        tableView.scrollEnabled = false
         
-        // Preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
+        initData()
+
+        initTableView()
         
 
         
-        //注册TableViewCellID
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Constants.SideMenuReusableCellID)
+        
        
         
         // Uncomment the following line to preserve selection between presentations
@@ -41,44 +51,89 @@ class SideMenuTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // 数据初始化
+    func initData() {
+        
+        Alamofire.request(.GET, Network.GetPublicMaxType).responseJSON { (_, _, data, error) -> Void in
+            if let json = data as? [NSDictionary] {
+                for type in json {
+                    let maxType = MaxType(maxType: type)
+                    self.maxTypeArr.append(maxType)
+                    
+                }
+                if !self.maxTypeArr.isEmpty {
+                    self.delegate?.sideMenu(didSelectMaxType: self.maxTypeArr[0])
+                }
+            }
+        }
+        
+    }
+    
+    // tableView初始化
+    func initTableView() {
+        // Customize apperance of table view
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        tableView.separatorStyle = .None
+        tableView.backgroundColor = Constants.SideMenuBGColor
+        tableView.scrollsToTop = false
+        tableView.scrollEnabled = false
+        
+        // Preserve selection between presentations
+        self.clearsSelectionOnViewWillAppear = false
+        
+        //注册TableViewCellID
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Constants.SideMenuReusableCellID)
+    }
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 7
+        return maxTypeArr.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SideMenuReusableCellID, forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
+        
         cell.backgroundColor = UIColor.clearColor()
-        var cellText: String?
-        switch indexPath.row {
-        case 0: cellText = Constants.CourseType.TDW.rawValue
-        case 1: cellText = Constants.CourseType.GYFZ.rawValue
-        case 2: cellText = Constants.CourseType.JYCY.rawValue
-        case 3: cellText = Constants.CourseType.XQAH.rawValue
-        case 4: cellText = Constants.CourseType.KWHD.rawValue
-        case 5: cellText = Constants.CourseType.QGCSJPK.rawValue
-        case 6: cellText = Constants.CourseType.WYGKK.rawValue
-        default: cellText = nil
-        }
-        cell.textLabel?.text = cellText
+        cell.textLabel?.text = maxTypeArr[indexPath.row].maxTypeName
         cell.textLabel?.textColor = UIColor.whiteColor()
-//        cell.textLabel?.textAlignment = NSTextAlignment.Center
+        //        cell.textLabel?.textAlignment = NSTextAlignment.Center
         cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
+
+    
+    
+    // MARK: - table view delegate
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.textLabel?.textColor = UIColor.yellowColor()
+        self.currentMaxType = maxTypeArr[indexPath.row]
+        delegate?.sideMenu(didSelectMaxType: self.currentMaxType!)
+
+//        self.currentMaxTypeId = maxTypeArr[indexPath.row].maxTypeId
+//        self.currentPage = 1
+//        self.coursesByPage = []
+//        self.isLoaded = false
+//        let leftBarButtonLabel = self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(1) as? UILabel
+//        leftBarButtonLabel?.text = maxTypeArr[indexPath.row].maxTypeName
+//        
+//        self.toggle()
+//        self.loadData()
+        
+    }
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.textLabel?.textColor = UIColor.whiteColor()
+    }
+
     
     
     /*

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8647498908C91F64A3037210 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC4A68FEFB1AF0D4697D8C1 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8743D50D1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743D50C1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift */; };
 		875200FB1B30FFF6005DF73B /* CourseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875200FA1B30FFF6005DF73B /* CourseInfo.swift */; };
 		875200FE1B310C5B005DF73B /* LectureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875200FD1B310C5B005DF73B /* LectureInfo.swift */; };
 		875201001B310E97005DF73B /* CommentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875200FF1B310E97005DF73B /* CommentInfo.swift */; };
@@ -56,6 +57,7 @@
 		2BA251DD45513BD77C73FC54 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5DF321C8B2672357F2266C8B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7EC4A68FEFB1AF0D4697D8C1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8743D50C1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCourseMaxTypeInfo.swift; sourceTree = "<group>"; };
 		875200FA1B30FFF6005DF73B /* CourseInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfo.swift; sourceTree = "<group>"; };
 		875200FD1B310C5B005DF73B /* LectureInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureInfo.swift; sourceTree = "<group>"; };
 		875200FF1B310E97005DF73B /* CommentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentInfo.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				87F182EB1B259533000314B5 /* OpenCourseViewController.swift */,
 				878299F61B33FEA5003086D8 /* LoadingCollectionViewCell.swift */,
+				878299F81B38EFC7003086D8 /* SideMenu */,
 			);
 			name = OpenCourse;
 			sourceTree = "<group>";
@@ -164,10 +167,11 @@
 			children = (
 				875200FA1B30FFF6005DF73B /* CourseInfo.swift */,
 				875201051B311B7B005DF73B /* MaxType.swift */,
+				875201031B311100005DF73B /* PageInfo.swift */,
+				8743D50C1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift */,
 				875200FF1B310E97005DF73B /* CommentInfo.swift */,
 				875201011B310FD1005DF73B /* StudentInfo.swift */,
 				875200FD1B310C5B005DF73B /* LectureInfo.swift */,
-				875201031B311100005DF73B /* PageInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -243,7 +247,6 @@
 				87F5A1471B2FC2590058D7AF /* TrainingClass */,
 				87F5A1481B2FC26F0058D7AF /* MyClass */,
 				87AE27BE1B26CA2600C397C4 /* Search */,
-				878299F81B38EFC7003086D8 /* SideMenu */,
 				87AE27CB1B28154400C397C4 /* CourseDetail */,
 				87F182E41B2591E5000314B5 /* MainTabBarController.swift */,
 			);
@@ -455,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875201061B311B7B005DF73B /* MaxType.swift in Sources */,
+				8743D50D1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift in Sources */,
 				87AE27C31B26DEE400C397C4 /* CourseCollectionViewCell.swift in Sources */,
 				87AE27BD1B26CA1F00C397C4 /* SearchViewController.swift in Sources */,
 				87F5A1111B2ADE580058D7AF /* FirstPageViewController.swift in Sources */,

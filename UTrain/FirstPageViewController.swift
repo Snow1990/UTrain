@@ -42,7 +42,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initData()
+//        self.initData()
         
         self.initTabBar()
 
@@ -168,7 +168,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         var reusableView: UICollectionReusableView?
-        
+
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeaderView
 
@@ -223,7 +223,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -231,5 +231,5 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
     }
-    */
+    
 }

@@ -85,7 +85,7 @@ struct Network {
 
         case Image(imagePath:String)
         case CourseByPage(pageNo: Int, pageSize: Int)
-        case CourseByType(pageNo: Int, maxTypeId: String)
+        case CourseByType(pageNo: Int, maxTypeId: String?)
         
         var URLRequest: NSURLRequest {
             let (path:String, parameters: [String:AnyObject]) = {
@@ -106,7 +106,7 @@ struct Network {
                 let params: [String:AnyObject] = [
                     "pageNo": pageNo,
                     "pageSize": 20,
-                    "maxTypeId": maxTypeId
+                    "maxTypeId": maxTypeId ?? ""
                 ]
                 return (GetPublicCourses, params)
                 }
