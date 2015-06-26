@@ -27,7 +27,6 @@ class CourseCollectionHeaderView: UICollectionReusableView {
         let Width = 22 * Scale
         let Height = 40 * Scale
         let X = UIScreen.mainScreen().bounds.width - Width - 20
-//        let X = 10 + lable.frame.width
         let Y = (40 - Height)/2
         
         imageView.frame = CGRectMake(X, Y, Width, Height)

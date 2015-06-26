@@ -42,7 +42,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.initData()
+        self.initData()
         
         self.initTabBar()
 

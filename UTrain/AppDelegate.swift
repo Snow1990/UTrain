@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initializePlat()
         self.initdata()
         
+        
+        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        
+        
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
         UINavigationBar.appearance().barTintColor = Constants.DarkGreen
 

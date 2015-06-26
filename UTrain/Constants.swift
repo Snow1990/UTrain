@@ -35,6 +35,7 @@ struct Constants {
     static let HomePageReusableCellID = "HomePageCell"
     static let HomePageAdReusableCellID = "HomePageAdCell"
     static let SideMenuReusableCellID = "SideMenuCell"
+    static let PopularRecomendReusableCellID = "PopularRecomendCell"
     static let CollectionHeaderViewReusableCellID = "CollectionHeaderView"
     static let CollectionFooterViewReusableCellID = "CollectionFooterView"
     static let CollectionLoadingViewReusableCellID = "CollectionLoadingView"

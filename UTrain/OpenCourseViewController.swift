@@ -12,17 +12,8 @@ import Alamofire
 class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SideMenuTableViewDelegate {
 
     
-    
-//    // 大类
-//    var maxTypeArr = [MaxType](){
-//        didSet {
-//            self.sideMenuViewController.tableView.reloadData()
-//        }
-//    }
-    //
-    var coursesDictionary = [String: OpenCourseMaxTypeInfo]()
-    // 当前课程按页码分组
-    var coursesByPage = [PageInfo](){
+    // 大类课程信息字典
+    var coursesDictionary = [String: OpenCourseMaxTypeInfo]() {
         didSet {
             self.courseCollectionView.reloadData()
         }
@@ -36,20 +27,18 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     // 当前大类
-    var currentMaxType:MaxType?
-    // 当前页码
-    var currentPage = 1
-    // 是否正在下载数据
-    var isLoading = false
-    // 数据下载完成
-    var isLoaded = false
+    var currentMaxType:MaxType? {
+        didSet {
+            self.courseCollectionView.reloadData()
+        }
+    }
     
     // 抽屉效果
     var sideMenu: SnowSideMenu?
     var sideMenuViewController = SideMenuTableViewController()
 
-    
     @IBOutlet weak var courseCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,8 +51,6 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         self.initnavigation()
     
         self.initSideMenu()
-        
-
         
         self.initCollectionView()
         
@@ -90,54 +77,65 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     // 下载数据
-    func loadData() {
-        
-        if isLoading {
+    func loadData(maxType: MaxType) {
+
+        // 获取当前大类详细信息，如果没有，新建
+        var maxTypeInfo = coursesDictionary[maxType.maxTypeId] ?? OpenCourseMaxTypeInfo()
+        // 正在下载中或已下载完成 返回
+        if maxTypeInfo.isLoading || maxTypeInfo.isLoaded {
             return
         }
-        isLoading = true
+        // 设置正在下载
+        maxTypeInfo.isLoading = true
         
-//        if self.coursesDictionary[self.currentMaxType!.maxTypeId] != nil {
-//            self.courseCollectionView.reloadData()
-//            return
-//        }
-        
-        Alamofire.request(Network.Router.CourseByType(pageNo: self.currentPage, maxTypeId: self.currentMaxType?.maxTypeId)).responseJSON { (request, _, data, error) -> Void in
+        // 网络请求 参数：当前页，大类Id
+        Alamofire.request(Network.Router.CourseByType(pageNo: maxTypeInfo.currentPage, maxTypeId: maxType.maxTypeId)).responseJSON { (request, _, data, error) -> Void in
 //            println(request)
             if error == nil {
                 
                 if let json = data as? NSDictionary {
                     
                     let pageInfo = PageInfo(pageCoursesJson: json)
-                    self.coursesByPage.append(pageInfo)
+                    maxTypeInfo.coursesByPage.append(pageInfo)
 
-//                    self.coursesDictionary[self.currentMaxType!.maxTypeId] = self.coursesByPage
                     //下载图片数据
                     for courseInfo in pageInfo.currentCourses {
                         if let path = courseInfo.imagePath {
-                            Alamofire.request(Network.Router.Image(imagePath: path)).responseImage() {(_, _, image, error) in
-                                if error == nil && image != nil {
-                                    self.imageDictionary[courseInfo.imagePath!] = image!
+                            // 图片Dictionary中如果没有数据，则下载图片
+                            if self.imageDictionary[path] == nil {
+                                Alamofire.request(Network.Router.Image(imagePath: path)).responseImage() {(_, _, image, error) in
+                                    if error == nil && image != nil {
+                                        self.imageDictionary[path] = image!
+                                    }
                                 }
                             }
                         }
                     }
-                    self.currentPage++
-                    self.isLoading = false
+                    
+                    maxTypeInfo.currentPage++
+                    maxTypeInfo.isLoading = false
 
-                    if pageInfo.pageCount == self.coursesByPage.count {
-                        self.isLoaded = true
+                    // 课程页码和当前大类课程数量相同，加载完成
+                    if pageInfo.pageCount == maxTypeInfo.coursesByPage.count {
+                        maxTypeInfo.isLoaded = true
                     }
+                    // 将当前大类课程信息写入coursesDictionary
+                    self.coursesDictionary[maxType.maxTypeId] = maxTypeInfo
+
                 }
             }
         }
     }
     
-    
+    // MARK: - ScrollView delegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        // 如果scrollView里有数据，并且滚动超过90%
         if scrollView.contentOffset.y + view.frame.size.height >= scrollView.contentSize.height * 0.9 && scrollView.contentSize.height > 0 {
-            if !self.isLoaded {
-                loadData()
+            // 如果当前课程有数据，并且未全部加载完成，记载数据
+            if currentMaxType != nil {
+                if (!coursesDictionary[currentMaxType!.maxTypeId]!.isLoaded) {
+                    loadData(self.currentMaxType!)
+                }
             }
         }
     }
@@ -145,11 +143,9 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // 从网络下载数据
     func initData() {
         
-        
-        
-
     }
-    // MARK: 导航条布局
+    
+    // MARK: - 导航条初始化
     func initnavigation() {
         
         //左边barbuttonitem
@@ -190,13 +186,12 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     // 搜索
     func search() {
-        
-
+        // 跳转到搜索页面
         self.performSegueWithIdentifier(Constants.ToSearchSegue, sender: self)
     }
     
 
-    // MARK: TabBar初始化
+    // MARK: - TabBar初始化
     func initTabBar() {
         
         //tabBarItem的image属性必须是png格式（建议大小32*32）并且打开alpha通道否则无法正常显示。
@@ -205,9 +200,9 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: "table_icon2_pressed")
     }
     
-    // MARK: SideMenu初始化
+    // MARK: - SideMenu初始化
     func initSideMenu() {
-        sideMenu = SnowSideMenu(sourceView: self.view, menuViewController: sideMenuViewController, menuPosition:.Left)
+        sideMenu = SnowSideMenu(sourceView: self.view, menuViewController: sideMenuViewController, menuPosition: .Left)
         sideMenuViewController.delegate = self
         
         
@@ -216,7 +211,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     
-    // MARK: Collection View 初始化
+    // MARK: - Collection View 初始化
     func initCollectionView() {
         
         courseCollectionView.backgroundColor = Constants.OpenCourseBGColor
@@ -234,11 +229,23 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     
     // MARK: - Collection data sourse
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return self.coursesByPage.count
+        // 如果当前大类有数据，返回课程页码数量
+        if self.currentMaxType != nil {
+            if let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId] {
+                return maxTypeInfo.coursesByPage.count
+            }
+        }
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.coursesByPage[section].currentCourses.count
+        // 如果当前大类有数据，返回课程数量
+        if self.currentMaxType != nil {
+            if let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId] {
+                return maxTypeInfo.coursesByPage[section].currentCourses.count
+            }
+        }
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -247,31 +254,41 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         
 
         //获取课程详细信息
-        var course = self.coursesByPage[indexPath.section].currentCourses[indexPath.row]
-
-        cell.title.text = course.name
-        cell.source = course.sourceName!
-        cell.clickCountNum = course.hits!
-        cell.starNum = Int(course.avgStarScore! + 0.5)
-        cell.imageView.image = nil
-        if let path = course.imagePath {
-            cell.imageView.image = imageDictionary[path]
+        if self.currentMaxType != nil {
+            let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId]!
+            var course = maxTypeInfo.coursesByPage[indexPath.section].currentCourses[indexPath.row]
+            
+            cell.title.text = course.name
+            cell.source = course.sourceName!
+            cell.clickCountNum = course.hits!
+            cell.starNum = Int(course.avgStarScore! + 0.5)
+            cell.imageView.image = nil
+            if let path = course.imagePath {
+                cell.imageView.image = imageDictionary[path]
+            }
         }
         
-
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
             
         let reusableView =  collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: Constants.CollectionLoadingViewReusableCellID, forIndexPath: indexPath) as! LoadingCollectionViewCell
-        reusableView.isLoaded = self.isLoaded
+        
+        // 向collection footer 传值 ，是否加载完成
+        
+        if self.currentMaxType != nil {
+            let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId]!
+            reusableView.isLoaded = maxTypeInfo.isLoaded
+        }
+
         return reusableView
         
     }
     
     // MARK: - Collection delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // 跳转到课程详情
         self.performSegueWithIdentifier(Constants.ToCourseDetailSegue, sender: self)
 
     }
@@ -279,11 +296,8 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         return CourseCollectionViewCell.getSize()
-        
     }
-    
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
        
@@ -298,90 +312,36 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if section == coursesByPage.count - 1 {
-            return CGSizeMake(0, 40)
-        } else {
-            return CGSizeZero
+        
+        // 如果是最后一行，并且有数据，返回Footer Size
+        if self.currentMaxType != nil {
+            let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId]!
+            if section == maxTypeInfo.coursesByPage.count - 1 {
+                return CGSizeMake(0, 40)
+            }
         }
+        return CGSizeZero
+
     }
     
     // MARK: - 抽屉效果委托
     // 点击某个大类
     func sideMenu(didSelectMaxType maxType: MaxType) {
+        
+        // 设置当前大类
         self.currentMaxType = maxType
-        self.currentPage = 1
-        self.coursesByPage = []
-        self.isLoaded = false
+        // 滚动到CollectionView最顶端 navigation bar 的宽度为64
+        self.courseCollectionView.setContentOffset(CGPointMake(0, -64), animated: true)
 
+        // 设置左上角名称
         let leftBarButtonLabel = self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(1) as? UILabel
         leftBarButtonLabel?.text = maxType.maxTypeName
+        // 关闭抽屉
         self.sideMenu?.toggleMenu(false)
-
-//        if let courses = coursesDictionary[self.currentMaxType!.maxTypeId] {
-//            self.coursesByPage = courses
-//            self.currentPage = courses.count
-//        }else {
-//            self.loadData()
-//
-//        }
         
-        
-        self.loadData()
-
-
-
-        
-    }
-   
-    
-    /*
-    // MARK: - Table view data source
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return maxTypeArr.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SideMenuReusableCellID, forIndexPath: indexPath) as! UITableViewCell
-        
-        cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.text = maxTypeArr[indexPath.row].maxTypeName
-        cell.textLabel?.textColor = UIColor.whiteColor()
-        //        cell.textLabel?.textAlignment = NSTextAlignment.Center
-        cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        return cell
-    }
-    
-    // MARK: - table view delegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.textLabel?.textColor = UIColor.yellowColor()
-//        println(indexPath.row )
-        self.currentMaxTypeId = maxTypeArr[indexPath.row].maxTypeId
-        self.currentPage = 1
-        self.coursesByPage = []
-        self.isLoaded = false
-        let leftBarButtonLabel = self.navigationItem.leftBarButtonItem?.customView?.viewWithTag(1) as? UILabel
-        leftBarButtonLabel?.text = maxTypeArr[indexPath.row].maxTypeName
-        
-        self.toggle()
-        self.loadData()
+        self.loadData(self.currentMaxType!)
 
     }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.textLabel?.textColor = UIColor.whiteColor()
-    }
-    
-    
-    */
-    
     
     /*
     // MARK: - Navigation

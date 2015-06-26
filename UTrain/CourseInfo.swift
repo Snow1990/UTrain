@@ -56,5 +56,10 @@ class CourseInfo:NSObject {
                 lectureInfo = LectureInfo(id: lectureId, name: lectureName)
         }
     }
+    init(PopRecomendCoursesJson course: NSDictionary) {
+        self.id  = course["course_id"] as? String
+        self.name = course["course_name"] as? String
+        self.hits = course["course_hits"] as? Int
+    }
 
 }

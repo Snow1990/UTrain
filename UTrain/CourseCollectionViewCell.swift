@@ -38,7 +38,6 @@ class CourseCollectionViewCell: UICollectionViewCell {
             clickCount.text = "点击：\(clickCountNum)"
         }
     }
-    var request: Alamofire.Request?
 
     
 
@@ -138,7 +137,7 @@ class CourseCollectionViewCell: UICollectionViewCell {
         source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
         sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight);
+        sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight)
         self.addSubview(sourceContent)
         
         insertTransparentGradient(view: sourceContent)

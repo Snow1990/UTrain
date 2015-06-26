@@ -8,15 +8,16 @@
 
 import UIKit
 
+// 抽屉效果委托
 @objc protocol SnowSideMenuDelegate {
     optional func sideMenuWillOpen()
     optional func sideMenuWillClose()
     optional func sideMenuShouldOpenSideMenu () -> Bool
 }
-@objc protocol SnowSideMenuProtocol {
-    var sideMenu : SnowSideMenu? { get }
-}
-
+//@objc protocol SnowSideMenuProtocol {
+//    var sideMenu : SnowSideMenu? { get }
+//}
+// 抽屉位置
 enum SnowSideMenuPosition : Int {
     case Left
     case Right
@@ -28,6 +29,7 @@ enum SnowSideMenuAnimation : Int {
 }
 
 class SnowSideMenu: NSObject, UIGestureRecognizerDelegate {
+    
     var menuWidth: CGFloat = 180
     var menuPosition: SnowSideMenuPosition = .Left
     var bounces: Bool = false
@@ -52,9 +54,13 @@ class SnowSideMenu: NSObject, UIGestureRecognizerDelegate {
         
         animator = UIDynamicAnimator(referenceView: sourceView)
         
+//        // 点击手势
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleGesture:")
 //        tapGestureRecognizer.delegate = self
+//        tapGestureRecognizer.cancelsTouchesInView = false
 //        sourceView.addGestureRecognizer(tapGestureRecognizer)
+
+        
         
         // 右滑手势
         let rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleGesture:")
@@ -68,21 +74,8 @@ class SnowSideMenu: NSObject, UIGestureRecognizerDelegate {
         leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         sourceView.addGestureRecognizer(leftSwipeGestureRecognizer)
         
-//        if menuPosition == .Left {
-//            
-//            let rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleGesture:")
-//            rightSwipeGestureRecognizer.delegate = self
-//            rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
-//            sourceView.addGestureRecognizer(rightSwipeGestureRecognizer)
-//        }else {
-//            
-//            let leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleGesture:")
-//            leftSwipeGestureRecognizer.delegate = self
-//            leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
-//            sourceView.addGestureRecognizer(leftSwipeGestureRecognizer)
-//        }
-        
     }
+    
     convenience init(sourceView: UIView, menuViewController: UIViewController, menuPosition: SnowSideMenuPosition) {
         self.init(sourceView: sourceView, menuPosition: menuPosition)
         self.menuViewController = menuViewController
