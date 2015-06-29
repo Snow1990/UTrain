@@ -86,6 +86,7 @@ struct Network {
         case Image(imagePath:String)
         case CourseByPage(pageNo: Int, pageSize: Int)
         case CourseByType(pageNo: Int, maxTypeId: String?)
+        case CourseByKeyword(keyword: String)
         
         var URLRequest: NSURLRequest {
             let (path:String, parameters: [String:AnyObject]) = {
@@ -95,6 +96,7 @@ struct Network {
                         "image": imagePath
                     ]
                     return (GetImage, params)
+                    
                 case Router.CourseByPage(let pageNo, let pageSize):
                     let params: [String:AnyObject] = [
                         "pageNo": pageNo,
@@ -103,12 +105,20 @@ struct Network {
                     return (GetPublicCourses, params)
                 
                 case Router.CourseByType(let pageNo, let maxTypeId):
-                let params: [String:AnyObject] = [
-                    "pageNo": pageNo,
-                    "pageSize": 20,
-                    "maxTypeId": maxTypeId ?? ""
-                ]
-                return (GetPublicCourses, params)
+                    let params: [String:AnyObject] = [
+                        "pageNo": pageNo,
+                        "pageSize": 20,
+                        "maxTypeId": maxTypeId ?? ""
+                    ]
+                    return (GetPublicCourses, params)
+                    
+                case Router.CourseByKeyword(let keyword):
+                    let params: [String:AnyObject] = [
+                        "pageSize": 20,
+                        "keyword": keyword
+                    ]
+                    return (GetPublicCourses, params)
+                    
                 }
             }()
         

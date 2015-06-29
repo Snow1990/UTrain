@@ -14,7 +14,6 @@ class SnowToolBar: UIView {
     var textFieldBackground = UIImageView()
     var textField = UITextField()
     var leftBtn = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-//    var smileBtn = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     var searchBtn = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     
     override init(frame: CGRect) {
@@ -28,8 +27,6 @@ class SnowToolBar: UIView {
         self.backgroundView.backgroundColor = Constants.DarkGreen
         addSubview(self.backgroundView)
         
-        
-        
         // 返回按钮
         let Scale: CGFloat = 0.3
         let backWidth = 22 * Scale
@@ -39,8 +36,6 @@ class SnowToolBar: UIView {
         self.leftBtn.tag = 1
         addSubview(self.leftBtn)
 
-
-        
         // 搜索按钮
         self.searchBtn.frame = CGRectMake(screenRect.width - 24 - 10, 10 + topHight, 24, 24)
         self.searchBtn.setBackgroundImage(UIImage(named: "nav_icon2" ), forState: UIControlState.Normal)
@@ -50,21 +45,16 @@ class SnowToolBar: UIView {
         // 文本框背景
         self.textFieldBackground.frame = CGRectMake(24 + 10 * 2, 30 + topHight, screenRect.width - 24 * 2 - 10 * 4, 5)
         self.textFieldBackground.image = UIImage(named: "search_textfield_bg")
-//        self.textFieldBackground.contentMode = UIViewContentMode.Bottom
         addSubview(self.textFieldBackground)
         
         // 文本框
         self.textField.frame = CGRectMake(self.textFieldBackground.frame.origin.x + 5, 5 + topHight, self.textFieldBackground.frame.width - 10, 34)
         self.textField.borderStyle = UITextBorderStyle.None
         self.textField.backgroundColor = UIColor.clearColor()
+        self.textField.textColor = UIColor.whiteColor()
         self.textField.placeholder = "请输入..."
         self.textField.tag = 3
         addSubview(self.textField)
-        
-//        self.smileBtn.frame = CGRectMake(screenRect.width - 34 * 2 - 5 * 3, 5, 34, 34)
-//        self.smileBtn.setBackgroundImage(UIImage(named: Constants.ChatSmileBtnIco), forState: UIControlState.Normal)
-//        addSubview(self.smileBtn)
-        
         
     }
     

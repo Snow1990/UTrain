@@ -34,7 +34,7 @@ class LoadingCollectionViewCell: UICollectionReusableView {
         label.frame = labelFrame
         label.textColor = UIColor.blackColor()
         label.text = self.text
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        label.font = Constants.FootNoteFont
         label.textAlignment = .Center
         label.baselineAdjustment = UIBaselineAdjustment.AlignCenters
 

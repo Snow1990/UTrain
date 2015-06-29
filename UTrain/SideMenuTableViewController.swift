@@ -98,7 +98,7 @@ class SideMenuTableViewController: UITableViewController {
         cell.textLabel?.text = maxTypeArr[indexPath.row].maxTypeName
         cell.textLabel?.textColor = UIColor.whiteColor()
         //        cell.textLabel?.textAlignment = NSTextAlignment.Center
-        cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        cell.textLabel?.font = Constants.BodyFont
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }

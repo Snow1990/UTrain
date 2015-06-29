@@ -115,9 +115,9 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         //注册广告页CellID
         courseCollectionView.registerClass(CourseAdCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: Constants.HomePageAdReusableCellID)
         //注册collection section header ID
-        courseCollectionView.registerClass(CourseCollectionHeaderView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionHeader.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID)
         //注册collection section footer ID
-        courseCollectionView.registerClass(CourseCollectionFooterView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID)
+        courseCollectionView.registerClass(CourseCollectionFooter.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID)
     }
     
     
@@ -151,7 +151,9 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             cell.source = course.sourceName!
             cell.clickCountNum = course.hits!
             cell.starNum = Int(course.avgStarScore! + 0.5)
-            cell.imageView.image = imageDictionary[course.imagePath!]
+            if let path = course.imagePath {
+                cell.imageView.image = imageDictionary[path]
+            }
 
             return cell
         }
@@ -170,7 +172,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         var reusableView: UICollectionReusableView?
 
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.CollectionHeaderViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionHeader
 
             headerView.lable.text = self.bodyCourses[indexPath.section - 1].maxTypeName
             reusableView = headerView
@@ -179,7 +181,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
             
             
         }else {
-            let footView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionFooterView
+            let footView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionFooter
             reusableView = footView
             reusableView!.backgroundColor = Constants.CellFooterColor
             

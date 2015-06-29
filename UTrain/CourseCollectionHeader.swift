@@ -1,5 +1,5 @@
 //
-//  CourseCollectionHeaderView.swift
+//  CourseCollectionHeader.swift
 //  UTrain
 //
 //  Created by SN on 15/6/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseCollectionHeaderView: UICollectionReusableView {
+class CourseCollectionHeader: UICollectionReusableView {
     
  
     var lable = UILabel()
@@ -17,7 +17,7 @@ class CourseCollectionHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         lable.frame = CGRectMake(10, 0, UIScreen.mainScreen().bounds.width-50, 40)
-        lable.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        lable.font = Constants.HeadlineFont
         lable.textColor = Constants.DarkGreen
 
         self.addSubview(lable)

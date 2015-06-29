@@ -1,5 +1,5 @@
 //
-//  CourseCollectionFooterView.swift
+//  CourseCollectionFooter.swift
 //  UTrain
 //
 //  Created by SN on 15/6/11.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class CourseCollectionFooterView: UICollectionReusableView {
+class CourseCollectionFooter: UICollectionReusableView {
         
 }

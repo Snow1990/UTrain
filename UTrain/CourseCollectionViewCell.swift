@@ -97,24 +97,35 @@ class CourseCollectionViewCell: UICollectionViewCell {
         //课程图片
         imageView.backgroundColor = UIColor.brownColor().colorWithAlphaComponent(0.5)
         imageView.opaque = false
-        imageView.frame = CGRectMake(0, 0, Argument.ImageWidth, Argument.ImageHight)
+        imageView.frame = CGRectMake(
+            0, 0,
+            Argument.ImageWidth,
+            Argument.ImageHight)
         self.addSubview(imageView)
         
         
         //课程名称
         title.backgroundColor = UIColor.clearColor()
         title.text = "标题示例文字"
-        title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        title.frame = CGRectMake(5, imageView.frame.height, Argument.TitleWidth, Argument.TitleHight)
+        title.font = Constants.BodyFont
+        title.frame = CGRectMake(
+            5,
+            imageView.frame.height,
+            Argument.TitleWidth,
+            Argument.TitleHight)
         self.addSubview(title)
         
         //课程点击次数
         clickCountNum = 12334
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
-        clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        clickCount.font = Constants.FootNoteFont
         clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-        clickCount.frame = CGRectMake(5, imageView.frame.height + title.frame.height, Argument.ClickCountWidth, Argument.ClickCountHight)
+        clickCount.frame = CGRectMake(
+            5,
+            imageView.frame.height + title.frame.height,
+            Argument.ClickCountWidth,
+            Argument.ClickCountHight)
         self.addSubview(clickCount)
         
         //评价星级
@@ -126,90 +137,28 @@ class CourseCollectionViewCell: UICollectionViewCell {
             let Y = starImageFrame.origin.y + (starImageFrame.height - starImageFrame.width/5)/2
             let Width = starImageFrame.width/5 * Scale
             let Height = starImageFrame.width/5 * Scale
-            starImageArr.append(UIImageView(frame: CGRectMake(X, Y, Width, Height)))
+            starImageArr.append(UIImageView(frame: CGRectMake(
+                X,
+                Y,
+                Width,
+                Height)))
             
             self.addSubview(starImageArr[index])
         }
-
         
         
         //来源
         source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
-        sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        sourceContent.frame = CGRectMake(0, title.frame.origin.y - Argument.SourceHight, Argument.SourceWidth, Argument.SourceHight)
+        sourceContent.font = Constants.FootNoteFont
+        sourceContent.frame = CGRectMake(
+            0,
+            title.frame.origin.y - Argument.SourceHight,
+            Argument.SourceWidth,
+            Argument.SourceHight)
         self.addSubview(sourceContent)
         
         insertTransparentGradient(view: sourceContent)
-        
-        /*
-        
-        mainSpeaker.text = "主讲："
-        mainSpeaker.backgroundColor = UIColor.clearColor()
-        mainSpeaker.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
-        mainSpeaker.frame = CGRectMake(5, 105, 35, 20);
-        self.addSubview(mainSpeaker)
-        
-        
-        mainSpeakerContent.text = "赵钱孙李"
-        mainSpeakerContent.backgroundColor = UIColor.clearColor()
-        mainSpeakerContent.textColor = UIColor.grayColor()
-        mainSpeakerContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        mainSpeakerContent.frame = CGRectMake(40, 105, 105, 20);
-        self.addSubview(mainSpeakerContent)
-        
-        
-
-        source.text = "来源："
-        source.backgroundColor = UIColor.clearColor()
-        source.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
-        source.frame = CGRectMake(5, 125, 35, 20);
-        self.addSubview(source)
-        
-        
-        sourceContent.text = "网络资源部"
-        sourceContent.backgroundColor = UIColor.clearColor()
-        sourceContent.textColor = UIColor.grayColor()
-        sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        sourceContent.frame = CGRectMake(40, 125, 105, 20);
-        self.addSubview(sourceContent)
-        
-        
-        
-
-        about.backgroundColor = UIColor.blackColor()
-        about.textColor = UIColor.whiteColor()
-        about.text = "标题名称示例文字"
-        sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        about.alpha = 0.6
-        about.frame = CGRectMake(0, 85, 145, 20)
-        self.addSubview(about)
-        
-        
-        
-        self.starNum = 3
-        setupStarImage(frame: CGRectMake(20, 150, 50, 10))
-        
-        
-        peopleImgView.image = UIImage(named: "o_click")
-        peopleImgView.frame = CGRectMake(10, 165, 15, 15)
-        self.addSubview(peopleImgView)
-        
-        studyCountNum = 200
-        studyCount.text = "\(studyCountNum)人在学"
-        studyCount.backgroundColor = UIColor.clearColor()
-        studyCount.textColor = UIColor.grayColor()
-        studyCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        studyCount.frame = CGRectMake(25, 167, 100, 15)
-        self.addSubview(studyCount)
-        
-//        //多少人在学
-//        var studyCount = UILabel()
-//        //在学人数
-//        var studyCountNum = Int()
-//        
- 
-        */
         
     }
     

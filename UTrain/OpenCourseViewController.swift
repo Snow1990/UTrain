@@ -89,8 +89,8 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         maxTypeInfo.isLoading = true
         
         // 网络请求 参数：当前页，大类Id
-        Alamofire.request(Network.Router.CourseByType(pageNo: maxTypeInfo.currentPage, maxTypeId: maxType.maxTypeId)).responseJSON { (request, _, data, error) -> Void in
-//            println(request)
+        Alamofire.request(Network.Router.CourseByType(pageNo: maxTypeInfo.currentPage, maxTypeId: maxType.maxTypeId)).responseJSON { (_, _, data, error) -> Void in
+
             if error == nil {
                 
                 if let json = data as? NSDictionary {
@@ -252,7 +252,6 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.HomePageReusableCellID, forIndexPath: indexPath) as! CourseCollectionViewCell
         
-
         //获取课程详细信息
         if self.currentMaxType != nil {
             let maxTypeInfo = coursesDictionary[self.currentMaxType!.maxTypeId]!

@@ -10,7 +10,6 @@ import UIKit
 
 class SearchResultTableViewCell: UITableViewCell {
     
-    
     //课程图片
     var courseImageView = UIImageView()
     //课程简介
@@ -18,7 +17,7 @@ class SearchResultTableViewCell: UITableViewCell {
     //“来源：”
     var source: String = "" {
         didSet{
-            sourceContent.text = "  来源：" + source
+            sourceContent.text = "来源：" + source
         }
     }
     //来源
@@ -60,7 +59,7 @@ class SearchResultTableViewCell: UITableViewCell {
         static let CellWidth: CGFloat = Rect.width
         static let CellHight: CGFloat = ImageHight + HightGap * 2
         
-        static let ImageWidth: CGFloat = Rect.width/3.2
+        static let ImageWidth: CGFloat = Rect.width/3
         static let ImageHight: CGFloat = ImageWidth/Scale
         
         static let TitleWidth: CGFloat = CellWidth-ImageWidth-WidthGap*3
@@ -69,7 +68,6 @@ class SearchResultTableViewCell: UITableViewCell {
         static let SourceWidth: CGFloat = CellWidth-ImageWidth-WidthGap*3
         static let SourceHight: CGFloat = ImageHight/4
 
-        
 //        static let ClickLabelScale: CGFloat = 0.6
         static let ClickCountWidth: CGFloat = SourceWidth/2
         static let ClickCountHight: CGFloat = ImageHight/4
@@ -78,9 +76,13 @@ class SearchResultTableViewCell: UITableViewCell {
         static let StarViewHight: CGFloat = ImageHight/4
         
     }
+    class func getCellHight() -> CGFloat {
+        return Argument.ImageHight + Argument.HightGap * 2
+    }
     
     func setupCell() {
         
+        self.backgroundColor = UIColor.clearColor()
         
         //课程图片
         courseImageView.backgroundColor = UIColor.brownColor()
@@ -95,35 +97,36 @@ class SearchResultTableViewCell: UITableViewCell {
         //课程名称
         title.backgroundColor = UIColor.clearColor()
         title.text = "标题示例文字"
-        title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        title.numberOfLines = 2
+        title.font = Constants.GenneralFont
+        
         title.frame = CGRectMake(
             Argument.WidthGap * 2 + Argument.ImageWidth,
             Argument.HightGap,
             Argument.TitleWidth,
             Argument.TitleHight)
         self.addSubview(title)
-        
+
         //来源
         source = "广州团校"
-        sourceContent.textColor = UIColor.whiteColor()
-        sourceContent.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        sourceContent.backgroundColor = UIColor.clearColor()
+        sourceContent.textColor = UIColor.grayColor()
+        sourceContent.font = Constants.FootNoteFont
         sourceContent.frame = CGRectMake(
-            Argument.WidthGap * 2 + Argument.ImageWidth,
+            title.frame.origin.x,
             Argument.HightGap + title.frame.height,
             Argument.SourceWidth,
             Argument.SourceHight)
         self.addSubview(sourceContent)
         
-        
-        
         //课程点击次数
         clickCountNum = 12334
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
-        clickCount.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        clickCount.font = Constants.FootNoteFont
         clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         clickCount.frame = CGRectMake(
-            Argument.WidthGap * 2 + Argument.ImageWidth,
+            title.frame.origin.x,
             sourceContent.frame.origin.y + sourceContent.frame.height,
             Argument.ClickCountWidth,
             Argument.ClickCountHight)
@@ -137,22 +140,18 @@ class SearchResultTableViewCell: UITableViewCell {
             Argument.StarViewWidth,
             Argument.StarViewHight)
         for index in 0..<5 {
-            let Scale:CGFloat = 0.8
-            let X = starImageFrame.origin.x + starImageFrame.width/5*CGFloat(index)
-            let Y = starImageFrame.origin.y + (starImageFrame.height - starImageFrame.width/5)/2
-            let Width = starImageFrame.width/5 * Scale
-            let Height = starImageFrame.width/5 * Scale
-            starImageArr.append(UIImageView(frame: CGRectMake(X, Y, Width, Height)))
             
-            self.addSubview(starImageArr[index])
+            let Scale:CGFloat = 0.8
+            let imageView = UIImageView(frame: CGRectMake(
+                starImageFrame.origin.x + starImageFrame.width/5*CGFloat(index),
+                starImageFrame.origin.y + (starImageFrame.height - starImageFrame.width/5)/2,
+                starImageFrame.width/5 * Scale,
+                starImageFrame.width/5 * Scale))
+            self.addSubview(imageView)
+            starImageArr.append(imageView)
         }
-
-
-        
     }
     
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -164,12 +163,10 @@ class SearchResultTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     func setupStarImage() {
         
         let starNormalImage = UIImage(named: "start2")
         let starPressedImage = UIImage(named: "start1")
-        
         
         for index in 0..<starImageArr.count {
             if index < self.starNum {
