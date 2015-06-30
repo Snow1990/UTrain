@@ -12,7 +12,16 @@ import Alamofire
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PopularRecomendDelegate {
 
-    
+    // 搜索结果为空
+    var searchResultIsEmpty = false {
+        didSet {
+            if searchResultIsEmpty {
+                self.view.addSubview(errorView)
+            }else {
+                self.view.addSubview(searchResultTableView)
+            }
+        }
+    }
     // 搜索结果课程列表
     var resultCourses = [CourseInfo]() {
         didSet{
@@ -27,20 +36,32 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
-    var popRecomendTableView: PopularRecomendTableView!
+    var errorView: SnowErrorView!
     var searchToolBar: SnowToolBar!
+    var popRecomendTableView: PopularRecomendTableView!
     var searchResultTableView: UITableView!
     let screenRect : CGRect = UIScreen.mainScreen().bounds
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Constants.CellFooterColor
         
+
         initSearchToolBar()
         initPopularRecomendTableView()
         initSearchResultTableView()
+        initErrorView()
         
-        self.view.backgroundColor = UIColor.whiteColor()
+    }
+    override func viewDidAppear(animated: Bool) {
+        if let indexPath = popRecomendTableView.indexPathForSelectedRow() {
+            popRecomendTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        if let indexPath = searchResultTableView.indexPathForSelectedRow() {
+            searchResultTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,13 +104,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchResultTableView = UITableView(frame: CGRectMake(0, 64, screenRect.width, screenRect.height - 64), style: UITableViewStyle.Plain)
         
         searchResultTableView.backgroundColor = Constants.CellFooterColor
-        searchResultTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        searchResultTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         // 设置委托
         searchResultTableView.delegate = self
         searchResultTableView.dataSource = self
       
         //注册TableViewCellID
         searchResultTableView.registerClass(SearchResultTableViewCell.self, forCellReuseIdentifier: Constants.SearchResultReusableCellID)
+    }
+    
+    // 初始化错误页
+    func initErrorView() {
+        errorView = SnowErrorView(frame: CGRectMake(
+            0,
+            64,
+            self.view.frame.width,
+            self.view.frame.height - 64))
+
     }
     
     // 后退
@@ -101,10 +132,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func searchBtnClicked() {
         if let keyword = self.searchToolBar.viewWithTag(3) as? UITextField {
             if keyword.text != "" {
+                // 隐藏键盘
                 self.searchToolBar.textField.resignFirstResponder()
 
+                // 去掉推荐列表
                 self.popRecomendTableView.removeFromSuperview()
-                self.view.addSubview(searchResultTableView)
+                self.searchResultTableView.removeFromSuperview()
+                self.errorView.removeFromSuperview()
+
+
                 loadSearchData(keyword.text)
             }
         }
@@ -120,7 +156,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if let json = data as? NSDictionary {
                     
                     let pageInfo = PageInfo(pageCoursesJson: json)
-                    self.resultCourses = pageInfo.currentCourses
+                    // 如果搜索结果数据为0条
+                    if pageInfo.currentCourses.isEmpty {
+                        self.errorView.errorMessage.text = "很抱歉，没有找到相关的结果。"
+                        self.searchResultIsEmpty = true
+                        
+                    // 如果搜索到数据
+                    }else {
+                        self.searchResultIsEmpty = false
+                        self.resultCourses = pageInfo.currentCourses
+                    }
                     
                     //下载图片数据
                     for courseInfo in pageInfo.currentCourses {
@@ -153,7 +198,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SearchResultReusableCellID, forIndexPath: indexPath) as! SearchResultTableViewCell
 
-        //获取课程详细信息
+        // 自定义选中颜色
+        let backView = UIView(frame: cell.frame)
+        backView.backgroundColor = Constants.SelectedBGColor
+        cell.selectedBackgroundView = backView
+        
+        
+        // 获取课程详细信息
         let course = resultCourses[indexPath.row]
         cell.title.text = course.name
         cell.source = course.sourceName!

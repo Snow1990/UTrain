@@ -50,6 +50,8 @@ struct Constants {
     static let CellFooterColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 1)
     static let OpenCourseBGColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 1)
     static let SideMenuBGColor = UIColor(red: 54/255, green: 134/255, blue: 50/255, alpha: 0.8)
+    static let SelectedBGColor = UIColor(red: 240/255, green: 247/255, blue: 242/255, alpha: 1)
+
     
     // 字体
     static let FootNoteFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)

@@ -24,6 +24,7 @@
 		87829A021B3933BC003086D8 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87829A011B3933BC003086D8 /* SideMenuTableViewController.swift */; };
 		87A36F301B412F24007D855D /* PopularRecomendTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F2F1B412F24007D855D /* PopularRecomendTableView.swift */; };
 		87A36F321B4139D8007D855D /* PopularRecomendHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F311B4139D8007D855D /* PopularRecomendHeader.swift */; };
+		87A36F341B426F9F007D855D /* SnowErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F331B426F9F007D855D /* SnowErrorView.swift */; };
 		87AE27BD1B26CA1F00C397C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */; };
 		87AE27C01B26CF8000C397C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87AE27BF1B26CF8000C397C4 /* Main.storyboard */; };
 		87AE27C31B26DEE400C397C4 /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27C21B26DEE400C397C4 /* CourseCollectionViewCell.swift */; };
@@ -78,6 +79,7 @@
 		87829A011B3933BC003086D8 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		87A36F2F1B412F24007D855D /* PopularRecomendTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecomendTableView.swift; sourceTree = "<group>"; };
 		87A36F311B4139D8007D855D /* PopularRecomendHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecomendHeader.swift; sourceTree = "<group>"; };
+		87A36F331B426F9F007D855D /* SnowErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowErrorView.swift; sourceTree = "<group>"; };
 		87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		87AE27BF1B26CF8000C397C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87AE27C21B26DEE400C397C4 /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			children = (
 				8743D5A71B3CDEDC009CCD0F /* SnowToolBar.swift */,
 				87F5A1411B2EB0650058D7AF /* AdScrollView.swift */,
+				87A36F331B426F9F007D855D /* SnowErrorView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				87F5A10C1B2AD0AD0058D7AF /* CourseAdCollectionViewCell.swift in Sources */,
 				875201081B315405005DF73B /* Network.swift in Sources */,
 				87AE27CA1B28153D00C397C4 /* CourseDetailViewController.swift in Sources */,
+				87A36F341B426F9F007D855D /* SnowErrorView.swift in Sources */,
 				87F5A1421B2EB0650058D7AF /* AdScrollView.swift in Sources */,
 				87A36F301B412F24007D855D /* PopularRecomendTableView.swift in Sources */,
 				875201001B310E97005DF73B /* CommentInfo.swift in Sources */,

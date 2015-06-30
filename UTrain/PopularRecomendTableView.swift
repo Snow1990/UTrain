@@ -2,15 +2,22 @@
 //  PopularRecomendTableView.swift
 //  UTrain
 //
-//  Created by SN on 15/6/26.
+//  Created by SN on 15/6/29.
 //  Copyright (c) 2015年 Snow. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+// 热门推荐委托
+@objc protocol PopularRecomendDelegate {
+    optional func popularRecomendTableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+}
 
+class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+    
+    var popularRecomendDelegate: PopularRecomendDelegate?
+    
     var courses = [CourseInfo](){
         didSet {
             self.reloadData()
@@ -19,16 +26,16 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
     }
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-
+        
         initData()
         initTableView()
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -38,7 +45,7 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
         
         //下载公开课热门搜索课程
         Alamofire.request(.GET, Network.GetHotSearch).responseJSON { (request, _, data, error) -> Void in
-
+            
             if let json = data as? [NSDictionary] {
                 for course in json {
                     let courseInfo = CourseInfo(PopRecomendCoursesJson: course)
@@ -50,7 +57,7 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     
     func initTableView() {
         self.backgroundColor = Constants.CellFooterColor
-
+        
         
         self.dataSource = self
         self.delegate = self
@@ -73,15 +80,28 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.PopularRecomendReusableCellID, forIndexPath: indexPath) as! PopularRecomendTableViewCell
         
+        // 自定义选中颜色
+        let backView = UIView(frame: cell.frame)
+        backView.backgroundColor = Constants.SelectedBGColor
+        cell.selectedBackgroundView = backView
+        
         cell.number = indexPath.row + 1
         cell.titleLabel.text = courses[indexPath.row].name
         cell.backgroundColor = UIColor.clearColor()
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var popularRecomendHeader = PopularRecomendHeader(frame: CGRectMake(0, 0, 100, 40))
+        popularRecomendHeader.lable.text = "热门搜索"
+        return popularRecomendHeader
+    }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "热门搜索"
+    
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     // MARK: - Table view delegate
@@ -89,16 +109,20 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 40
     }
-
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.popularRecomendDelegate?.popularRecomendTableView?(tableView, didSelectRowAtIndexPath: indexPath)
+    }
     
     
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
-        // Drawing code
+    // Drawing code
     }
     */
-
+    
 }
+
+

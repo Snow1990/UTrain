@@ -37,8 +37,6 @@ class PopularRecomendHeader: UITableViewHeaderFooterView {
         lable.font = Constants.GenneralFont
         lable.textColor = UIColor.grayColor()
 //        lable.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-
-        
         self.addSubview(lable)
 
     }

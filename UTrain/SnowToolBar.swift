@@ -28,10 +28,10 @@ class SnowToolBar: UIView {
         addSubview(self.backgroundView)
         
         // 返回按钮
-        let Scale: CGFloat = 0.3
-        let backWidth = 22 * Scale
-        let backHeight = 40 * Scale
-        self.leftBtn.frame = CGRectMake(10, 10 + topHight, 12, 24)
+//        let Scale: CGFloat = 0.3
+//        let backWidth = 22 * Scale
+//        let backHeight = 40 * Scale
+        self.leftBtn.frame = CGRectMake(15, 10 + topHight, 12, 24)
         self.leftBtn.setBackgroundImage(UIImage(named: "nav_back"), forState: UIControlState.Normal)
         self.leftBtn.tag = 1
         addSubview(self.leftBtn)

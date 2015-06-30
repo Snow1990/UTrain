@@ -73,13 +73,12 @@
                     <navigationItem key="navigationItem" title="播放课程" id="3Qf-gS-dKX">
                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="vow-fe-cPg">
                             <connections>
-                                <segue destination="hLL-Cr-W3R" kind="unwind" unwindAction="unwindToMainTabBar:" id="uGG-SK-afW"/>
+                                <action selector="goBack:" destination="HU5-Bk-UMa" id="anc-O9-tMU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUD-uK-RDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="hLL-Cr-W3R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1013" y="4252"/>
         </scene>
@@ -282,6 +281,7 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ojN-Gy-AvY">
                                 <rect key="frame" x="317" y="403" width="97" height="30"/>
+                                <color key="backgroundColor" red="0.94117647058823528" green="0.96862745098039216" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>

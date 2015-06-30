@@ -33,12 +33,11 @@ class PopularRecomendTableViewCell: UITableViewCell {
         numberLabel.backgroundColor = UIColor.clearColor()
         self.addSubview(numberLabel)
         
-        titleLabel.frame = CGRectMake(numberLabel.frame.width + 10, 5, rect.width - numberLabel.frame.width - 10, CellHight - 10)
+        titleLabel.frame = CGRectMake(numberLabel.frame.width, 5, rect.width - numberLabel.frame.width - 20, CellHight - 10)
+        titleLabel.font = Constants.GenneralFont
         titleLabel.baselineAdjustment = UIBaselineAdjustment.AlignCenters
 
-
         self.addSubview(titleLabel)
-        
         
     }
     required init(coder aDecoder: NSCoder) {
@@ -59,9 +58,9 @@ class PopularRecomendTableViewCell: UITableViewCell {
     func setNumberLabelColor() {
         switch number {
         case 1: numberLabel.textColor = UIColor.redColor()
-        case 2: numberLabel.textColor = UIColor.orangeColor()
-        case 3: numberLabel.textColor = UIColor.yellowColor()
-        default: numberLabel.textColor = UIColor.grayColor()
+        case 2: numberLabel.textColor = UIColor(red: 222/255, green: 100/255, blue: 0/255, alpha: 1)
+        case 3: numberLabel.textColor = UIColor(red: 217/255, green: 162/255, blue: 16/255, alpha: 1)
+        default: numberLabel.textColor = UIColor(red: 110/255, green: 115/255, blue: 115/255, alpha: 1)
         }
     }
 
