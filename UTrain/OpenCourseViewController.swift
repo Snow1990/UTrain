@@ -148,28 +148,28 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: - 导航条初始化
     func initnavigation() {
         
-        //左边barbuttonitem
-        var leftView = UIView(frame: CGRectMake(0, 0, 75, 25))
+        // 左边barbuttonitem
+        var leftView = UIView(frame: CGRectMake(0, 0, 75, 20))
         
         var leftImage = UIImage(named: "nav_icon1")!
-        var leftButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        var leftButton = UIButton(frame: CGRectMake(0, 0, 20, 20))
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
         leftButton.addTarget(self, action: "toggle", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 100, 25))
+
+        // 边栏标题
+        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 200, 20))
         sideMenuLabel.textColor = UIColor.whiteColor()
         sideMenuLabel.tag = 1
         
         leftView.addSubview(leftButton)
         leftView.addSubview(sideMenuLabel)
-        
         var leftBarButtonItem = UIBarButtonItem(customView: leftView)
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
-        //又边barbuttonitem search
+        // 右边barbuttonitem search
         var searchImage = UIImage(named: "nav_icon2")!
-        var searchButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        var searchButton = UIButton(frame: CGRectMake(0, 0, 20, 20))
         searchButton.setBackgroundImage(searchImage, forState: UIControlState.Normal)
         
         searchButton.addTarget(self, action: "search", forControlEvents: UIControlEvents.TouchUpInside)
@@ -177,6 +177,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         var searchBarButtonItem = UIBarButtonItem(customView: searchButton)
         self.navigationItem.rightBarButtonItem = searchBarButtonItem
         
+
     }
     
     
@@ -203,6 +204,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: - SideMenu初始化
     func initSideMenu() {
         sideMenu = SnowSideMenu(sourceView: self.view, menuViewController: sideMenuViewController, menuPosition: .Left)
+        sideMenu?.menuWidth = Constants.ScreenRect.width * 0.53
         sideMenuViewController.delegate = self
         
         
@@ -214,7 +216,7 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: - Collection View 初始化
     func initCollectionView() {
         
-        courseCollectionView.backgroundColor = Constants.OpenCourseBGColor
+        courseCollectionView.backgroundColor = Constants.backgroundColor
         
         courseCollectionView.dataSource = self
         courseCollectionView.delegate = self
@@ -300,14 +302,14 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
        
-        let Rect = UIScreen.mainScreen().bounds
-        let Gap: CGFloat = Rect.width/60
+
+        let Gap: CGFloat = 12 * Constants.Scale
         return UIEdgeInsetsMake(Gap, Gap, 0, Gap)
         
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return UIScreen.mainScreen().bounds.width/60
+        return 12 * Constants.Scale
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

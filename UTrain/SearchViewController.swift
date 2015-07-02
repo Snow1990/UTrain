@@ -40,12 +40,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchToolBar: SnowToolBar!
     var popRecomendTableView: PopularRecomendTableView!
     var searchResultTableView: UITableView!
-    let screenRect : CGRect = UIScreen.mainScreen().bounds
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Constants.CellFooterColor
+        self.view.backgroundColor = Constants.backgroundColor
         
 
         initSearchToolBar()
@@ -73,7 +73,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 初始化搜索栏
     func initSearchToolBar() {
         // 搜索输入栏
-        searchToolBar = SnowToolBar(frame: CGRectMake(0, 0, screenRect.width, 64))
+        searchToolBar = SnowToolBar(frame: CGRectMake(0, 0, Constants.ScreenRect.width, 64))
         if let backBtn = searchToolBar.viewWithTag(1) as? UIButton {
             // 添加后退事件
             backBtn.addTarget(self, action: "dismissClicked", forControlEvents: UIControlEvents.TouchUpInside)
@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func initPopularRecomendTableView() {
         
         // 热门推荐课程
-        popRecomendTableView = PopularRecomendTableView(frame: CGRectMake(0, 64, screenRect.width, screenRect.height - 64), style: UITableViewStyle.Grouped)
+        popRecomendTableView = PopularRecomendTableView(frame: CGRectMake(0, 64, Constants.ScreenRect.width, Constants.ScreenRect.height - 64), style: UITableViewStyle.Grouped)
         popRecomendTableView.popularRecomendDelegate = self
         
         self.view.addSubview(popRecomendTableView)
@@ -101,10 +101,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func initSearchResultTableView() {
         
         // 搜索结果
-        searchResultTableView = UITableView(frame: CGRectMake(0, 64, screenRect.width, screenRect.height - 64), style: UITableViewStyle.Plain)
+        searchResultTableView = UITableView(frame: CGRectMake(0, 64, Constants.ScreenRect.width, Constants.ScreenRect.height - 64), style: UITableViewStyle.Plain)
         
-        searchResultTableView.backgroundColor = Constants.CellFooterColor
-        searchResultTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        searchResultTableView.backgroundColor = Constants.backgroundColor
+        searchResultTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         // 设置委托
         searchResultTableView.delegate = self
         searchResultTableView.dataSource = self
@@ -206,7 +206,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // 获取课程详细信息
         let course = resultCourses[indexPath.row]
-        cell.title.text = course.name
+        cell.title = course.name
         cell.source = course.sourceName!
         cell.clickCountNum = course.hits!
         cell.starNum = Int(course.avgStarScore! + 0.5)

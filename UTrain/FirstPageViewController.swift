@@ -183,7 +183,7 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         }else {
             let footView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: Constants.CollectionFooterViewReusableCellID, forIndexPath: indexPath) as! CourseCollectionFooter
             reusableView = footView
-            reusableView!.backgroundColor = Constants.CellFooterColor
+            reusableView!.backgroundColor = Constants.backgroundColor
             
         }
         return reusableView!
@@ -204,8 +204,8 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         if section == 0 {
             return UIEdgeInsetsZero
         }else {
-            let Rect = UIScreen.mainScreen().bounds
-            let Gap: CGFloat = Rect.width/60
+
+            let Gap: CGFloat = 12 * Constants.Scale
             return UIEdgeInsetsMake(0, Gap, 0, Gap)
         }
     }

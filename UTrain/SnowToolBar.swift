@@ -19,43 +19,57 @@ class SnowToolBar: UIView {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        let screenRect : CGRect = UIScreen.mainScreen().bounds
+//        let screenRect : CGRect = UIScreen.mainScreen().bounds
         let topHight : CGFloat = 20
         
         // 工具栏背景
         self.backgroundView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
-        self.backgroundView.backgroundColor = Constants.DarkGreen
+        self.backgroundView.backgroundColor = Constants.MainColor
         addSubview(self.backgroundView)
         
         // 返回按钮
-//        let Scale: CGFloat = 0.3
-//        let backWidth = 22 * Scale
-//        let backHeight = 40 * Scale
-        self.leftBtn.frame = CGRectMake(15, 10 + topHight, 12, 24)
+        let Scale: CGFloat = 0.5
+        let backWidth = 22 * Scale
+        let backHeight = 40 * Scale
+        self.leftBtn.frame = CGRectMake(10, 10 + topHight, backWidth, backHeight)
         self.leftBtn.setBackgroundImage(UIImage(named: "nav_back"), forState: UIControlState.Normal)
         self.leftBtn.tag = 1
         addSubview(self.leftBtn)
 
         // 搜索按钮
-        self.searchBtn.frame = CGRectMake(screenRect.width - 24 - 10, 10 + topHight, 24, 24)
+        let searchHeight = backHeight
+        let searchWidth = searchHeight
+        self.searchBtn.frame = CGRectMake(
+            Constants.ScreenRect.width - searchWidth - 10,
+            10 + topHight,
+            searchWidth,
+            searchHeight)
         self.searchBtn.setBackgroundImage(UIImage(named: "nav_icon2" ), forState: UIControlState.Normal)
         self.searchBtn.tag = 2
         addSubview(self.searchBtn)
         
         // 文本框背景
-        self.textFieldBackground.frame = CGRectMake(24 + 10 * 2, 30 + topHight, screenRect.width - 24 * 2 - 10 * 4, 5)
+        self.textFieldBackground.frame = CGRectMake(
+            backWidth + 10 * 2,
+            30 + topHight,
+            Constants.ScreenRect.width - backWidth - searchWidth - 10 * 4,
+            5)
         self.textFieldBackground.image = UIImage(named: "search_textfield_bg")
         addSubview(self.textFieldBackground)
         
         // 文本框
-        self.textField.frame = CGRectMake(self.textFieldBackground.frame.origin.x + 5, 5 + topHight, self.textFieldBackground.frame.width - 10, 34)
+        self.textField.frame = CGRectMake(
+            self.textFieldBackground.frame.origin.x + 5,
+            5 + topHight,
+            self.textFieldBackground.frame.width - 10,
+            34)
         self.textField.borderStyle = UITextBorderStyle.None
         self.textField.backgroundColor = UIColor.clearColor()
         self.textField.textColor = UIColor.whiteColor()
         self.textField.placeholder = "请输入..."
         self.textField.tag = 3
         addSubview(self.textField)
-        
+
     }
     
     required init(coder aDecoder: NSCoder) {

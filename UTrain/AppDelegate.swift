@@ -25,14 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
-        UINavigationBar.appearance().barTintColor = Constants.DarkGreen
+        UINavigationBar.appearance().barTintColor = Constants.MainColor
 
 //
 //        UIToolbar.appearance().barStyle = .BlackTranslucent
         UITabBar.appearance().barStyle = UIBarStyle.Default
         UITabBar.appearance().translucent = true
-        UITabBar.appearance().tintColor = Constants.DarkGreen
-        UITabBar.appearance().barTintColor = Constants.LightGreen
+        UITabBar.appearance().tintColor = Constants.MainColor
+        UITabBar.appearance().barTintColor = Constants.TabViewBGGreen
         UITabBar.appearance().opaque = false
 
 //

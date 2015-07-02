@@ -17,24 +17,25 @@ class PopularRecomendHeader: UITableViewHeaderFooterView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let Scale: CGFloat = 0.4
-        let Width = 40 * Scale
-        let Height = 40 * Scale
+
+        let Width = 28 * Constants.Scale
+        let Height = 28 * Constants.Scale
+//        let CellHeight = 90 * Constants.Scale
         
         imageView.frame = CGRectMake(
-            40 - Width,
-            40 - Height,
+            25 * Constants.Scale,
+            44 * Constants.Scale,
             Width,
             Height)
         imageView.image = UIImage(named: "search_hot")
         self.addSubview(imageView)
         
         lable.frame = CGRectMake(
-            50,
-            15,
-            UIScreen.mainScreen().bounds.width-40,
-            40)
-        lable.font = Constants.GenneralFont
+            64 * Constants.Scale,
+            44 * Constants.Scale,
+            200 * Constants.Scale,
+            28 * Constants.Scale)
+        lable.font = Constants.Font2
         lable.textColor = UIColor.grayColor()
 //        lable.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         self.addSubview(lable)
@@ -43,6 +44,9 @@ class PopularRecomendHeader: UITableViewHeaderFooterView {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    class func getHeaderHeight() -> CGFloat {
+        return 90 * Constants.Scale
     }
 
 }

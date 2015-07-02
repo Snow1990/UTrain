@@ -10,9 +10,6 @@ import UIKit
 
 class CourseAdCollectionViewCell: UICollectionViewCell {
     
-    //测试用图片
-//    let imageArray = ["tutorial_background_00","tutorial_background_01","tutorial_background_02","tutorial_background_03","tutorial_background_04"]
-    
     var scrollView: AdScrollView!
 
     override init(frame: CGRect) {
@@ -21,7 +18,7 @@ class CourseAdCollectionViewCell: UICollectionViewCell {
         self.addSubview(scrollView)
         
         scrollView.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
-        scrollView.pageControl.currentPageIndicatorTintColor = Constants.LightGreen
+        scrollView.pageControl.currentPageIndicatorTintColor = Constants.AssistColor1
         scrollView.addPageControl()
 
     }
@@ -38,10 +35,10 @@ class CourseAdCollectionViewCell: UICollectionViewCell {
         return CGSizeMake(Argument.CellWidth, Argument.CellHeight)
     }
     private struct Argument {
-        static let Rect = UIScreen.mainScreen().bounds
+
         //广告页宽高比
         static let Scale:CGFloat = 19/8
-        static let CellWidth: CGFloat = Rect.width
+        static let CellWidth: CGFloat = Constants.ScreenRect.width
         static let CellHeight: CGFloat = CellWidth/Scale
 //        static let AdPageControlWidth: CGFloat = CellWidth/5
 //        static let AdPageControlHeight: CGFloat = 10

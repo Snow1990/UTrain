@@ -20,11 +20,11 @@ class SnowErrorView: UIView {
         super.init(frame: frame)
         
         // 错误图片
-        let Rect = UIScreen.mainScreen().bounds
+
         let ImageWidth: CGFloat = 44.0 * 5
         let ImageHeight: CGFloat = 27.0 * 5
         imageView.frame = CGRectMake(
-            (Rect.width - ImageWidth)/2,
+            (Constants.ScreenRect.width - ImageWidth)/2,
             100,
             ImageWidth,
             ImageHeight)
@@ -35,14 +35,14 @@ class SnowErrorView: UIView {
         let ErrorMsgWidth: CGFloat = 200
         let ErrorMsgHeight: CGFloat = 40
         errorMessage.frame = CGRectMake(
-            (Rect.width - ErrorMsgWidth)/2,
+            (Constants.ScreenRect.width - ErrorMsgWidth)/2,
             100 + ImageHeight + 10,
             ErrorMsgWidth,
             ErrorMsgHeight)
         errorMessage.numberOfLines = 0
         errorMessage.textAlignment = NSTextAlignment.Center
         errorMessage.text = "网络不给力，链接错误啊！"
-        errorMessage.font = Constants.GenneralFont
+        errorMessage.font = Constants.Font2
         self.addSubview(errorMessage)
         
     }

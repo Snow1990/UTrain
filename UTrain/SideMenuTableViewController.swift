@@ -77,7 +77,7 @@ class SideMenuTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         
         //注册TableViewCellID
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Constants.SideMenuReusableCellID)
+        tableView.registerClass(SideMenuTableViewCell.self, forCellReuseIdentifier: Constants.SideMenuReusableCellID)
     }
     
     
@@ -92,17 +92,16 @@ class SideMenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SideMenuReusableCellID, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SideMenuReusableCellID, forIndexPath: indexPath) as! SideMenuTableViewCell
         
-        cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.text = maxTypeArr[indexPath.row].maxTypeName
-        cell.textLabel?.textColor = UIColor.whiteColor()
-        //        cell.textLabel?.textAlignment = NSTextAlignment.Center
-        cell.textLabel?.font = Constants.BodyFont
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.title.text = maxTypeArr[indexPath.row].maxTypeName
+
         return cell
     }
-
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return SideMenuTableViewCell.getCellHeight()
+    }
     
     
     // MARK: - table view delegate

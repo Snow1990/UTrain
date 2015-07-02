@@ -10,10 +10,25 @@ import UIKit
 
 class CourseDetailViewController: UIViewController {
 
+    
+    var scrollView: UIScrollView!
+    var coursePlayerView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.whiteColor()
+        
+
+        coursePlayerView = UIView(frame: CGRectMake(0, 0, Constants.ScreenRect.width, 100))
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.backgroundColor = UIColor.blackColor()
+        scrollView.contentSize = CGSize(width: Constants.ScreenRect.width, height: Constants.ScreenRect.height * 2)
+        scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        
+        scrollView.addSubview(coursePlayerView)
+        view.addSubview(scrollView)
 
         // Do any additional setup after loading the view.
     }

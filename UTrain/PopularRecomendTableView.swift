@@ -56,8 +56,8 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     }
     
     func initTableView() {
-        self.backgroundColor = Constants.CellFooterColor
-        
+        self.backgroundColor = Constants.backgroundColor
+        self.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.dataSource = self
         self.delegate = self
@@ -88,7 +88,7 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
         cell.number = indexPath.row + 1
         cell.titleLabel.text = courses[indexPath.row].name
         cell.backgroundColor = UIColor.clearColor()
-        
+
         return cell
     }
     
@@ -101,13 +101,13 @@ class PopularRecomendTableView: UITableView, UITableViewDataSource, UITableViewD
     
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return PopularRecomendHeader.getHeaderHeight()
     }
     
     // MARK: - Table view delegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 40
+        return PopularRecomendTableViewCell.getCellHeight()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

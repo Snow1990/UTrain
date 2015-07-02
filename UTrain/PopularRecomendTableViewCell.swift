@@ -11,7 +11,7 @@ import UIKit
 class PopularRecomendTableViewCell: UITableViewCell {
 
     
-    let CellHight: CGFloat = 40
+//    let CellHight: CGFloat = 40
 
     var number: Int = 0 {
         didSet {
@@ -21,23 +21,42 @@ class PopularRecomendTableViewCell: UITableViewCell {
     }
     var numberLabel = UILabel()
     var titleLabel = UILabel()
+    var separateImageView = UIImageView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let rect = UIScreen.mainScreen().bounds
 
-        numberLabel.frame = CGRectMake(5, 5, 60, CellHight - 10)
+        // 数字
+        numberLabel.frame = CGRectMake(
+            32 * Constants.Scale,
+            20 * Constants.Scale,
+            44 * Constants.Scale,
+            44 * Constants.Scale)
         numberLabel.textAlignment = NSTextAlignment.Center
         numberLabel.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-
         numberLabel.backgroundColor = UIColor.clearColor()
         self.addSubview(numberLabel)
         
-        titleLabel.frame = CGRectMake(numberLabel.frame.width, 5, rect.width - numberLabel.frame.width - 20, CellHight - 10)
-        titleLabel.font = Constants.GenneralFont
+        // 标题
+        titleLabel.frame = CGRectMake(
+            100 * Constants.Scale,
+            20 * Constants.Scale,
+            555 * Constants.Scale,
+            44 * Constants.Scale)
+        titleLabel.font = Constants.Font2
         titleLabel.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-
         self.addSubview(titleLabel)
+        
+        // 分割线
+        separateImageView = UIImageView(frame: CGRectMake(
+            0,
+            80 * Constants.Scale - 2,
+            Constants.ScreenRect.width,
+            2))
+        let Image = UIImage(named: "search_separate")!
+        separateImageView.image = Image
+        separateImageView.backgroundColor = UIColor.clearColor()
+        self.addSubview(separateImageView)
         
     }
     required init(coder aDecoder: NSCoder) {
@@ -50,6 +69,9 @@ class PopularRecomendTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    class func getCellHeight() -> CGFloat {
+        return 80 * Constants.Scale
+    }
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

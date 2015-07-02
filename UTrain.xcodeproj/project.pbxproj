@@ -25,6 +25,7 @@
 		87A36F301B412F24007D855D /* PopularRecomendTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F2F1B412F24007D855D /* PopularRecomendTableView.swift */; };
 		87A36F321B4139D8007D855D /* PopularRecomendHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F311B4139D8007D855D /* PopularRecomendHeader.swift */; };
 		87A36F341B426F9F007D855D /* SnowErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F331B426F9F007D855D /* SnowErrorView.swift */; };
+		87A36F371B438B7A007D855D /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A36F361B438B7A007D855D /* SideMenuTableViewCell.swift */; };
 		87AE27BD1B26CA1F00C397C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */; };
 		87AE27C01B26CF8000C397C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87AE27BF1B26CF8000C397C4 /* Main.storyboard */; };
 		87AE27C31B26DEE400C397C4 /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27C21B26DEE400C397C4 /* CourseCollectionViewCell.swift */; };
@@ -80,6 +81,7 @@
 		87A36F2F1B412F24007D855D /* PopularRecomendTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecomendTableView.swift; sourceTree = "<group>"; };
 		87A36F311B4139D8007D855D /* PopularRecomendHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecomendHeader.swift; sourceTree = "<group>"; };
 		87A36F331B426F9F007D855D /* SnowErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowErrorView.swift; sourceTree = "<group>"; };
+		87A36F361B438B7A007D855D /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		87AE27BC1B26CA1F00C397C4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		87AE27BF1B26CF8000C397C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87AE27C21B26DEE400C397C4 /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				878299F91B38F021003086D8 /* SnowSideMenu.swift */,
 				87829A011B3933BC003086D8 /* SideMenuTableViewController.swift */,
+				87A36F361B438B7A007D855D /* SideMenuTableViewCell.swift */,
 			);
 			name = SideMenu;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				87F182BB1B252F82000314B5 /* AppDelegate.swift in Sources */,
 				87F182EE1B259543000314B5 /* MyClassViewController.swift in Sources */,
 				87F182E71B25939F000314B5 /* Constants.swift in Sources */,
+				87A36F371B438B7A007D855D /* SideMenuTableViewCell.swift in Sources */,
 				87F182F11B259830000314B5 /* BWWalkthroughPageViewController.swift in Sources */,
 				87D295E61B296286006F772C /* CourseCollectionHeader.swift in Sources */,
 				8743D5A81B3CDEDC009CCD0F /* SnowToolBar.swift in Sources */,

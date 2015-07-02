@@ -64,13 +64,13 @@ class CourseCollectionViewCell: UICollectionViewCell {
     }
     
     private struct Argument {
-        static let Rect = UIScreen.mainScreen().bounds
+
 
         //collection cell 宽高比
         static let Scale: CGFloat = 16/10
-        static let Gap: CGFloat = Rect.width/60
+        static let Gap: CGFloat = Constants.ScreenRect.width/60
         
-        static let CellWidth: CGFloat = (Rect.width - Gap * 3)/2
+        static let CellWidth: CGFloat = (Constants.ScreenRect.width - Gap * 3)/2
         static let CellHight: CGFloat = ImageHight + TitleHight + ClickCountHight + Gap
         
         static let ImageWidth: CGFloat = CellWidth
@@ -107,7 +107,7 @@ class CourseCollectionViewCell: UICollectionViewCell {
         //课程名称
         title.backgroundColor = UIColor.clearColor()
         title.text = "标题示例文字"
-        title.font = Constants.BodyFont
+        title.font = Constants.Font2
         title.frame = CGRectMake(
             5,
             imageView.frame.height,
@@ -119,7 +119,7 @@ class CourseCollectionViewCell: UICollectionViewCell {
         clickCountNum = 12334
         clickCount.backgroundColor = UIColor.clearColor()
         clickCount.textColor = UIColor.grayColor()
-        clickCount.font = Constants.FootNoteFont
+        clickCount.font = Constants.Font1
         clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         clickCount.frame = CGRectMake(
             5,
@@ -150,7 +150,7 @@ class CourseCollectionViewCell: UICollectionViewCell {
         //来源
         source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
-        sourceContent.font = Constants.FootNoteFont
+        sourceContent.font = Constants.Font1
         sourceContent.frame = CGRectMake(
             0,
             title.frame.origin.y - Argument.SourceHight,

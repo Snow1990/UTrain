@@ -16,9 +16,9 @@ class CourseCollectionHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        lable.frame = CGRectMake(10, 0, UIScreen.mainScreen().bounds.width-50, 40)
-        lable.font = Constants.HeadlineFont
-        lable.textColor = Constants.DarkGreen
+        lable.frame = CGRectMake(10, 0, Constants.ScreenRect.width-50, 40)
+        lable.font = Constants.Font3
+        lable.textColor = Constants.MainColor
 
         self.addSubview(lable)
 
@@ -26,7 +26,7 @@ class CourseCollectionHeader: UICollectionReusableView {
         let Scale: CGFloat = 0.3
         let Width = 22 * Scale
         let Height = 40 * Scale
-        let X = UIScreen.mainScreen().bounds.width - Width - 20
+        let X = Constants.ScreenRect.width - Width - 20
         let Y = (40 - Height)/2
         
         imageView.frame = CGRectMake(X, Y, Width, Height)
