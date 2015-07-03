@@ -37,9 +37,9 @@ class CourseAdCollectionViewCell: UICollectionViewCell {
     private struct Argument {
 
         //广告页宽高比
-        static let Scale:CGFloat = 19/8
+//        static let Scale:CGFloat = 19/8
         static let CellWidth: CGFloat = Constants.ScreenRect.width
-        static let CellHeight: CGFloat = CellWidth/Scale
+        static let CellHeight: CGFloat = 303 * Constants.Scale
 //        static let AdPageControlWidth: CGFloat = CellWidth/5
 //        static let AdPageControlHeight: CGFloat = 10
 //        static let AdPageNumber: Int = 5

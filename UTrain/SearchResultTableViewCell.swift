@@ -16,9 +16,9 @@ class SearchResultTableViewCell: UITableViewCell {
     // 课程名称
     var title: String = "" {
         didSet{
-            titleLable.text = title
+            titleLabel.text = title
             let size = UILabel.sizeOfString(title, font: Constants.Font2, maxWidth: Argument.TitleWidth)
-            titleLable.frame = CGRectMake(
+            titleLabel.frame = CGRectMake(
                 273 * Constants.Scale,
                 Argument.HightGap,
                 size.width,
@@ -26,7 +26,7 @@ class SearchResultTableViewCell: UITableViewCell {
         }
     }
     // 课程名称Label
-    var titleLable = UILabel()
+    var titleLabel = UILabel()
 
     // “来源：”
     var source: String = "" {
@@ -124,17 +124,17 @@ class SearchResultTableViewCell: UITableViewCell {
         
         
         //课程名称
-        titleLable.backgroundColor = UIColor.clearColor()
-        titleLable.text = "标题示例文字"
-        titleLable.numberOfLines = 0
-        titleLable.font = Constants.Font2
-        titleLable.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        titleLable.frame = CGRectMake(
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.text = "标题示例文字"
+        titleLabel.numberOfLines = 0
+        titleLabel.font = Constants.Font2
+        titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        titleLabel.frame = CGRectMake(
             273 * Constants.Scale,
             Argument.HightGap,
             Argument.TitleWidth,
             Argument.TitleHight)
-        self.addSubview(titleLable)
+        self.addSubview(titleLabel)
 
         //来源
         source = "广州团校"
@@ -142,7 +142,7 @@ class SearchResultTableViewCell: UITableViewCell {
         sourceContent.textColor = UIColor.grayColor()
         sourceContent.font = Constants.Font1
         sourceContent.frame = CGRectMake(
-            titleLable.frame.origin.x,
+            titleLabel.frame.origin.x,
             112 * Constants.Scale,
             Argument.SourceWidth,
             Argument.SourceHight)
@@ -155,7 +155,7 @@ class SearchResultTableViewCell: UITableViewCell {
         clickCount.font = Constants.Font1
         clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         clickCount.frame = CGRectMake(
-            titleLable.frame.origin.x,
+            titleLabel.frame.origin.x,
             sourceContent.frame.origin.y + sourceContent.frame.height,
             Argument.ClickCountWidth,
             Argument.ClickCountHight)

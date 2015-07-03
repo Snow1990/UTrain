@@ -10,6 +10,14 @@ import UIKit
 
 class RelateRecomendView: UIView {
 
+    // 课程信息列表
+    var courseInfoArr = [CourseInfo]() {
+        didSet {
+            setCourseScrollView()
+            self.reloadView()
+        }
+    }
+    
     var titleLabel = UILabel()
     var separateView = UIView()
     var courseScrollView = UIScrollView()
@@ -39,37 +47,31 @@ class RelateRecomendView: UIView {
         
         // 课程滚动视图
         courseScrollView.backgroundColor = UIColor.clearColor()
-        courseScrollView.showsHorizontalScrollIndicator = false
+        courseScrollView.showsHorizontalScrollIndicator = true
         courseScrollView.showsVerticalScrollIndicator = false
-        courseScrollView.pagingEnabled = false
         courseScrollView.frame = CGRectMake(
             0,
             106 * Constants.Scale,
             Constants.ScreenRect.width,
             220 * Constants.Scale)
+        courseScrollView.contentSize = CGSize(
+            width: Constants.ScreenRect.width * 2,
+            height: courseScrollView.frame.height)
         self.addSubview(courseScrollView)
-
-//        //创建一个对话框
-//        let messageView = MessageView(origin: CGPoint(x: 0, y: scrollView1.contentSize.height), message: message)
-//        scrollView1.backgroundColor = UIColor(patternImage: UIImage(named: "chat_bg_default")!)
-//        scrollView1.addSubview(messageView)
-//        //对话框高度
-//        var messageHeight = messageView.bounds.height
-//        //增加scrollView高度
-//        scrollView1.contentOffset = CGPoint(x: 0, y: scrollView1.contentSize.height)
-//        scrollView1.contentSize.height += messageHeight
+        
     }
+
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    var courseInfoArr = [CourseInfo]() {
-        didSet {
-            setCourseScrollView()
-        }
-    }
     func setCourseScrollView() {
+        // 清空子视图
+        for subView in courseScrollView.subviews{
+            subView.removeFromSuperview()
+        }
+        // 添加课程视图
         for (index,course) in enumerate(courseInfoArr) {
             var imageView = UIImageView()
             imageView.frame = CGRectMake(
@@ -84,17 +86,25 @@ class RelateRecomendView: UIView {
             recomendCourseLabel.backgroundColor = UIColor.clearColor()
             recomendCourseLabel.text = course.name
             recomendCourseLabel.font = Constants.Font1
+            recomendCourseLabel.numberOfLines = 0
+            recomendCourseLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+            let labelSize = UILabel.sizeOfString(recomendCourseLabel.text!, font: recomendCourseLabel.font, maxWidth: 224 * Constants.Scale)
             recomendCourseLabel.frame = CGRectMake(
                 32 * Constants.Scale + 244 * Constants.Scale * CGFloat(index),
                 150 * Constants.Scale,
-                224 * Constants.Scale,
-                24 * Constants.Scale)
+                labelSize.width,
+                labelSize.height)
             courseScrollView.addSubview(recomendCourseLabel)
         }
-        
-        
-        
     }
+    
+    // 内容改变后更新滚动视图
+    func reloadView() {
+        courseScrollView.contentSize = CGSize(
+            width: 32 * Constants.Scale + 244 * Constants.Scale * CGFloat(courseInfoArr.count),
+            height: courseScrollView.contentSize.height)
+    }
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

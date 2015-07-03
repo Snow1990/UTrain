@@ -214,14 +214,14 @@ class FirstPageViewController: UIViewController, UICollectionViewDataSource, UIC
         if section == 0 {
             return CGSizeZero
         }else {
-            return CGSizeMake(0, 40)
+            return CGSizeMake(Constants.ScreenRect.width, 83 * Constants.Scale)
         }
         
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
-        return CGSizeMake(0, 10)
+        return CGSizeMake(Constants.ScreenRect.width, 20 * Constants.Scale)
     }
     
     

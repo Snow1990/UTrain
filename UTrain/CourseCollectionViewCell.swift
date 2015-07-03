@@ -11,35 +11,40 @@ import Alamofire
 
 class CourseCollectionViewCell: UICollectionViewCell {
     
-    // 课程图片
-    var imageView = UIImageView()
-    // 课程简介
-    var title = UILabel()
     // “来源：”
     var source: String = "" {
         didSet{
-            sourceContent.text = "  来源：" + source
+            sourceContent.text = "来源：" + source
         }
     }
-    // 来源
-    var sourceContent = UILabel()
     // 评分
     var starNum: Int = 0 {
         didSet{
             setupStarImage()
         }
     }
-    var starImageArr = [UIImageView]()
-    // 多少人点击
-    var clickCount = UILabel()
     // 点击次数
     var clickCountNum: Int = 0 {
         didSet{
             clickCount.text = "点击：\(clickCountNum)"
         }
     }
-
     
+    
+    // 课程图片
+    var imageView = UIImageView()
+    // 课程简介
+    var title = UILabel()
+    
+    // 来源
+    var sourceContent = UILabel()
+    
+    var starImageArr = [UIImageView]()
+    // 多少人点击
+    var clickCount = UILabel()
+    
+    // 逐渐透明阴影
+    var shadowView = UIView()
 
     
     override init(frame: CGRect) {
@@ -60,37 +65,10 @@ class CourseCollectionViewCell: UICollectionViewCell {
     }
     
     class func getSize() -> CGSize {
-        return CGSizeMake(Argument.CellWidth, Argument.CellHight)
+        return CGSizeMake(
+            342 * Constants.Scale,
+            318 * Constants.Scale)
     }
-    
-    private struct Argument {
-
-
-        //collection cell 宽高比
-        static let Scale: CGFloat = 16/10
-        static let Gap: CGFloat = Constants.ScreenRect.width/60
-        
-        static let CellWidth: CGFloat = (Constants.ScreenRect.width - Gap * 3)/2
-        static let CellHight: CGFloat = ImageHight + TitleHight + ClickCountHight + Gap
-        
-        static let ImageWidth: CGFloat = CellWidth
-        static let ImageHight: CGFloat = ImageWidth/Scale
-        
-        static let TitleWidth: CGFloat = CellWidth-10
-        static let TitleHight: CGFloat = 20
-        
-        static let ClickLabelScale: CGFloat = 0.6
-        static let ClickCountWidth: CGFloat = (CellWidth-10) * ClickLabelScale
-        static let ClickCountHight: CGFloat = 20
-        
-        static let StarViewWidth: CGFloat = (CellWidth-10) * (1 - ClickLabelScale)
-        static let StarViewHight: CGFloat = 20
-        
-        static let SourceWidth: CGFloat = ImageWidth
-        static let SourceHight: CGFloat = 20
-        
-    }
-    
 
     private func setupCell() {
         
@@ -99,8 +77,8 @@ class CourseCollectionViewCell: UICollectionViewCell {
         imageView.opaque = false
         imageView.frame = CGRectMake(
             0, 0,
-            Argument.ImageWidth,
-            Argument.ImageHight)
+            342 * Constants.Scale,
+            214 * Constants.Scale)
         self.addSubview(imageView)
         
         
@@ -109,10 +87,10 @@ class CourseCollectionViewCell: UICollectionViewCell {
         title.text = "标题示例文字"
         title.font = Constants.Font2
         title.frame = CGRectMake(
-            5,
-            imageView.frame.height,
-            Argument.TitleWidth,
-            Argument.TitleHight)
+            14 * Constants.Scale,
+            227 * Constants.Scale,
+            310 * Constants.Scale,
+            28 * Constants.Scale)
         self.addSubview(title)
         
         //课程点击次数
@@ -122,15 +100,19 @@ class CourseCollectionViewCell: UICollectionViewCell {
         clickCount.font = Constants.Font1
         clickCount.baselineAdjustment = UIBaselineAdjustment.AlignCenters
         clickCount.frame = CGRectMake(
-            5,
-            imageView.frame.height + title.frame.height,
-            Argument.ClickCountWidth,
-            Argument.ClickCountHight)
+            14 * Constants.Scale,
+            268 * Constants.Scale,
+            168 * Constants.Scale,
+            24 * Constants.Scale)
         self.addSubview(clickCount)
         
         //评价星级
         self.starNum = 3
-        let starImageFrame = CGRectMake(Argument.CellWidth * Argument.ClickLabelScale, imageView.frame.height + title.frame.height, Argument.StarViewWidth, Argument.StarViewHight)
+        let starImageFrame = CGRectMake(
+            200 * Constants.Scale,
+            268 * Constants.Scale,
+            124 * Constants.Scale,
+            20 * Constants.Scale)
         for index in 0..<5 {
             let Scale:CGFloat = 0.8
             let X = starImageFrame.origin.x + starImageFrame.width/5*CGFloat(index)
@@ -138,28 +120,33 @@ class CourseCollectionViewCell: UICollectionViewCell {
             let Width = starImageFrame.width/5 * Scale
             let Height = starImageFrame.width/5 * Scale
             starImageArr.append(UIImageView(frame: CGRectMake(
-                X,
-                Y,
-                Width,
-                Height)))
+                200 * Constants.Scale + 26 * Constants.Scale * CGFloat(index),
+                268 * Constants.Scale,
+                20 * Constants.Scale,
+                20 * Constants.Scale)))
             
             self.addSubview(starImageArr[index])
         }
         
-        
-        //来源
+        // 阴影
+        shadowView.frame = CGRectMake(
+            0,
+            161 * Constants.Scale,
+            342 * Constants.Scale,
+            53 * Constants.Scale)
+        insertTransparentGradient(view: shadowView)
+        self.addSubview(shadowView)
+
+        // 来源
         source = "广州团校"
         sourceContent.textColor = UIColor.whiteColor()
         sourceContent.font = Constants.Font1
         sourceContent.frame = CGRectMake(
-            0,
-            title.frame.origin.y - Argument.SourceHight,
-            Argument.SourceWidth,
-            Argument.SourceHight)
+            14 * Constants.Scale,
+            174 * Constants.Scale,
+            300 * Constants.Scale,
+            24 * Constants.Scale)
         self.addSubview(sourceContent)
-        
-        insertTransparentGradient(view: sourceContent)
-        
     }
     
     func setupStarImage() {

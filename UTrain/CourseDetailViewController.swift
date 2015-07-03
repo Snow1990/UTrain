@@ -18,7 +18,7 @@ class CourseDetailViewController: UIViewController {
     var introduceFooter: UIView!
     var relateRecomendView: RelateRecomendView!
     var relateRecomendFooter: UIView!
-    var commentView: UIView!
+    var commentView: CourseCommentView!
     
     
     override func viewDidLoad() {
@@ -32,8 +32,12 @@ class CourseDetailViewController: UIViewController {
             Constants.ScreenRect.width,
             Constants.ScreenRect.height))
         scrollView.backgroundColor = Constants.backgroundColor
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
         // 内容size不确定
-        scrollView.contentSize = CGSize(width: Constants.ScreenRect.width, height: Constants.ScreenRect.height * 2)
+        scrollView.contentSize = CGSize(
+            width: Constants.ScreenRect.width,
+            height: Constants.ScreenRect.height * 2)
         scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         scrollView.backgroundColor = UIColor.blackColor()
         view.addSubview(scrollView)
@@ -83,10 +87,12 @@ class CourseDetailViewController: UIViewController {
             introduceFooter.frame.maxY,
             Constants.ScreenRect.width,
             344 * Constants.Scale))
-        let course = CourseInfo(id: "123", name: "测试专用测试专用")
-        relateRecomendView.courseInfoArr.append(course)
-        relateRecomendView.courseInfoArr.append(course)
-        relateRecomendView.courseInfoArr.append(course)
+        let course1 = CourseInfo(id: "123", name: "测试专用测试专用")
+        let course2 = CourseInfo(id: "123", name: "测试专用测试专用测试专用测试专用")
+        relateRecomendView.courseInfoArr.append(course1)
+        relateRecomendView.courseInfoArr.append(course2)
+        relateRecomendView.courseInfoArr.append(course1)
+        relateRecomendView.courseInfoArr.append(course2)
         scrollView.addSubview(relateRecomendView)
         
         // 添加相关推荐视图Footer
@@ -99,12 +105,13 @@ class CourseDetailViewController: UIViewController {
         scrollView.addSubview(relateRecomendFooter)
         
         // 添加评论视图
-        commentView = UIView(frame: CGRectMake(
+        commentView = CourseCommentView(frame: CGRectMake(
             0,
             relateRecomendFooter.frame.maxY,
             Constants.ScreenRect.width,
-            300 * Constants.Scale))
-        commentView.backgroundColor = UIColor.blueColor()
+            500 * Constants.Scale))
+        commentView.commentCount = 243
+//        commentView.backgroundColor = UIColor.blueColor()
         scrollView.addSubview(commentView)
 
 

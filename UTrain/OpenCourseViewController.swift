@@ -148,17 +148,34 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
     // MARK: - 导航条初始化
     func initnavigation() {
         
+//        var leftView = UIView(frame: CGRectMake(0, 0, 75, 20))
+//         var leftButton = UIButton(frame: CGRectMake(0, 0, 20, 20))
+//        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 200, 20))
+
         // 左边barbuttonitem
-        var leftView = UIView(frame: CGRectMake(0, 0, 75, 20))
+        var leftView = UIView(frame: CGRectMake(
+            0,
+            0,
+            600 * Constants.NavScale,
+            28 * Constants.NavScale))
         
         var leftImage = UIImage(named: "nav_icon1")!
-        var leftButton = UIButton(frame: CGRectMake(0, 0, 20, 20))
+        var leftButton = UIButton(frame: CGRectMake(
+            0,
+            -8 * Constants.NavScale,
+            44 * Constants.NavScale,
+            44 * Constants.NavScale))
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Normal)
         leftButton.setBackgroundImage(leftImage, forState: UIControlState.Highlighted)
         leftButton.addTarget(self, action: "toggle", forControlEvents: UIControlEvents.TouchUpInside)
 
         // 边栏标题
-        var sideMenuLabel = UILabel(frame: CGRectMake(30, 0, 200, 20))
+        var sideMenuLabel = UILabel(frame: CGRectMake(
+            68 * Constants.NavScale,
+            0,
+            500 * Constants.NavScale,
+            32 * Constants.NavScale))
+        sideMenuLabel.font = Constants.Font3
         sideMenuLabel.textColor = UIColor.whiteColor()
         sideMenuLabel.tag = 1
         
@@ -169,7 +186,11 @@ class OpenCourseViewController: UIViewController, UICollectionViewDataSource, UI
         
         // 右边barbuttonitem search
         var searchImage = UIImage(named: "nav_icon2")!
-        var searchButton = UIButton(frame: CGRectMake(0, 0, 20, 20))
+        var searchButton = UIButton(frame: CGRectMake(
+            0,
+            -8 * Constants.NavScale,
+            44 * Constants.NavScale,
+            44 * Constants.NavScale))
         searchButton.setBackgroundImage(searchImage, forState: UIControlState.Normal)
         
         searchButton.addTarget(self, action: "search", forControlEvents: UIControlEvents.TouchUpInside)

@@ -85,6 +85,7 @@ struct Constants {
     // 和设计图比例
     static let ScreenRect = UIScreen.mainScreen().bounds
     static let Scale = ScreenRect.width/720
+    static let NavScale: CGFloat = 44/96
     
     
     

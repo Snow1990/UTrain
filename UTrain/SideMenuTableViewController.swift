@@ -94,13 +94,20 @@ class SideMenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SideMenuReusableCellID, forIndexPath: indexPath) as! SideMenuTableViewCell
         
-        cell.title.text = maxTypeArr[indexPath.row].maxTypeName
+        cell.title = maxTypeArr[indexPath.row].maxTypeName
 
         return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return SideMenuTableViewCell.getCellHeight()
+        let title = maxTypeArr[indexPath.row].maxTypeName
+        let size = UILabel.sizeOfString(title,
+            font: Constants.Font3,
+            maxWidth: 280 * Constants.Scale)
+
+        let cellHeight = size.height + 58 * Constants.Scale
+        
+        return cellHeight
     }
     
     
@@ -117,6 +124,7 @@ class SideMenuTableViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.textLabel?.textColor = UIColor.whiteColor()
     }
+
 
     /*
     // MARK: - Navigation

@@ -28,42 +28,47 @@ class SnowToolBar: UIView {
         addSubview(self.backgroundView)
         
         // 返回按钮
-        let Scale: CGFloat = 0.5
-        let backWidth = 22 * Scale
-        let backHeight = 40 * Scale
-        self.leftBtn.frame = CGRectMake(10, 10 + topHight, backWidth, backHeight)
+//        let Scale: CGFloat = 0.5
+//        let backWidth = 24 * Constants.NavScale
+//        let backHeight = 44 * Constants.NavScale
+        self.leftBtn.frame = CGRectMake(
+            28 * Constants.Scale,
+            25 * Constants.NavScale + 20,
+            24 * Constants.NavScale,
+            44 * Constants.NavScale)
         self.leftBtn.setBackgroundImage(UIImage(named: "nav_back"), forState: UIControlState.Normal)
         self.leftBtn.tag = 1
         addSubview(self.leftBtn)
 
         // 搜索按钮
-        let searchHeight = backHeight
-        let searchWidth = searchHeight
+//        let searchHeight = backHeight
+//        let searchWidth = searchHeight
         self.searchBtn.frame = CGRectMake(
-            Constants.ScreenRect.width - searchWidth - 10,
-            10 + topHight,
-            searchWidth,
-            searchHeight)
+            648 * Constants.Scale,
+            25 * Constants.NavScale + 20,
+            44 * Constants.NavScale,
+            44 * Constants.NavScale)
         self.searchBtn.setBackgroundImage(UIImage(named: "nav_icon2" ), forState: UIControlState.Normal)
         self.searchBtn.tag = 2
         addSubview(self.searchBtn)
         
         // 文本框背景
         self.textFieldBackground.frame = CGRectMake(
-            backWidth + 10 * 2,
-            30 + topHight,
-            Constants.ScreenRect.width - backWidth - searchWidth - 10 * 4,
-            5)
+            84 * Constants.Scale,
+            64 * Constants.NavScale + 20,
+            532 * Constants.Scale,
+            12 * Constants.NavScale)
         self.textFieldBackground.image = UIImage(named: "search_textfield_bg")
         addSubview(self.textFieldBackground)
         
         // 文本框
         self.textField.frame = CGRectMake(
-            self.textFieldBackground.frame.origin.x + 5,
-            5 + topHight,
-            self.textFieldBackground.frame.width - 10,
-            34)
+            textFieldBackground.frame.origin.x + 14 * Constants.Scale,
+            32 * Constants.NavScale + 20,
+            textFieldBackground.frame.width - 28 * Constants.Scale,
+            40 * Constants.NavScale)
         self.textField.borderStyle = UITextBorderStyle.None
+        self.textField.font = Constants.Font2
         self.textField.backgroundColor = UIColor.clearColor()
         self.textField.textColor = UIColor.whiteColor()
         self.textField.placeholder = "请输入..."

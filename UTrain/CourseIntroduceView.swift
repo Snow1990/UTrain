@@ -49,7 +49,7 @@ class CourseIntroduceView: UIView {
         
         // 简介标题
         titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.text = "简 介"
+        titleLabel.text = "简  介"
         titleLabel.font = Constants.Font3
         titleLabel.frame = CGRectMake(
             32 * Constants.Scale,
