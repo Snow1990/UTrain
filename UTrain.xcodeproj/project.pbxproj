@@ -32,6 +32,8 @@
 		87AE27CA1B28153D00C397C4 /* CourseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE27C91B28153D00C397C4 /* CourseDetailViewController.swift */; };
 		87D295E61B296286006F772C /* CourseCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D295E51B296286006F772C /* CourseCollectionHeader.swift */; };
 		87D295E81B296E24006F772C /* CourseCollectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D295E71B296E24006F772C /* CourseCollectionFooter.swift */; };
+		87EC11231B44D94B00483A54 /* CourseIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EC11221B44D94B00483A54 /* CourseIntroduceView.swift */; };
+		87EC11251B451AE000483A54 /* RelateRecomendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EC11241B451AE000483A54 /* RelateRecomendView.swift */; };
 		87F182BB1B252F82000314B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F182BA1B252F82000314B5 /* AppDelegate.swift */; };
 		87F182C21B252F82000314B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F182C11B252F82000314B5 /* Images.xcassets */; };
 		87F182C51B252F82000314B5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F182C31B252F82000314B5 /* LaunchScreen.xib */; };
@@ -88,6 +90,8 @@
 		87AE27C91B28153D00C397C4 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
 		87D295E51B296286006F772C /* CourseCollectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCollectionHeader.swift; sourceTree = "<group>"; };
 		87D295E71B296E24006F772C /* CourseCollectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCollectionFooter.swift; sourceTree = "<group>"; };
+		87EC11221B44D94B00483A54 /* CourseIntroduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseIntroduceView.swift; sourceTree = "<group>"; };
+		87EC11241B451AE000483A54 /* RelateRecomendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelateRecomendView.swift; sourceTree = "<group>"; };
 		87F182B51B252F82000314B5 /* UTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87F182B91B252F82000314B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87F182BA1B252F82000314B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				87AE27C91B28153D00C397C4 /* CourseDetailViewController.swift */,
+				87EC11221B44D94B00483A54 /* CourseIntroduceView.swift */,
+				87EC11241B451AE000483A54 /* RelateRecomendView.swift */,
 			);
 			name = CourseDetail;
 			sourceTree = "<group>";
@@ -487,6 +493,7 @@
 				875201021B310FD1005DF73B /* StudentInfo.swift in Sources */,
 				87F182EC1B259533000314B5 /* OpenCourseViewController.swift in Sources */,
 				875200FE1B310C5B005DF73B /* LectureInfo.swift in Sources */,
+				87EC11231B44D94B00483A54 /* CourseIntroduceView.swift in Sources */,
 				87A36F321B4139D8007D855D /* PopularRecomendHeader.swift in Sources */,
 				87F182E51B2591E5000314B5 /* MainTabBarController.swift in Sources */,
 				8743D5AE1B3D31A1009CCD0F /* PopularRecomendTableViewCell.swift in Sources */,
@@ -512,6 +519,7 @@
 				87F5A1461B2FC2060058D7AF /* TrainingClassViewController.swift in Sources */,
 				87D295E81B296E24006F772C /* CourseCollectionFooter.swift in Sources */,
 				878299F71B33FEA5003086D8 /* LoadingCollectionViewCell.swift in Sources */,
+				87EC11251B451AE000483A54 /* RelateRecomendView.swift in Sources */,
 				87F182F71B259AA9000314B5 /* CustomPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

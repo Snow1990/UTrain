@@ -11,28 +11,28 @@ import Alamofire
 
 class CourseCollectionViewCell: UICollectionViewCell {
     
-    //课程图片
+    // 课程图片
     var imageView = UIImageView()
-    //课程简介
+    // 课程简介
     var title = UILabel()
-    //“来源：”
+    // “来源：”
     var source: String = "" {
         didSet{
             sourceContent.text = "  来源：" + source
         }
     }
-    //来源
+    // 来源
     var sourceContent = UILabel()
-    //评分
+    // 评分
     var starNum: Int = 0 {
         didSet{
             setupStarImage()
         }
     }
     var starImageArr = [UIImageView]()
-    //多少人点击
+    // 多少人点击
     var clickCount = UILabel()
-    //点击次数
+    // 点击次数
     var clickCountNum: Int = 0 {
         didSet{
             clickCount.text = "点击：\(clickCountNum)"

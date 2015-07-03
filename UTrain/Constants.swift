@@ -51,7 +51,7 @@ struct Constants {
 //    static let OpenCourseBGColor = UIColor(red: 230/255, green: 237/255, blue: 229/255, alpha: 1)
     static let SideMenuBGColor = UIColor(red: 37/255, green: 155/255, blue: 36/255, alpha: 0.75)
     static let SelectedBGColor = UIColor(red: 240/255, green: 247/255, blue: 242/255, alpha: 1)
-
+    static let SeparateColor = UIColor(red: 219/255, green: 225/255, blue: 221/255, alpha: 1)
     
     static let MainColor = UIColor(red: 37/255, green: 155/255, blue: 36/255, alpha: 1)
     static let backgroundColor = UIColor(red: 241/255, green: 248/255, blue: 240/255, alpha: 1)
@@ -64,10 +64,18 @@ struct Constants {
     static let AssistColor7 = UIColor(red: 5/255, green: 111/255, blue: 0/255, alpha: 1)
     
     // 字体
-    static let Font1 = UIFont.boldSystemFontOfSize(12)
-    static let Font2 = UIFont.boldSystemFontOfSize(14)
-    static let Font3 = UIFont.boldSystemFontOfSize(18)
-    static let Font4 = UIFont.boldSystemFontOfSize(20)
+//    static let Font1 = UIFont.boldSystemFontOfSize(12)
+//    static let Font2 = UIFont.boldSystemFontOfSize(14)
+//    static let Font3 = UIFont.boldSystemFontOfSize(18)
+//    static let Font4 = UIFont.boldSystemFontOfSize(20)
+    
+    static let Font1 = UIFont.systemFontOfSize(12)
+    static let Font2 = UIFont.systemFontOfSize(14)
+    static let Font3 = UIFont.systemFontOfSize(18)
+    static let Font4 = UIFont.systemFontOfSize(20)
+
+    
+ 
     
 //    static let FootNoteFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
 //    static let HeadlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
