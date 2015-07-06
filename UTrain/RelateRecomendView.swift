@@ -14,7 +14,7 @@ class RelateRecomendView: UIView {
     var courseInfoArr = [CourseInfo]() {
         didSet {
             setCourseScrollView()
-            self.reloadView()
+            self.updateView()
         }
     }
     
@@ -99,7 +99,7 @@ class RelateRecomendView: UIView {
     }
     
     // 内容改变后更新滚动视图
-    func reloadView() {
+    func updateView() {
         courseScrollView.contentSize = CGSize(
             width: 32 * Constants.Scale + 244 * Constants.Scale * CGFloat(courseInfoArr.count),
             height: courseScrollView.contentSize.height)

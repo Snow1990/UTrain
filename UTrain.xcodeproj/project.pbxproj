@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8647498908C91F64A3037210 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC4A68FEFB1AF0D4697D8C1 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		873FA5771B4A35AA003010C7 /* CourseCommentFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873FA5761B4A35AA003010C7 /* CourseCommentFooter.swift */; };
 		8743D50D1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743D50C1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift */; };
 		8743D5A81B3CDEDC009CCD0F /* SnowToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743D5A71B3CDEDC009CCD0F /* SnowToolBar.swift */; };
 		8743D5AE1B3D31A1009CCD0F /* PopularRecomendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743D5AD1B3D31A1009CCD0F /* PopularRecomendTableViewCell.swift */; };
@@ -68,6 +69,7 @@
 		2BA251DD45513BD77C73FC54 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5DF321C8B2672357F2266C8B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7EC4A68FEFB1AF0D4697D8C1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		873FA5761B4A35AA003010C7 /* CourseCommentFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCommentFooter.swift; sourceTree = "<group>"; };
 		8743D50C1B3AAE43009CCD0F /* OpenCourseMaxTypeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCourseMaxTypeInfo.swift; sourceTree = "<group>"; };
 		8743D5A71B3CDEDC009CCD0F /* SnowToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowToolBar.swift; sourceTree = "<group>"; };
 		8743D5AD1B3D31A1009CCD0F /* PopularRecomendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecomendTableViewCell.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				87EC11241B451AE000483A54 /* RelateRecomendView.swift */,
 				87EC11261B462FA300483A54 /* CourseCommentView.swift */,
 				87EC11281B463D4600483A54 /* CourseCommentTableViewCell.swift */,
+				873FA5761B4A35AA003010C7 /* CourseCommentFooter.swift */,
 			);
 			name = CourseDetail;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				87F182E51B2591E5000314B5 /* MainTabBarController.swift in Sources */,
 				8743D5AE1B3D31A1009CCD0F /* PopularRecomendTableViewCell.swift in Sources */,
 				875200FB1B30FFF6005DF73B /* CourseInfo.swift in Sources */,
+				873FA5771B4A35AA003010C7 /* CourseCommentFooter.swift in Sources */,
 				87F5A10C1B2AD0AD0058D7AF /* CourseAdCollectionViewCell.swift in Sources */,
 				875201081B315405005DF73B /* Network.swift in Sources */,
 				87AE27CA1B28153D00C397C4 /* CourseDetailViewController.swift in Sources */,

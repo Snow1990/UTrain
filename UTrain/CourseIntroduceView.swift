@@ -21,7 +21,7 @@ class CourseIntroduceView: UIView {
     var introduce: String = "" {
         didSet {
             introduceLabel.text = "课程简介：" + introduce
-            self.reloadView()
+            self.updateView()
         }
     }
     
@@ -145,7 +145,7 @@ class CourseIntroduceView: UIView {
     }
     
     
-    func reloadView() {
+    func updateView() {
         let size = UILabel.sizeOfString(introduceLabel.text!, font: Constants.Font2, maxWidth: 656 * Constants.Scale)
         introduceLabel.frame = CGRectMake(
             32 * Constants.Scale,

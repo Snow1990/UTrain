@@ -34,6 +34,7 @@ class CourseDetailViewController: UIViewController {
         scrollView.backgroundColor = Constants.backgroundColor
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = true
+        scrollView.bounces = false
         // 内容size不确定
         scrollView.contentSize = CGSize(
             width: Constants.ScreenRect.width,
@@ -111,9 +112,16 @@ class CourseDetailViewController: UIViewController {
             Constants.ScreenRect.width,
             500 * Constants.Scale))
         commentView.commentCount = 243
-//        commentView.backgroundColor = UIColor.blueColor()
+        var testComment = PageInfo()
+        commentView.commentsByPage.append(testComment)
+        commentView.commentsByPage.append(testComment)
+
         scrollView.addSubview(commentView)
 
+        // 更新滚动视图内容
+        scrollView.contentSize = CGSize(
+            width: Constants.ScreenRect.width,
+            height: commentView.frame.maxY)
 
     }
 
